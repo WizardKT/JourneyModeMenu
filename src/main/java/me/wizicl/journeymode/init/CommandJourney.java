@@ -70,6 +70,17 @@ public class CommandJourney extends CommandBase {
             return;
         }
 
+        /// Объединяем все команды в 1 поле
+        String subCommand = args[0];
+        switch (subCommand) {
+            case "consume": handleConsume(player, cap, stack, args); break;
+            case "research": handleResearch(player, stack, cap, args); break;
+            case "give": handleGive(player, cap, args); break;
+            case "progress": handleProgress(player, cap); break;
+            case "clear": handleClear(player, cap); break;
+            case "remove": handleRemove(player, cap); break;
+        }
+    }
 
             // Команда изучения предмета
             if (args[0].equals("consume")) {
