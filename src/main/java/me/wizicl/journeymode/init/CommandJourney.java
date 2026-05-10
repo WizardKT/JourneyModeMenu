@@ -20,6 +20,19 @@ import java.util.List;
 import java.util.Map;
 
 public class CommandJourney extends CommandBase {
+
+    /// Универсальное сообщение ошибки
+    private void sendError(ICommandSender sender, String key, Object args) {
+        sender.sendMessage(new TextComponentTranslation("chat.journeymode.commandError" + key, args));
+    }
+
+    /// Универсальное сообщение об отсутствии изучений
+    private void sendNoResearch(ICommandSender sender, String key, Object args) {
+        sender.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch" + key, args));
+    }
+
+
+    // Название команды
     @Override
     public String getName() {
         return "jm";
