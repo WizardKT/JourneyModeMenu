@@ -39,12 +39,36 @@ public class CommandJourney extends CommandBase {
         EntityPlayer player = (EntityPlayer) sender; // Получаем переменную игрока
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null); // Получаем переменную капы
         ItemStack stack = player.getHeldItemMainhand(); // Получаем переменную предмета в руке
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null); // Получаем переменную капы
+        String cmd = args[0].toLowerCase();
 
-            // Проверяем, ввел ли игрок хоть что-то
-            if (args.length == 0) {
-                player.sendMessage(new TextComponentTranslation("chat.journeymode.commandError", getUsage(sender)));
-                return;
-            }
+
+        /// Вводим список команд, которым нужен предмет в руке
+        List<String> requireHand = Arrays.asList("consume", "research");
+
+        // Проверка на наличие предмета в руке
+        if (requireHand.contains(cmd) && stack.isEmpty()) {
+            sendError(sender, "commandError", getUsage(sender));
+        }
+
+
+        /// Вводим список команд, которым нужны исследования
+        List<String> requireResearch = Arrays.asList("give", "progress", "remove");
+
+        // Проверка на наличие исследований у игрока
+        if (requireResearch.contains(cmd) && stack.isEmpty()) {
+            sendNoResearch(sender, "commandError", getUsage(sender));
+        }
+
+
+        /// Проверка на то что команду отправил именно игрок
+        if (!(sender instanceof EntityPlayer)) return;
+
+        /// Проверяем на то что игрок ввёл хоть что-то
+        if (args.length == 0) {
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.commandError", getUsage(sender)));
+            return;
+        }
 
 
             // Команда изучения предмета
