@@ -35,8 +35,10 @@ public class CommandJourney extends CommandBase {
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
         if (sender instanceof EntityPlayer) {
 
-            EntityPlayer player = (EntityPlayer) sender;
-            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+        /// Все используемые в коде переменные
+        EntityPlayer player = (EntityPlayer) sender; // Получаем переменную игрока
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null); // Получаем переменную капы
+        ItemStack stack = player.getHeldItemMainhand(); // Получаем переменную предмета в руке
 
             // Проверяем, ввел ли игрок хоть что-то
             if (args.length == 0) {
