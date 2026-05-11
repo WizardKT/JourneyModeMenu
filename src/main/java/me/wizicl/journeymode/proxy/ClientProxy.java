@@ -14,17 +14,6 @@ import net.minecraftforge.fml.relauncher.Side;
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy{
 
-    @SubscribeEvent
-    public static void onModelRegister(ModelRegistryEvent event) {
-//        registerModel(ModItems.ITEM_TEST_ITEM);
-    }
-
-    private static void registerModel(Item item) {
-//        ModelLoader.setCustomModelResourceLocation(item, 0,
-//                new ModelResourceLocation(item.getRegistryName(), "inventory"));
-    }
-
-
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);

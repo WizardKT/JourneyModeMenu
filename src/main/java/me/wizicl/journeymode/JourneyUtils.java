@@ -1,13 +1,15 @@
 package me.wizicl.journeymode;
 
 import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.network.MessageSyncResearch;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 
 public class JourneyUtils {
 
-    // Сколько надо на изучение предмета
+    /// Сколько надо на изучение предмета
     public static int getRequiredAmount(ItemStack stack) {
 
         // Если пусто - выводить 0
@@ -20,9 +22,18 @@ public class JourneyUtils {
         return max * JourneyConfig.stackMult;
     }
 
-    public static boolean researchFinished(EntityPlayer player, IResearch cap, ItemStack stack) {
+    /// Обновление капы в реальном времени
+    public static void addResearchAndSync(EntityPlayer player, String itemName, int amount) {
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+        if (cap != null) {
 
-        player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
-        return true;
+            // Обновление данных капы
+            cap.addResearch(itemName, amount);
+
+            // Если игрок в мультиплеере, отправляем пакет данных
+            if (!player.world.isRemote) {
+                JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+            }
+        }
     }
 }

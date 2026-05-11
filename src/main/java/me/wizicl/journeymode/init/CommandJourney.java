@@ -137,6 +137,9 @@ public class CommandJourney extends CommandBase {
         cap.addResearch(item, amount);
         stack.shrink(amount);
 
+        // Синхронизируем данные с сервером
+        JourneyUtils.addResearchAndSync(player, item, amount);
+
         // Отправляем игроку сколько он изучил
         player.sendMessage(new TextComponentTranslation("chat.journeymode.add", item, amount));
     }
@@ -173,11 +176,15 @@ public class CommandJourney extends CommandBase {
             }
         }
 
-        // Добавляем предметы в изучения
+        // Добавляем предметы в капу
         cap.addResearch(item, amount);
+
+        // Синхронизируем данные с сервером
+        JourneyUtils.addResearchAndSync(player, item, amount);
 
         // Отправляем игроку сколько он изучил
         player.sendMessage(new TextComponentTranslation("chat.journeymode.add", item, amount));
+
     }
 
 
@@ -235,17 +242,16 @@ public class CommandJourney extends CommandBase {
             Item item = Item.getByNameOrId(entry.getKey()); // Переменная предмета, означающая его айди
 
             // Проверка на пустой предмет во избежание ошибок
-            if (item == null) {
-                continue;
-            }
+            if (item == null) continue;
 
             // Используем метод проверки требуемого количества предметов
+            int has = entry.getValue();
             int need = JourneyUtils.getRequiredAmount(new ItemStack(item));
             String localizedName = new ItemStack(item).getDisplayName();
 
             // Выводим игроку прогресс исследования для каждого предмета отдельными сообщениями
             // благодаря циклу for
-            player.sendMessage(new TextComponentString(entry.getKey() + ":" + entry.getValue() + "/" + localizedName));
+            player.sendMessage(new TextComponentString(localizedName + ":" + has + "/" + need));
         }
     }
 

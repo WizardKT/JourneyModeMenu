@@ -3,12 +3,12 @@ package me.wizicl.journeymode.init;
 import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.network.MessageSyncResearch;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -16,12 +16,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 // Регистрируем наши предметы в Майнкрафте
 @Mod.EventBusSubscriber(modid = JourneyMode.MODID)
 public class RegHandler {
-    @SubscribeEvent
-    public static void RegItems(RegistryEvent.Register<Item> event) {
-//        event.getRegistry().register(ModItems.ITEM_TEST_ITEM);
-//        JourneyMode.logger.info("Зарегестрирован новый предмет!");
-    }
 
+    /// Регистрации капы на игроке
     @SubscribeEvent
     public static void onAttach(AttachCapabilitiesEvent<Entity> event) {
         if (event.getObject() instanceof EntityPlayer) {
@@ -29,6 +25,7 @@ public class RegHandler {
         }
     }
 
+    /// Выдача капы игроку если тот умер
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
         if (event.isWasDeath()) {
@@ -42,8 +39,32 @@ public class RegHandler {
                 newCap.getResearchMap().putAll(oldCap.getResearchMap());
             }
 
+            // Создаём переменную игрока и капы
+            EntityPlayer player = event.getEntityPlayer();
+            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+            // Отправляем игроку пакет данных
+            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+
         }
     }
 
+    /// Выдача капы игроку который зашёл на сервер в МП
+    @SubscribeEvent
+    public static void onPlayerLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
+
+        // Создаём переменную игрока
+        EntityPlayer player = event.player;
+
+        // Если это сервер
+        if (!player.world.isRemote) {
+
+            // Создаём переменную капы
+            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+            // Отправляем игроку пакет данных
+            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+        }
+    }
 }
 
