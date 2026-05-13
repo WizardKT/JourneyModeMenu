@@ -3,14 +3,16 @@ package me.wizicl.journeymode.gui.base;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.input.Mouse;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class GuiBase extends GuiScreen {
-    protected int xSize, ySize, guiLeft, guiTop;
 
+    /// Все переменные
+    protected int xSize, ySize, guiLeft, guiTop, scrollAmount = 0, maxScrollAmount = 100;
     protected List<IGuiElement> components = new ArrayList<>();
 
     public GuiBase(int xSize, int ySize) {
@@ -18,6 +20,7 @@ public abstract class GuiBase extends GuiScreen {
         this.ySize = ySize;
     }
 
+    /// Запуск GUI
     @Override
     public void initGui() {
         super.initGui();
@@ -27,17 +30,16 @@ public abstract class GuiBase extends GuiScreen {
         this.addComponents();
     }
 
-    // Добавление кнопок и т.п.
+    /// Добавление компанентов
     protected abstract void addComponents();
 
+    /// Отрисовка GUI
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawDefaultBackground();
 
-        // Отрисовка фона
         drawBackground(mouseX, mouseY, partialTicks);
 
-        // Отрисовка компанентов
         for (IGuiElement component : this.components) {
             component.draw(mouseX, mouseY, partialTicks);
         }
@@ -48,13 +50,15 @@ public abstract class GuiBase extends GuiScreen {
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
+    /// Отрисовка заднего фона
     protected void drawBackground(int mouseX, int mouseY, float partialTicks) {
-        // Стандартная рамка
         drawGradientRect(guiLeft, guiTop, guiLeft + xSize, guiTop + ySize, 0xF0101010, 0xF0252525);
     }
 
+    /// Отрисовка тултипов
     protected abstract void drawTooltips(int mouseX, int mouseY);
 
+    /// Проверка нажатия курсора
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -64,6 +68,7 @@ public abstract class GuiBase extends GuiScreen {
         }
     }
 
+    /// Отрисовка предметов
     protected void drawItemStack(ItemStack stack, int x, int y) {
         RenderHelper.enableGUIStandardItemLighting();
         this.itemRender.renderItemIntoGUI(stack, x, y);
@@ -71,12 +76,30 @@ public abstract class GuiBase extends GuiScreen {
         RenderHelper.disableStandardItemLighting();
     }
 
+    /// Отрисовка слота
     protected void drawSlot(int x, int y, int size, int mouseX, int mouseY) {
         int color = isHovered(x, y, size, mouseX, mouseY) ? 0x80FFFFFF : 0x80000000;
         drawRect(x, y, x + size, y + size, color);
     }
 
+    /// Проверка позиции курсора
     private boolean isHovered(int x, int y, int size, int mouseX, int mouseY) {
         return mouseX >= x && mouseX < x + size && mouseY >= y && mouseY < y + size;
+    }
+
+    /// Скроллбар
+    @Override
+    public void handleMouseInput() throws IOException {
+        super.handleMouseInput();
+        int dWheel = Mouse.getEventDWheel();
+        if (dWheel != 0) {
+            if (dWheel > 0) dWheel = -1; // Прокрутка вверх
+            else dWheel = 1; // Прокрутка вниз
+
+            this.scrollAmount += dWheel * 15;
+
+            if (this.scrollAmount < 0) this.scrollAmount = 0;
+            if (this.scrollAmount > maxScrollAmount) this.scrollAmount = maxScrollAmount;
+        }
     }
 }

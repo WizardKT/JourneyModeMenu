@@ -114,3 +114,8 @@ publishing {
         }
     }
 }
+
+sourceSets.main.resources {
+    // Перенаправляем ресурсы в папку классов
+    output.resourcesDir = file("${buildDir}/classes/main")
+}

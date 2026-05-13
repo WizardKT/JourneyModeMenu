@@ -1,7 +1,5 @@
 package me.wizicl.journeymode.gui.base;
 
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 
 public class GuiItemSlot implements IGuiElement {
@@ -9,15 +7,20 @@ public class GuiItemSlot implements IGuiElement {
     private int x, y, size;
     private ItemStack stack;
 
-    public GuiItemSlot(GuiBase parent,int x, int y, int size, ItemStack stack) {
+    public GuiItemSlot(GuiBase parent ,int x, int y, int size, ItemStack stack) {
         this.parent = parent;
         this.x = x; this.y = y; this.size = size; this.stack = stack;
     }
 
     @Override
     public void draw(int mouseX, int mouseY, float partialTicks) {
-        drawSlot(this.x, this.y, this.size, mouseX, mouseY);
-        drawItemStack(this.stack, this.x + 1, this.y + 1);
+        int renderY = this.y - parent.scrollAmount;
+
+        if (renderY + size >  parent.guiTop + 30 && renderY< parent.guiTop + parent.ySize - 10 ) {
+            parent.drawSlot(this.x, renderY, this.size, mouseX, mouseY);
+            parent.drawItemStack(this.stack, this.x + 1, renderY + 1);
+        }
+
     }
 
     public ItemStack getStack() { return stack; }
@@ -35,8 +38,4 @@ public class GuiItemSlot implements IGuiElement {
     }
 
     @Override public void keyTyped(char typedChar, int keyCode) {}
-
-    public void drawSlot(int x, int y, int size, int mouseX, int mouseY) {}
-
-    public void drawItemStack(ItemStack stack, int x, int y) {}
 }
