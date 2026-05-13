@@ -1,4 +1,4 @@
-package me.wizicl.journeymode.gui;
+package me.wizicl.journeymode.gui.base;
 
 public interface IGuiElement {
     void draw(int mouseX, int mouseY, float partialTicks);
