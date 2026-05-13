@@ -115,7 +115,4 @@ publishing {
     }
 }
 
-sourceSets.main.resources {
-    // Перенаправляем ресурсы в папку классов
-    output.resourcesDir = file("${buildDir}/classes/main")
-}
+sourceSets.all { it.output.resourcesDir = it.output.classesDirs.getFiles().iterator().next() }

@@ -1,9 +1,12 @@
 package me.wizicl.journeymode.gui.base;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,9 +39,12 @@ public abstract class GuiBase extends GuiScreen {
     /// Отрисовка GUI
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+
         this.drawDefaultBackground();
 
         drawBackground(mouseX, mouseY, partialTicks);
+
+        cutScissor(guiLeft + 5, guiTop + 30, xSize - 10, ySize - 40);
 
         for (IGuiElement component : this.components) {
             component.draw(mouseX, mouseY, partialTicks);
@@ -101,5 +107,15 @@ public abstract class GuiBase extends GuiScreen {
             if (this.scrollAmount < 0) this.scrollAmount = 0;
             if (this.scrollAmount > maxScrollAmount) this.scrollAmount = maxScrollAmount;
         }
+    }
+
+    /// Вырезание вылезающих элементов
+    protected void cutScissor(int x, int y, int width, int height) {
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        Minecraft mc = Minecraft.getMinecraft();
+        int scale = new ScaledResolution(mc).getScaleFactor();
+
+        GL11.glScissor(x * scale, (mc.displayHeight - (y + height) * scale), width * scale, height * scale);
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 }
