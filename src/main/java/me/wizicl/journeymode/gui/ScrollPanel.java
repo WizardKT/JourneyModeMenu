@@ -1,5 +1,5 @@
 package me.wizicl.journeymode.gui;
 
-public interface IGuiElement {
+public class ScrollPanel
+{
 }
-//

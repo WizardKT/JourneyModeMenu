@@ -1,5 +1,6 @@
 package me.wizicl.journeymode.init;
 
+import me.wizicl.journeymode.gui.GuiResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
