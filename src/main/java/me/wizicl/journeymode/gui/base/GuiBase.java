@@ -2,6 +2,7 @@ package me.wizicl.journeymode.gui.base;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.item.ItemStack;
@@ -41,9 +42,7 @@ public abstract class GuiBase extends GuiScreen {
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
         this.drawDefaultBackground();
-
         drawBackground(mouseX, mouseY, partialTicks);
-
         cutScissor(guiLeft + 5, guiTop + 30, xSize - 10, ySize - 40);
 
         for (IGuiElement component : this.components) {

@@ -37,5 +37,7 @@ public class GuiItemSlot implements IGuiElement {
         return mouseX >= x && mouseX < x + size && mouseY >= y && mouseY < y + size;
     }
 
-    @Override public void keyTyped(char typedChar, int keyCode) {}
+    @Override public void keyTyped(char typedChar, int keyCode) {
+
+    }
 }
