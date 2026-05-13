@@ -1,4 +1,4 @@
-package me.wizicl.journeymode.init;
+package me.wizicl.journeymode.gui;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
@@ -10,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiResearch extends GuiScreen {
 
@@ -27,6 +29,9 @@ public class GuiResearch extends GuiScreen {
     int currentX = guiLeft + 10;
     int currentY = guiTop + 30;
 
+    /// Создаём список для предметов
+    private final List<ItemStack> allResearchedItems = new ArrayList<>(); // Список всез предметов в интерфейсе
+
     /// Вызываем метод запуска интерфейса
     @Override
     public void initGui() {
@@ -35,14 +40,19 @@ public class GuiResearch extends GuiScreen {
         // Высчитывание центра экрана
         this.guiLeft = (this.width - this.xSize) / 2;
         this.guiTop = (this.height - this.ySize) / 2;
+
+        this.updateCache();
     }
 
     /// Отрисовываем интерфейс
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 
-        // Задний фон интерфейса
+        // Задний фон и область интерфейса, рамка интерфейса, надпись названия мода
         this.drawDefaultBackground();
+        drawGradientRect(guiLeft, guiTop, guiLeft + xSize, guiTop + ySize, 0xF0101010, 0xF0252525);
+        this.drawHorizontalLine(guiLeft, guiLeft + xSize, guiTop, 0xFFFFFFFF);
+        this.fontRenderer.drawString("Journey Mode",(this.width / 2) - 24, guiTop + padding, 0xFFFFFFFF);
 
         // Переменная предмета под курсором
         ItemStack hoveredStack = ItemStack.EMPTY;
@@ -50,33 +60,21 @@ public class GuiResearch extends GuiScreen {
         // Переменная капы игрока
         IResearch cap = Minecraft.getMinecraft().player.getCapability(ResearchProvider.RESEARCH, null);
 
-        // Область интерфейса
-        drawGradientRect(guiLeft, guiTop, guiLeft + xSize, guiTop + ySize, 0xF0101010, 0xF0252525);
-
-        // Рамка интерейса
-        this.drawHorizontalLine(guiLeft, guiLeft + xSize, guiTop, 0xFFFFFFFF);
-
-        // Надпись Journey Mode
-        this.fontRenderer.drawString("Journey Mode",(this.width / 2) - 24, guiTop + padding, 0xFFFFFFFF);
-
         // Извлечение предметов из капы
-        if (cap != null) {
-            int i = 0;
-            for (String itemId : cap.getResearchMap().keySet()) {
-                ItemStack stack = new ItemStack(Item.getByNameOrId(itemId));
+        for (int i = 0; i < allResearchedItems.size(); i++) {
+            ItemStack stack = allResearchedItems.get(i);
 
-                int x = guiLeft + 10 + (i % 10) * 18;
-                int y = guiTop + 30 + (i / 10) * 18;
+            int x = guiLeft + 10 + (i % 10) * 18;
+            int y = guiTop + 30 + (i / 10) * 18;
 
-                drawSlot(x, y, 18, mouseX, mouseY);
-                drawItemStack(stack, x + 1, y + 1);
+            drawSlot(x, y, 18, mouseX, mouseY);
+            drawItemStack(stack, x + 1, y + 1);
 
-                // Проверка позиции курсора = позиции предмета
-                if (mouseX >= x && mouseX < x + 18 && mouseY >= y && mouseY < y + 18) {
-                    hoveredStack = stack;
-                }
-                i++;
+            // Проверка позиции курсора = позиции предмета
+            if (mouseX >= x && mouseX < x + 18 && mouseY >= y && mouseY < y + 18) {
+                hoveredStack = stack;
             }
+            i++;
         }
 
         // Отрисовка тултипа под предметом
@@ -86,6 +84,22 @@ public class GuiResearch extends GuiScreen {
 
         // Вызываем интерфейс
         super.drawScreen(mouseX, mouseY, partialTicks);
+    }
+
+    /// Обновление списка предметов
+    private void updateCache() {
+        this.allResearchedItems.clear();
+
+        IResearch cap = Minecraft.getMinecraft().player.getCapability(ResearchProvider.RESEARCH, null);
+        if (cap != null) {
+            int i = 0;
+            for (String itemId : cap.getResearchMap().keySet()) {
+                Item item = Item.getByNameOrId(itemId);
+                if (item != null) {
+                    this.allResearchedItems.add(new ItemStack(item));
+                }
+            }
+        }
     }
 
     /// Отрисовка предметов в интерфейсе
