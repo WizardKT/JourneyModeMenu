@@ -13,7 +13,6 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.2.0'
 group = 'me.wizicl.journeymode' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'journeymode'
 
@@ -112,11 +111,5 @@ publishing {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"
         }
-    }
-}
-
-sourceSets {
-    main {
-        output.resourcesDir = output.classesDir
     }
 }
