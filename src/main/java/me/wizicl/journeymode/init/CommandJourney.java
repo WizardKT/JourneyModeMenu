@@ -1,6 +1,6 @@
 package me.wizicl.journeymode.init;
 
-import me.wizicl.journeymode.JourneyUtils;
+import me.wizicl.journeymode.main.JourneyUtils;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import net.minecraft.command.CommandBase;

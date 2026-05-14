@@ -1,4 +1,4 @@
-package me.wizicl.journeymode;
+package me.wizicl.journeymode.main;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;

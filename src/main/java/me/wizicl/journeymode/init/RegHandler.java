@@ -1,6 +1,6 @@
 package me.wizicl.journeymode.init;
 
-import me.wizicl.journeymode.JourneyMode;
+import me.wizicl.journeymode.main.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.network.MessageSyncResearch;

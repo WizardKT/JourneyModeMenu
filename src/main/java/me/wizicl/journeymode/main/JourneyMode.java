@@ -1,4 +1,4 @@
-package me.wizicl.journeymode;
+package me.wizicl.journeymode.main;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
