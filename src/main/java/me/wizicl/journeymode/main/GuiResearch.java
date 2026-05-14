@@ -1,36 +1,43 @@
 package me.wizicl.journeymode.main;
 
-import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 
-public class GuiResearch extends GuiScreen {
+import static me.wizicl.journeymode.proxy.ClientProxy.keyBindOpenGui;
 
-    /// --- Механика смены меню ---
-
-    private GuiState currentState = GuiState.Research; // Состояние меню при его открытии
-
-    public enum GuiState {
-        Research,     // Меню исследования
-        Progress,     // Меню прогресса исследования
-        ItemList      // Меню предметов + их получения
-    }
-
-    public void setState(GuiState newState) { // Смена состояния меню
-        this.currentState = newState;
-        initGui();
-    }
+public class GuiResearch extends GuiContainer {
 
     /// --- Отрисовка меню ---
 
-    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        super.drawScreen(mouseX, mouseY, partialTicks);
+    private static final ResourceLocation BACKGROUND = new ResourceLocation("journeymode", "textures/gui/container/research.png");
 
-        switch (currentState) {
-            case Research:
-                break;
-            case Progress:
-                break;
-            case ItemList:
-                break;
+    public GuiResearch(InventoryPlayer playerInv) {
+        super(new ResearchContainer(playerInv));
+    }
+
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        this.mc.getTextureManager().bindTexture(BACKGROUND);
+
+        int x = (width - this.xSize) / 2;
+        int y = (height - this.ySize) / 2;
+
+        this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+    }
+
+    @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        if (keyBindOpenGui.isPressed()) {
+            EntityPlayerSP player = Minecraft.getMinecraft().player;
+            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(player.inventory));
         }
     }
 }

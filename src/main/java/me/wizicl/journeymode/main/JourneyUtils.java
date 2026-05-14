@@ -19,7 +19,7 @@ public class JourneyUtils {
         int max = stack.getMaxStackSize();
 
         // Умножаем стак на коэффициент сложности
-        return max * JourneyConfig.stackMult;
+        return max * JourneyConfig.stackMultiplier;
     }
 
     /// Обновление капы в реальном времени
