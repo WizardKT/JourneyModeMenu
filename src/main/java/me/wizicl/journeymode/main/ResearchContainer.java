@@ -12,15 +12,16 @@ public class ResearchContainer extends Container{
     public ResearchContainer(InventoryPlayer playerInv) {
 
         // Инвентарь игрока
-        for (int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        // Хотбар игрока
-        for (int i = 0; i < 9; i++)
-            this.addSlotToContainer(new Slot(playerInv, i, 35 + i * 18, 175));
+        // 3. Добавляем горячую панель игрока (Hotbar)
+        for (int i = 0; i < 9; i++) {
+            this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
+        }
     }
 
     /// Возможность взаимодействия со слотами

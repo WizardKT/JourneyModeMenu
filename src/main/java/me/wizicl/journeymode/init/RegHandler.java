@@ -4,6 +4,7 @@ import me.wizicl.journeymode.main.GuiResearch;
 import me.wizicl.journeymode.main.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.main.ResearchContainer;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
@@ -78,7 +79,7 @@ public class RegHandler {
             EntityPlayer player = Minecraft.getMinecraft().player;
 
             // Теперь мы можем обращаться к его инвентарю
-            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(player.inventory));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(new ResearchContainer(player.inventory)));
         }
     }
 }
