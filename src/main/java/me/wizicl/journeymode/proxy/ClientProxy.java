@@ -12,7 +12,7 @@ import org.lwjgl.input.Keyboard;
 public class ClientProxy extends CommonProxy{
 
     // Добавляем переменную новой клавиши
-    public static KeyBinding keyBindOpenResearch;
+    public static KeyBinding keyBindOpenGui;
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
@@ -24,8 +24,8 @@ public class ClientProxy extends CommonProxy{
         super.init(event);
 
         // Регистрируем новую клавишу на J
-        keyBindOpenResearch = new KeyBinding("key.journeymode.open_menu", Keyboard.KEY_J, "key.categories.journeymode");
-        ClientRegistry.registerKeyBinding(keyBindOpenResearch);
+        keyBindOpenGui = new KeyBinding("key.journeymode.open_menu", Keyboard.KEY_J, "key.categories.journeymode");
+        ClientRegistry.registerKeyBinding(keyBindOpenGui);
     }
 
 

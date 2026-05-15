@@ -1,4 +1,4 @@
-package me.wizicl.journeymode;
+package me.wizicl.journeymode.main;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -10,7 +10,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class JourneyConfig {
     @Config.Name("Stack Multiplier")
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")
-    public static int stackMult = 10;
+    public static int stackMultiplier = 10;
+
+    @Config.Name("GUI open key")
+    @Config.Comment("What key press to open the menu")
+    public static String openKey = "KEY_J";
 
     @Mod.EventBusSubscriber(modid = "journeymode")
     private static class EventHandler {

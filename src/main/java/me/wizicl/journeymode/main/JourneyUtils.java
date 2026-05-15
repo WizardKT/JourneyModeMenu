@@ -1,4 +1,4 @@
-package me.wizicl.journeymode;
+package me.wizicl.journeymode.main;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
@@ -19,7 +19,7 @@ public class JourneyUtils {
         int max = stack.getMaxStackSize();
 
         // Умножаем стак на коэффициент сложности
-        return max * JourneyConfig.stackMult;
+        return max * JourneyConfig.stackMultiplier;
     }
 
     /// Обновление капы в реальном времени
