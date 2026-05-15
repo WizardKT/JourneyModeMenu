@@ -1,9 +1,12 @@
 package me.wizicl.journeymode.init;
 
+import me.wizicl.journeymode.main.GuiResearch;
 import me.wizicl.journeymode.main.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.network.MessageSyncResearch;
+import me.wizicl.journeymode.proxy.ClientProxy;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,6 +15,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 // Регистрируем наши предметы в Майнкрафте
 @Mod.EventBusSubscriber(modid = JourneyMode.MODID)
@@ -64,6 +68,17 @@ public class RegHandler {
 
             // Отправляем игроку пакет данных
             JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onKeyInput(InputEvent.KeyInputEvent event) {
+        if (ClientProxy.keyBindOpenGui.isPressed()) {
+            // Получаем экземпляр игрока на клиенте
+            EntityPlayer player = Minecraft.getMinecraft().player;
+
+            // Теперь мы можем обращаться к его инвентарю
+            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(player.inventory));
         }
     }
 }

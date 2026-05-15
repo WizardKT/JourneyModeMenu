@@ -1,5 +1,6 @@
 package me.wizicl.journeymode.proxy;
 
+import me.wizicl.journeymode.main.JourneyConfig;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +25,7 @@ public class ClientProxy extends CommonProxy{
         super.init(event);
 
         // Регистрируем новую клавишу на J
-        keyBindOpenGui = new KeyBinding("key.journeymode.open_menu", Keyboard.KEY_J, "key.categories.journeymode");
+        keyBindOpenGui = new KeyBinding("key.journeymode.open_menu", JourneyConfig.openGuiKey, "key.categories.journeymode");
         ClientRegistry.registerKeyBinding(keyBindOpenGui);
     }
 

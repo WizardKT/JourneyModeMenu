@@ -5,6 +5,7 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.lwjgl.input.Keyboard;
 
 @Config(modid = "journeymode", name = "journeymode_general")
 public class JourneyConfig {
@@ -13,8 +14,8 @@ public class JourneyConfig {
     public static int stackMultiplier = 10;
 
     @Config.Name("GUI open key")
-    @Config.Comment("What key press to open the menu")
-    public static String openKey = "KEY_J";
+    @Config.Comment("Key to open mode GUI")
+    public static int openGuiKey = Keyboard.KEY_J;
 
     @Mod.EventBusSubscriber(modid = "journeymode")
     private static class EventHandler {

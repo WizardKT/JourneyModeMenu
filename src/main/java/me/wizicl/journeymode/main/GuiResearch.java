@@ -1,15 +1,14 @@
 package me.wizicl.journeymode.main;
 
+import me.wizicl.journeymode.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
-
-import static me.wizicl.journeymode.proxy.ClientProxy.keyBindOpenGui;
 
 public class GuiResearch extends GuiContainer {
 
@@ -17,19 +16,46 @@ public class GuiResearch extends GuiContainer {
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation("journeymode", "textures/gui/container/research.png");
 
-    public GuiResearch(InventoryPlayer playerInv) {
-        super(new ResearchContainer(playerInv));
+    public GuiResearch(ResearchContainer container) {
+        super(container);
+
+        // Размеры картинки фона
+        this.xSize = 176;
+        this.ySize = 166;
     }
+
+    /**
+     * ЭТАП 1: Инициализация. Вызывается при открытии или изменении размера окна игры.
+     */
 
     @Override
     public void initGui() {
         super.initGui();
+
+        // guiLeft и guiTop — это координаты верхнего левого угла окна,
     }
+
+    /**
+     * ЭТАП 2: Главный метод отрисовки. Вызывается каждый кадр.
+     */
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+
+        // Серый полупрозрачный фон
+        this.drawDefaultBackground();
+
+        // Отрисовка слотов и фона
         super.drawScreen(mouseX, mouseY, partialTicks);
+
+        // Всплывающие подсказки над предметами
+        this.renderHoveredToolTip(mouseX, mouseY);
+
     }
+
+    /**
+     * ЭТАП 3: Отрисовка заднего слоя (текстуры).
+     */
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -37,17 +63,16 @@ public class GuiResearch extends GuiContainer {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(BACKGROUND);
 
-        int x = (width - this.xSize) / 2;
-        int y = (height - this.ySize) / 2;
-
-        this.drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
+        this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
-    @SubscribeEvent
-    public void onKeyInput(InputEvent.KeyInputEvent event) {
-        if (keyBindOpenGui.isPressed()) {
-            EntityPlayerSP player = Minecraft.getMinecraft().player;
-            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(player.inventory));
-        }
+    /**
+     * ЭТАП 4: Отрисовка переднего слоя (текст, индикаторы).
+     * Рисуется поверх текстуры и слотов, но ПОД мышкой.
+     */
+
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+        this.fontRenderer.drawString("Research", 8, 6, 4210752);
     }
 }
