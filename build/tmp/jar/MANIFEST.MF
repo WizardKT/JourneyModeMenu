@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Implementation-Title: JourneyModeMenu
+Implementation-Version: 1.3
+Specification-Vendor: examplemodsareus
+Specification-Title: examplemod
+Implementation-Timestamp: 2026-05-13T13:34:09+0700
+Specification-Version: 1
+Implementation-Vendor: examplemodsareus
+
