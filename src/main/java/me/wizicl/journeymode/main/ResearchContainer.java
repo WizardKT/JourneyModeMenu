@@ -4,20 +4,26 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ResearchContainer extends Container{
 
     /// Слоты инвентаря
     public ResearchContainer(InventoryPlayer playerInv) {
 
-        for (int i = 0; i < 9; i++){
-            for(int j = 0; j < 9; j++){
+        // Ячейка
+
+        // Инвентарь игрока
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        for (int i = 0; i < 9; i++)
-            this.addSlotToContainer(new Slot(playerInv, i, 35 + i * 18, 175));
+        // 3. Добавляем горячую панель игрока (Hotbar)
+        for (int i = 0; i < 9; i++) {
+            this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
+        }
     }
 
     /// Возможность взаимодействия со слотами
@@ -25,4 +31,14 @@ public class ResearchContainer extends Container{
     public boolean canInteractWith(EntityPlayer playerIn) {
         return true;
     }
+
+    /// Обработка shift-клика
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(index);
+
+        return itemstack;
+    }
+
 }
