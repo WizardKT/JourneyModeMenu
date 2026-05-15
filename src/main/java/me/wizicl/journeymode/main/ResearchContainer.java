@@ -10,12 +10,14 @@ public class ResearchContainer extends Container{
     /// Слоты инвентаря
     public ResearchContainer(InventoryPlayer playerInv) {
 
+        // Инвентарь игрока
         for (int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
                 this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
+        // Хотбар игрока
         for (int i = 0; i < 9; i++)
             this.addSlotToContainer(new Slot(playerInv, i, 35 + i * 18, 175));
     }
