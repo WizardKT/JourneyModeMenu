@@ -11,6 +11,8 @@ public class ResearchContainer extends Container{
     /// Слоты инвентаря
     public ResearchContainer(InventoryPlayer playerInv) {
 
+        // Ячейка
+
         // Инвентарь игрока
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; ++j) {

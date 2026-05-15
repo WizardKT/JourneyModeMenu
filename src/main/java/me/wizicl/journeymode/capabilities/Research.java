@@ -23,9 +23,6 @@ public class Research implements IResearch {
     }
 
     @Override
-    public void set(int amount) {}
-
-    @Override
     public int getRequiredAmount(String itemName) {
         return researchMap.getOrDefault(itemName, 0);
     }

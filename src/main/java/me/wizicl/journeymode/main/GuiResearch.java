@@ -14,6 +14,8 @@ public class GuiResearch extends GuiContainer {
 
     /// --- Отрисовка меню ---
 
+    private static final ResourceLocation BACKGROUND = new ResourceLocation("journeymode", "textures/gui/container/research.png");
+
     public GuiResearch(ResearchContainer container) {
         super(container);
 
@@ -30,8 +32,7 @@ public class GuiResearch extends GuiContainer {
     public void initGui() {
         super.initGui();
 
-        // initGui использует guiLeft и guiTop для центрирования окна
-        // guiLeft и guiTop — это координаты верхнего левого угла окна соответственно.
+        // guiLeft и guiTop — это координаты верхнего левого угла окна,
     }
 
     /**
@@ -60,8 +61,8 @@ public class GuiResearch extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        this.mc.getTextureManager().bindTexture(BACKGROUND);
 
-        this.mc.getTextureManager().bindTexture(INVENTORY_BACKGROUND);
         this.drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
     }
 
@@ -72,6 +73,5 @@ public class GuiResearch extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-
     }
 }
