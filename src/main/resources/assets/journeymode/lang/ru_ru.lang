@@ -7,4 +7,5 @@ chat.journeymode.noResearch=Не было найдено ни 1 исследов
 chat.journeymode.clear=Весь прогресс был стерт.
 chat.journeymode.add=Добавлено %s %s к исследованиям игрока
 chat.journeymode.remove=Удалён предмет %s
-chat.journeymode.needMoreResearch=Нужно чтобы было на %s больше изучено %s
+chat.journeymode.needMoreResearch=Твоему %s недостаёт %s исследований
+chat.journeymode.noPermission=У тебя недостаточно прав для этой команды

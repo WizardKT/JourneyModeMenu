@@ -19,13 +19,13 @@ public class Research implements IResearch {
     }
 
     @Override
-    public void setProgress(ItemStack stack, int amount)  {
+    public void setResearch(ItemStack stack, int amount)  {
         if (stack.isEmpty()) return;
         researchMap.put(new ResearchKey(stack), amount);
     }
 
     @Override
-    public int getProgress(ItemStack stack) {
+    public int getResearch(ItemStack stack) {
         if (stack.isEmpty()) return 0;
         return researchMap.getOrDefault(new ResearchKey(stack), 0);
     }
@@ -35,7 +35,7 @@ public class Research implements IResearch {
         if (stack.isEmpty()) return false;
 
         int requared = getRequiredAmount(stack);
-        return getProgress(stack) >= requared;
+        return getResearch(stack) >= requared;
     }
 
     @Override
@@ -49,6 +49,10 @@ public class Research implements IResearch {
     }
 
     @Override
+    public void remove(ItemStack stack) {
+        researchMap.remove(new ResearchKey(stack));
+    }
+
     public int getRequiredAmount(ItemStack stack) {
         return JourneyUtils.getRequiredAmount(stack);
     }

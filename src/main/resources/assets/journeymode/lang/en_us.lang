@@ -7,4 +7,5 @@ chat.journeymode.noResearch=No research has been detected.
 chat.journeymode.clear=All your progress has been deleted.
 chat.journeymode.add=Added %s %s to player researches
 chat.journeymode.remove=Removed %s item
-chat.journeymode.needMoreResearch=You need %s more researched %s
+chat.journeymode.needMoreResearch=You need %s researched %s times more
+chat.journeymode.noPermission=You don't have permission to that command

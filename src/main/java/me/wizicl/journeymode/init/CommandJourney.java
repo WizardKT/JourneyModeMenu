@@ -1,5 +1,6 @@
 package me.wizicl.journeymode.init;
 
+import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.main.JourneyUtils;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
@@ -11,17 +12,20 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CommandJourney extends CommandBase {
+
+    /// Общие переменные
+    int amount;
 
     /// Универсальное сообщение ошибки
     private void sendError(ICommandSender sender, String key, Object args) {
@@ -56,7 +60,7 @@ public class CommandJourney extends CommandBase {
         EntityPlayer player = (EntityPlayer) sender; // Получаем переменную игрока
         ItemStack stack = player.getHeldItemMainhand(); // Получаем переменную предмета в руке
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null); // Получаем переменную капы
-        String cmd = args[0].toLowerCase();
+        String cmd = args[0].toLowerCase(); // Первая команда jm
 
 
         /// Вводим список команд, которым нужен предмет в руке
@@ -79,6 +83,14 @@ public class CommandJourney extends CommandBase {
         }
 
 
+        /// Вводим список команд, которым нужны админ права
+        List<String> requireOp = Arrays.asList("ignore", "research");
+
+        if (requireOp.contains(cmd) && !sender.canUseCommand(2, cmd)) {
+            sender.sendMessage(new TextComponentTranslation("chat.journeymode.noPermission"));
+        }
+
+
         /// Проверка на то что команду отправил именно игрок
         if (!(sender instanceof EntityPlayer)) return;
 
@@ -94,18 +106,16 @@ public class CommandJourney extends CommandBase {
             case "consume": handleConsume(player, cap, stack, args); break;
             case "research": handleResearch(player, stack, cap, args); break;
             case "give": handleGive(player, cap, args); break;
-            case "progress": handleProgress(player, cap); break;
+            case "progress": handleProgress(player, stack, cap); break;
             case "clear": handleClear(player, cap); break;
             case "remove": handleRemove(player, stack, cap, args); break;
+            case "ignore": handleIgnore(player, stack, args);  break;
         }
     }
 
     /// --- Команда на уничтожение предмета в целях науки ---
 
     private void handleConsume(EntityPlayer player, IResearch cap, ItemStack stack, String[] args) {
-        // Вводим переменную количества предметов и сам предмет
-        int amount;
-        String item = player.getHeldItemMainhand().getItem().getRegistryName().toString();
 
         // Проверка, если пользователь ничего не ввёл
         if (args.length < 2) {
@@ -117,7 +127,7 @@ public class CommandJourney extends CommandBase {
             }
 
             // Если пользователь ничего не ввёл регистрируем максимально возможное число
-            amount = stack.getCount();
+            this.amount = stack.getCount();
         }
 
         // Если пользователь что-то ввёл, получаем желаемое игроком количество потребляемых предметов, с проверкой на число
@@ -134,24 +144,22 @@ public class CommandJourney extends CommandBase {
         if (amount > stack.getCount()) amount = stack.getCount();
 
         // Добавляем предметы в изучения и удаляем из инвентаря
-        cap.addResearch(item, amount);
         stack.shrink(amount);
 
         // Синхронизируем данные с сервером
-        JourneyUtils.addResearchAndSync(player, item, amount);
+        JourneyUtils.addResearchAndSync(player, stack, amount);
+
+        // Переводим название предмета с эльфийского
+        ITextComponent name = stack.getTextComponent();
 
         // Отправляем игроку сколько он изучил
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", item, amount));
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", name, amount));
     }
 
 
     /// --- Команда на бесплатное изучение предмета в целях науки ---
 
-    private void handleResearch(EntityPlayer player,ItemStack stack, IResearch cap, String[] args) {
-
-        // Вводим переменную количества предметов и сам предмет
-        int amount;
-        String item = player.getHeldItemMainhand().getItem().getRegistryName().toString();
+    private void handleResearch(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
 
         // Проверка, если пользователь ничего не ввёл
         if (args.length < 2) {
@@ -176,15 +184,14 @@ public class CommandJourney extends CommandBase {
             }
         }
 
-        // Добавляем предметы в капу
-        cap.addResearch(item, amount);
-
         // Синхронизируем данные с сервером
-        JourneyUtils.addResearchAndSync(player, item, amount);
+        JourneyUtils.addResearchAndSync(player, stack, amount);
+
+        // Переводим название предмета с эльфийского
+        ITextComponent name = stack.getTextComponent();
 
         // Отправляем игроку сколько он изучил
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", item, amount));
-
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", name, amount));
     }
 
 
@@ -204,7 +211,7 @@ public class CommandJourney extends CommandBase {
         int amount = item.getItemStackLimit();
 
         // Проверка на то сколько есть предметов, сколько надо и если предмет изучен, игрок может получить предметы
-        int has = cap.getReadOnlyMap().getOrDefault(args[1], 0);
+        int has = cap.getResearch(new ItemStack(item));
         int need = JourneyUtils.getRequiredAmount(new ItemStack(item));
         if (has >= need) {
 
@@ -232,26 +239,75 @@ public class CommandJourney extends CommandBase {
 
     /// --- Команда на бесплатную выдачу изученного предмета ---
 
-    private void handleProgress(EntityPlayer player, IResearch cap) {
+    private void handleProgress(EntityPlayer player, IResearch cap, String[] args) {
+        List<Map.Entry<ResearchKey, Integer>> totalList = new ArrayList<>(cap.getReadOnlyMap().entrySet());
 
-        // Высылаем игроку заголовок команды
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.progress"));
+        if (totalList.isEmpty()) {
+            player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "chat.journeymode.noResearch"));
+            return;
+        }
 
-        // Вытаскиваем из карты изучений все предметы, которые изучает игрок
-        for (Map.Entry<String, Integer> entry : cap.getReadOnlyMap().entrySet()) {
-            Item item = Item.getByNameOrId(entry.getKey()); // Переменная предмета, означающая его айди
+        final int ITEMS_PER_PAGE = 6; // Сколько строк поместится в чат за раз
+        int totalItems = totalList.size();
+        int maxPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
+        int currentPage = 1;
 
-            // Проверка на пустой предмет во избежание ошибок
-            if (item == null) continue;
+        if (args.length >= 2) {
+            try {
+                currentPage = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "chat.journeymode.wrongPage"));
+                return;
+            }
+        }
 
-            // Используем метод проверки требуемого количества предметов
-            int has = entry.getValue();
-            int need = JourneyUtils.getRequiredAmount(new ItemStack(item));
-            String localizedName = new ItemStack(item).getDisplayName();
+        if (currentPage < 1) currentPage = 1;
+        if (currentPage > maxPages) currentPage = maxPages;
 
-            // Выводим игроку прогресс исследования для каждого предмета отдельными сообщениями
-            // благодаря циклу for
-            player.sendMessage(new TextComponentString(localizedName + ":" + has + "/" + need));
+        int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+
+        player.sendMessage(new TextComponentTranslation(
+                TextFormatting.GOLD + "=== " +
+                        TextFormatting.YELLOW + "Прогресс исследований (Стр. " + currentPage + " из " + maxPages + ")" +
+                        TextFormatting.GOLD + " ==="
+        ));
+
+        for (int i = startIndex; i < endIndex; i++) {
+            Map.Entry<ResearchKey, Integer> entry = totalList.get(i);
+            ResearchKey key = entry.getKey();
+            int currentProgress = entry.getValue();
+
+            ItemStack displayStack = new ItemStack(
+                    ForgeRegistries.ITEMS.getValue(key.getRegistryName()),
+                    1,
+                    key.getMeta()
+            );
+            if (key.getCleanedNbt() != null) {
+                displayStack.setTagCompound(key.getCleanedNbt());
+            }
+
+            int requiredAmount = JourneyUtils.getRequiredAmount(displayStack);
+
+            TextFormatting color = (currentProgress >= requiredAmount) ? TextFormatting.GREEN : TextFormatting.GRAY;
+
+            String itemDisplayName = displayStack.getDisplayName();
+
+            String nbtMarker = (key.getCleanedNbt() != null) ? TextFormatting.LIGHT_PURPLE + " [+NBT]" : "";
+
+            player.sendMessage(new TextComponentString(
+                    TextFormatting.DARK_GRAY + " - " +
+                            color + itemDisplayName + nbtMarker +
+                            TextFormatting.DARK_AQUA + " [" + currentProgress + "/" + requiredAmount + "]"
+            ));
+        }
+
+        if (currentPage < maxPages) {
+            player.sendMessage(new TextComponentString(
+                    TextFormatting.GRAY + "Используйте " +
+                            TextFormatting.AQUA + "/jm progress " + (currentPage + 1) +
+                            TextFormatting.GRAY + ", чтобы открыть следующую страницу."
+            ));
         }
     }
 
@@ -261,7 +317,7 @@ public class CommandJourney extends CommandBase {
     private void handleClear(EntityPlayer player, IResearch cap) {
 
         // Вызываем метод очистки карты исследований
-        cap.getReadOnlyMap().clear();
+        cap.clear();
 
         // Выводим игроку сообщение об успешной очистке исследований
         player.sendMessage(new TextComponentTranslation("chat.journeymode.clear"));
@@ -270,7 +326,7 @@ public class CommandJourney extends CommandBase {
 
     /// --- Команда на бесплатную выдачу изученного предмета ---
 
-    private void handleRemove(EntityPlayer player,ItemStack stack ,IResearch cap, String[] args) {
+    private void handleRemove(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
         // Вводим переменную предмета для удаления и предмета в руке
         String item;
 
@@ -282,7 +338,6 @@ public class CommandJourney extends CommandBase {
                 sendError(player, "commandError", getUsage(player));
                 return;
             }
-            item = stack.getItem().getRegistryName().toString();
         }
 
         // Если пользовать что-то ввёл, регистрируем
@@ -291,11 +346,43 @@ public class CommandJourney extends CommandBase {
         }
 
         // Если карта исследований содержит этот предмет - сносим нафиг.
-        if (cap.getReadOnlyMap().containsKey(item)) {
-            cap.getReadOnlyMap().remove(item);
+        if (cap.getResearch(stack) > 0) {
+            cap.remove(stack);
 
-            // Выводим сообщение об успешном снесении предмета из исследований, хехе
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.remove", item));
+            String localizedName = new ItemStack(stack.getItem()).getDisplayName();
+
+            // Выводим сообщение об успешном снесении предмета из исследований, хе-хе
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.remove", localizedName));
+        }
+    }
+
+    private void handleIgnore(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
+        if (stack.isEmpty()) {
+            sendError(player, "commandError", getUsage(player));
+        }
+
+        if (!stack.hasTagCompound()) {
+            sendError(player, "commandError", getUsage(player));
+        }
+
+        if (args.length == 1) {
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.ignoreHat"));
+            for (String key : stack.getTagCompound().getKeySet()) {
+                boolean isIgnored = ConfigHandler.IGNORED_TAGS.contains(key);
+                String color = isIgnored ? TextComponentTranslation() : TextComponentTranslation();
+                player.sendMessage(new TextComponentTranslation(color + key));
+            }
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.ignore"));
+            return;
+        }
+
+        String action = args[1].toLowerCase();
+
+        if (args.length >= 3 && action.equals("add")) {
+            String tagToIngore = args[2];
+
+            ConfigHandler.IGNORED_TAGS.add(tagToIgnore);
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
         }
     }
 
@@ -316,8 +403,12 @@ public class CommandJourney extends CommandBase {
             }
 
             // Проверка для слова give и remove на ввод предмета
-            if (args.length == 2 && "give".equals(args[0]) || "remove".equals(args[0])) {
-                return getListOfStringsMatchingLastWord(args, cap.getReadOnlyMap().keySet().toArray(new String[cap.getReadOnlyMap().keySet().size()]));
+            if (args.length == 2 && ("give".equals(args[0]) || "remove".equals(args[0]))) {
+                List<String> researchedItems = new ArrayList<>();
+                for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
+                    researchedItems.add(key.getRegistryName().toString());
+                }
+                return getListOfStringsMatchingLastWord(args, researchedItems);
             }
 
             // Проверка для слова research и consume на ввод числа

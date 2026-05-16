@@ -17,4 +17,5 @@ public interface IResearch {
     Map<ResearchKey, Integer> getReadOnlyMap();
 
     void clear();
+    void remove(ItemStack stack);
 }

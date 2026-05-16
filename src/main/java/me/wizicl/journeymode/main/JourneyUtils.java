@@ -23,12 +23,12 @@ public class JourneyUtils {
     }
 
     /// Обновление капы в реальном времени
-    public static void addResearchAndSync(EntityPlayer player, String itemName, int amount) {
+    public static void addResearchAndSync(EntityPlayer player, ItemStack stack, int amount) {
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
         if (cap != null) {
 
             // Обновление данных капы
-            cap.addResearch(itemName, amount);
+            cap.addResearch(stack, amount);
 
             // Если игрок в мультиплеере, отправляем пакет данных
             if (!player.world.isRemote) {
