@@ -32,7 +32,7 @@ public class JourneyUtils {
 
             // Если игрок в мультиплеере, отправляем пакет данных
             if (!player.world.isRemote) {
-                JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+                JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadResearchMap()), (EntityPlayerMP) player);
             }
         }
     }

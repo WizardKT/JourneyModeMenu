@@ -73,7 +73,7 @@ public class CommandJourney extends CommandBase {
         List<String> requireResearch = Arrays.asList("give", "progress", "remove");
 
         // Проверка на наличие исследований у игрока
-        if (requireResearch.contains(cmd) && cap.getResearchMap().isEmpty()) {
+        if (requireResearch.contains(cmd) && cap.getReadResearchMap().isEmpty()) {
             sendNoResearch(sender, "", "");
             return;
         }
@@ -204,7 +204,7 @@ public class CommandJourney extends CommandBase {
         int amount = item.getItemStackLimit();
 
         // Проверка на то сколько есть предметов, сколько надо и если предмет изучен, игрок может получить предметы
-        int has = cap.getResearchMap().getOrDefault(args[1], 0);
+        int has = cap.getReadResearchMap().getOrDefault(args[1], 0);
         int need = JourneyUtils.getRequiredAmount(new ItemStack(item));
         if (has >= need) {
 
@@ -238,7 +238,7 @@ public class CommandJourney extends CommandBase {
         player.sendMessage(new TextComponentTranslation("chat.journeymode.progress"));
 
         // Вытаскиваем из карты изучений все предметы, которые изучает игрок
-        for (Map.Entry<String, Integer> entry : cap.getResearchMap().entrySet()) {
+        for (Map.Entry<String, Integer> entry : cap.getReadResearchMap().entrySet()) {
             Item item = Item.getByNameOrId(entry.getKey()); // Переменная предмета, означающая его айди
 
             // Проверка на пустой предмет во избежание ошибок
@@ -261,7 +261,7 @@ public class CommandJourney extends CommandBase {
     private void handleClear(EntityPlayer player, IResearch cap) {
 
         // Вызываем метод очистки карты исследований
-        cap.getResearchMap().clear();
+        cap.getReadResearchMap().clear();
 
         // Выводим игроку сообщение об успешной очистке исследований
         player.sendMessage(new TextComponentTranslation("chat.journeymode.clear"));
@@ -291,8 +291,8 @@ public class CommandJourney extends CommandBase {
         }
 
         // Если карта исследований содержит этот предмет - сносим нафиг.
-        if (cap.getResearchMap().containsKey(item)) {
-            cap.getResearchMap().remove(item);
+        if (cap.getReadResearchMap().containsKey(item)) {
+            cap.getReadResearchMap().remove(item);
 
             // Выводим сообщение об успешном снесении предмета из исследований, хехе
             player.sendMessage(new TextComponentTranslation("chat.journeymode.remove", item));
@@ -317,7 +317,7 @@ public class CommandJourney extends CommandBase {
 
             // Проверка для слова give и remove на ввод предмета
             if (args.length == 2 && "give".equals(args[0]) || "remove".equals(args[0])) {
-                return getListOfStringsMatchingLastWord(args, cap.getResearchMap().keySet().toArray(new String[cap.getResearchMap().keySet().size()]));
+                return getListOfStringsMatchingLastWord(args, cap.getReadResearchMap().keySet().toArray(new String[cap.getReadResearchMap().keySet().size()]));
             }
 
             // Проверка для слова research и consume на ввод числа

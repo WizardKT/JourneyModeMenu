@@ -9,13 +9,34 @@ import java.util.Objects;
 public class ResearchKey {
     private final ResourceLocation registryName;
     private final int meta;
-    private final NBTTagCompound nbt;
+    private final NBTTagCompound cleanedNbt;
 
     public ResearchKey(ItemStack stack) {
         this.registryName = stack.getItem().getRegistryName();
         this.meta = stack.getMetadata();
-        this.nbt = stack.hasTagCompound() ? stack.getTagCompound().copy() : null;
+
+        if (stack.hasTagCompound()) {
+
+            // Копия, чтобы не испортить оригинал
+            NBTTagCompound nbtCopy = stack.getTagCompound().copy();
+
+            // Удаляем NBT находящиеся в ЧС
+            for (String tagToRemove : ConfigHandler.IGNORED_TAGS) {
+                if (nbtCopy.hasKey(tagToRemove)) {
+                    nbtCopy.removeTag(tagToRemove);
+                }
+            }
+
+            // Если после проверки NBT остался пустым - заменяем null
+            this.cleanedNbt = nbtCopy.isEmpty() ? null : nbtCopy;
+        } else {
+            this.cleanedNbt = null;
+        }
     }
+
+    public ResourceLocation getRegistryName() { return registryName; }
+    public int getMeta() { return meta; }
+    public NBTTagCompound getCleanedNbt() { return cleanedNbt; }
 
     @Override
     public boolean equals(Object o) {
@@ -23,14 +44,13 @@ public class ResearchKey {
         if (o == null || getClass() != o.getClass()) return false;
         ResearchKey that = (ResearchKey) o;
 
-        if (meta != that.meta) return false;
-        if (!registryName.equals(that.registryName)) return false;
-
-        return Objects.equals(this.nbt, that.nbt);
+        return meta == that.meta &&
+                Objects.equals(registryName, that.registryName) &&
+                Objects.equals(cleanedNbt, that.cleanedNbt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registryName, meta, nbt);
+        return Objects.hash(registryName, meta, cleanedNbt);
     }
 }

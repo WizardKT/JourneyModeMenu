@@ -71,8 +71,8 @@ public class MessageSyncResearch implements IMessage {
                 if (player != null) {
                     IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
                     if (cap != null) {
-                        cap.getResearchMap().clear();
-                        cap.getResearchMap().putAll(message.data);
+                        cap.getReadResearchMap().clear();
+                        cap.getReadResearchMap().putAll(message.data);
 
                         // Дебаг логики
                         System.out.println("CLIENT-SIDE: Получены данные исследований! Размер: " + message.data.size());

@@ -15,7 +15,7 @@ public class ResearchStorage implements Capability.IStorage<IResearch> {
     public NBTBase writeNBT(Capability<IResearch> capability, IResearch instance, EnumFacing side) {
         NBTTagList researchedItems = new NBTTagList();
 
-        for (Map.Entry<String, Integer> entry : instance.getResearchMap().entrySet()) {
+        for (Map.Entry<String, Integer> entry : instance.getReadResearchMap().entrySet()) {
             NBTTagCompound tag = new NBTTagCompound();
             tag.setString("item", entry.getKey());
             tag.setInteger("amount", entry.getValue());
