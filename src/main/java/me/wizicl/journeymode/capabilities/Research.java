@@ -39,7 +39,7 @@ public class Research implements IResearch {
     }
 
     @Override
-    public Map<ResearchKey, Integer> getReadResearchMap() {
+    public Map<ResearchKey, Integer> getReadOnlyMap() {
         return Collections.unmodifiableMap(researchMap);
     }
 
@@ -51,5 +51,10 @@ public class Research implements IResearch {
     @Override
     public int getRequiredAmount(ItemStack stack) {
         return JourneyUtils.getRequiredAmount(stack);
+    }
+
+    public void refreshFromServer(Map<ResearchKey, Integer> newData) {
+        this.researchMap.clear();
+        this.researchMap.putAll(newData);
     }
 }

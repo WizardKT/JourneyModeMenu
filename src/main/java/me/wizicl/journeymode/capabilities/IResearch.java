@@ -14,7 +14,7 @@ public interface IResearch {
     boolean isResearched(ItemStack stack);
 
     // На всякий случай
-    Map<ResearchKey, Integer> getReadResearchMap();
+    Map<ResearchKey, Integer> getReadOnlyMap();
 
     void clear();
 }

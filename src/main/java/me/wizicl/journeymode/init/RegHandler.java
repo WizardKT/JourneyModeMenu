@@ -41,7 +41,7 @@ public class RegHandler {
             IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
 
             if (oldplayer != null && newplayer != null) {
-                newCap.getReadResearchMap().putAll(oldCap.getReadResearchMap());
+                newCap.getReadOnlyMap().putAll(oldCap.getReadOnlyMap());
             }
 
             // Создаём переменную игрока и капы
@@ -49,7 +49,7 @@ public class RegHandler {
             IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
             // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadResearchMap()), (EntityPlayerMP) player);
+            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
 
         }
     }
@@ -68,7 +68,7 @@ public class RegHandler {
             IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
             // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadResearchMap()), (EntityPlayerMP) player);
+            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
         }
     }
 
