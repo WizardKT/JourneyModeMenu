@@ -1,6 +1,6 @@
 package me.wizicl.journeymode.capabilities;
 
-import me.wizicl.journeymode.main.JourneyUtils;
+import me.wizicl.journeymode.util.JourneyUtils;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collections;

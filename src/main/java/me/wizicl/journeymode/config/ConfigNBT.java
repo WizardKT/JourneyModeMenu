@@ -1,4 +1,4 @@
-package me.wizicl.journeymode.init;
+package me.wizicl.journeymode.config;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Config(modid = "journeymode", name = "journeymode_nbt")
-public class ConfigHandler {
+public class ConfigNBT {
     @Config.Comment({"A list of NBT tags that will be ignored when researching items.",})
     @Config.Name("Ignored NBT Tags")
     public static String[] IGNORED_TAGS = new String[] {"display", "RepairCost"};

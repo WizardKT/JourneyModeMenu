@@ -1,4 +1,4 @@
-package me.wizicl.journeymode.main;
+package me.wizicl.journeymode.config;
 
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Keyboard;
 
 @Config(modid = "journeymode", name = "journeymode_config")
-public class JourneyConfig {
+public class ConfigMain {
     @Config.Name("Stack Multiplier")
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")
     public static int stackMultiplier = 10;

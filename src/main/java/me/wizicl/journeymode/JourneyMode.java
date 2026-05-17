@@ -1,9 +1,9 @@
-package me.wizicl.journeymode.main;
+package me.wizicl.journeymode;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
 import me.wizicl.journeymode.capabilities.ResearchStorage;
-import me.wizicl.journeymode.init.CommandJourney;
+import me.wizicl.journeymode.command.CommandJourney;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraftforge.common.capabilities.Capability;
@@ -49,7 +49,7 @@ public class JourneyMode {
 
     public static CommonProxy proxy;
 
-    // Пред-инициализация. Регистрирует блоки, предметы и отправку сообщий в лог.
+    // Пред-инициализация. Регистрирует блоки, предметы и отправку сообщений в лог.
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();

@@ -1,7 +1,9 @@
-package me.wizicl.journeymode.main;
+package me.wizicl.journeymode.util;
 
+import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.config.ConfigMain;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -19,7 +21,7 @@ public class JourneyUtils {
         int max = stack.getMaxStackSize();
 
         // Умножаем стак на коэффициент сложности
-        return max * JourneyConfig.stackMultiplier;
+        return max * ConfigMain.stackMultiplier;
     }
 
     /// Обновление капы в реальном времени

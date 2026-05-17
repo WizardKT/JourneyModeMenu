@@ -1,7 +1,8 @@
-package me.wizicl.journeymode.init;
+package me.wizicl.journeymode.command;
 
 import me.wizicl.journeymode.capabilities.ResearchKey;
-import me.wizicl.journeymode.main.JourneyUtils;
+import me.wizicl.journeymode.config.ConfigNBT;
+import me.wizicl.journeymode.util.JourneyUtils;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import net.minecraft.command.CommandBase;
@@ -261,7 +262,7 @@ public class CommandJourney extends CommandBase {
         if (args.length == 1) {
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignoreHat"));
             for (String key : stack.getTagCompound().getKeySet()) {
-                boolean isIgnored = ConfigHandler.isTagIgnored(key);
+                boolean isIgnored = ConfigNBT.isTagIgnored(key);
                 TextFormatting color = isIgnored ? TextFormatting.GREEN : TextFormatting.RED;
 
                 ITextComponent keyComponent = new TextComponentString(key);
@@ -280,7 +281,7 @@ public class CommandJourney extends CommandBase {
             String targetTag = args[2];
 
             if (action.equals("add")) {
-                boolean success = ConfigHandler.addTag(targetTag);
+                boolean success = ConfigNBT.addTag(targetTag);
                 if (success) {
                     player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
                 } else {
@@ -290,7 +291,7 @@ public class CommandJourney extends CommandBase {
                 }
             }
             else if (action.equals("remove")) {
-                boolean success = ConfigHandler.removeTag(targetTag); // Твой новый метод
+                boolean success = ConfigNBT.removeTag(targetTag); // Твой новый метод
                 if (success) {
                     // Создай этот ключ перевода в .lang файле
                     player.sendMessage(new TextComponentTranslation("chat.journeymode.removeIgnore"));
@@ -431,7 +432,7 @@ public class CommandJourney extends CommandBase {
             }
             else if (action.equals("remove")) {
                 // Подсказываем теги, которые уже занесены в конфиг
-                return getListOfStringsMatchingLastWord(args, ConfigHandler.IGNORED_TAGS);
+                return getListOfStringsMatchingLastWord(args, ConfigNBT.IGNORED_TAGS);
             }
         }
 

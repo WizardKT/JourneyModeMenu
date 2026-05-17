@@ -1,14 +1,8 @@
-package me.wizicl.journeymode.main;
+package me.wizicl.journeymode.client.gui;
 
-import me.wizicl.journeymode.proxy.ClientProxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 public class GuiResearch extends GuiContainer {
 
@@ -16,7 +10,7 @@ public class GuiResearch extends GuiContainer {
 
     private static final ResourceLocation BACKGROUND = new ResourceLocation("journeymode", "textures/gui/container/research.png");
 
-    public GuiResearch(ResearchContainer container) {
+    public GuiResearch(GuiResearchContainer container) {
         super(container);
 
         // Размеры картинки фона

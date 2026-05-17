@@ -1,6 +1,6 @@
 package me.wizicl.journeymode.capabilities;
 
-import me.wizicl.journeymode.init.ConfigHandler;
+import me.wizicl.journeymode.config.ConfigNBT;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
@@ -28,7 +28,7 @@ public class ResearchKey {
             NBTTagCompound nbtCopy = stack.getTagCompound().copy();
 
             // Удаляем NBT находящиеся в ЧС
-            for (String tagToRemove : ConfigHandler.IGNORED_TAGS) {
+            for (String tagToRemove : ConfigNBT.IGNORED_TAGS) {
                 if (nbtCopy.hasKey(tagToRemove)) {
                     nbtCopy.removeTag(tagToRemove);
                 }
