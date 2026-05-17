@@ -4,6 +4,7 @@ import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
 import me.wizicl.journeymode.capabilities.ResearchStorage;
 import me.wizicl.journeymode.command.CommandJourney;
+import me.wizicl.journeymode.network.MessageRequestResearch;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraftforge.common.capabilities.Capability;
@@ -61,6 +62,7 @@ public class JourneyMode {
         // Работа с сетью
         NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel("journeymode");
         NETWORK.registerMessage(MessageSyncResearch.Handler.class, MessageSyncResearch.class, 0, Side.CLIENT);
+        NETWORK.registerMessage(MessageRequestResearch.Handler.class, MessageRequestResearch.class, 1, Side.SERVER);
     }
 
     // Инициализация. Загрузка рецептов, событий, сущностей.

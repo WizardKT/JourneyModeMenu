@@ -20,21 +20,30 @@ public class GuiResearchContainer extends Container{
     private static final int RESEARCH_SLOT_INDEX = 36;
 
     public GuiResearchContainer(InventoryPlayer playerInv) {
+        this.addPlayerInventory(playerInv);
+        this.addPlayerHotbar(playerInv);
+        this.addResearchSlot();
+    }
 
+    private void addPlayerInventory(InventoryPlayer playerInv) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
+    }
 
+    private void addPlayerHotbar(InventoryPlayer playerInv) {
         for (int i = 0; i < 9; i++) {
             this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
         }
+    }
 
+    private void addResearchSlot() {
         this.addSlotToContainer(new Slot(this.researchInventory, 0, 98, 32) {
             @Override
             public boolean isItemValid(ItemStack stack) {
-                return true;
+                return !stack.isEmpty();
             }
 
             @Override
@@ -44,12 +53,22 @@ public class GuiResearchContainer extends Container{
         });
     }
 
-    public GuiState getCurrentState() {
-        return this.currentState;
+    public void switchState(GuiState newState) {
+        if (this.currentState != newState) {
+            this.currentState = newState;
+        }
     }
 
-    public void setCurrentState(GuiState state) {
-        this.currentState = state;
+    public ItemStack getResearchTargetStack() {
+        return this.researchInventory.getStackInSlot(0);
+    }
+
+    public boolean isResearchSlotEmpty() {
+        return this.getResearchTargetStack().isEmpty();
+    }
+
+    public GuiState getCurrentState() {
+        return this.currentState;
     }
 
     @Override
