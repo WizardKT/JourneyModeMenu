@@ -20,3 +20,5 @@ chat.journeymode.noPermission=§cУ тебя недостаточно прав �
 chat.journeymode.ignoreHat=§6--- Список NBT тегов предмета ---
 chat.journeymode.tagPrefix=§7-
 chat.journeymode.ignore=§6---------------------------------
+
+gui.journeymode.tooltip=Положи предмет

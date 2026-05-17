@@ -3,42 +3,110 @@ package me.wizicl.journeymode.client.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class GuiResearchContainer extends Container{
 
-    /// Слоты инвентаря
+    private GuiState currentState = GuiState.RESEARCH;
+
+    private final IInventory researchInventory = new InventoryBasic("ResearchConsole", false, 1);
+
+    private static final int PLAYER_INV_START = 0;
+    private static final int PLAYER_HOTBAR_START = 27;
+    private static final int PLAYER_INV_END = 36;
+    private static final int RESEARCH_SLOT_INDEX = 36;
+
     public GuiResearchContainer(InventoryPlayer playerInv) {
 
-        // Ячейка
-
-        // Инвентарь игрока
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; ++j) {
                 this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
-        // 3. Добавляем горячую панель игрока (Hotbar)
         for (int i = 0; i < 9; i++) {
             this.addSlotToContainer(new Slot(playerInv, i, 8 + i * 18, 142));
         }
+
+        this.addSlotToContainer(new Slot(this.researchInventory, 0, 98, 32) {
+            @Override
+            public boolean isItemValid(ItemStack stack) {
+                return true;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return currentState == GuiState.RESEARCH;
+            }
+        });
     }
 
-    /// Возможность взаимодействия со слотами
+    public GuiState getCurrentState() {
+        return this.currentState;
+    }
+
+    public void setCurrentState(GuiState state) {
+        this.currentState = state;
+    }
+
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return true;
     }
 
-    /// Обработка shift-клика
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
 
+        if (slot != null && slot.getHasStack()) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+
+            if (index == RESEARCH_SLOT_INDEX) {
+                if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_INV_END, true)) {
+                    return ItemStack.EMPTY;
+                }
+                slot.onSlotChange(itemstack1, itemstack);
+            }
+            else {
+                if (this.currentState == GuiState.RESEARCH) {
+                    if (!this.mergeItemStack(itemstack1, RESEARCH_SLOT_INDEX, RESEARCH_SLOT_INDEX + 1, false)) {
+                        if (index < PLAYER_HOTBAR_START) {
+                            if (!this.mergeItemStack(itemstack1, PLAYER_HOTBAR_START, PLAYER_INV_END, false)) {
+                                return ItemStack.EMPTY;
+                            }
+                        } else if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_HOTBAR_START, false)) {
+                            return ItemStack.EMPTY;
+                        }
+                    }
+                }
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.putStack(ItemStack.EMPTY);
+            } else {
+                slot.onSlotChanged();
+            }
+
+            if (itemstack1.getCount() == itemstack.getCount()) {
+                return ItemStack.EMPTY;
+            }
+
+            slot.onTake(playerIn, itemstack1);
+        }
+
         return itemstack;
     }
 
+    @Override
+    public void onContainerClosed(EntityPlayer playerIn) {
+        super.onContainerClosed(playerIn);
+        if (!playerIn.world.isRemote) {
+            this.clearContainer(playerIn, playerIn.world, this.researchInventory);
+        }
+    }
 }
