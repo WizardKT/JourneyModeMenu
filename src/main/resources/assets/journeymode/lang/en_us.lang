@@ -5,6 +5,7 @@ chat.journeymode.emptyHand=§cYou must hold an item in your hand!
 chat.journeymode.progress=--- Your research progress ---
 chat.journeymode.noResearch=§cNo research has been detected.
 chat.journeymode.wrongPage=§cIncorrect page number!
+chat.journeymode.giveSuccess=Added %s %s to player inventory
 
 chat.journeymode.progress.header=§6=== §eResearch progress (Page %1$d of %2$d) §6===
 chat.journeymode.progress.item=§8 - %1$s%2$s§3 [%3$d/%4$d]

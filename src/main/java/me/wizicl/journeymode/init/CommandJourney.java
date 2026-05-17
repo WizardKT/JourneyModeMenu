@@ -5,11 +5,13 @@ import me.wizicl.journeymode.main.JourneyUtils;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
@@ -19,7 +21,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -129,24 +130,30 @@ public class CommandJourney extends CommandBase {
             return;
         }
 
-        Item item = Item.getByNameOrId(args[1]);
-        if (item == null) {
+        ItemStack resultStack = parseItemStackFromString(args[1]);
+        if (resultStack.isEmpty()) {
             sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
-        ItemStack targetStack = new ItemStack(item);
-        int has = cap.getResearch(targetStack);
-        int need = JourneyUtils.getRequiredAmount(targetStack);
+        Integer amount = parseArgInt(player, args, 2, 1);
+        if (amount == null) return;
+        resultStack.setCount(amount);
 
-        if (has >= need) {
-            Integer amount = parseArgInt(player, args, 2, item.getItemStackLimit());
-            if (amount == null) return;
+        if (args.length >= 4) {
+            NBTTagCompound nbt = parseNbtFromArgs(args, 3);
+            if (nbt != null) resultStack.setTagCompound(nbt);
+        }
 
-            targetStack.setCount(amount);
-            player.inventory.addItemStackToInventory(targetStack);
+        if (cap.isResearched(resultStack)) {
+            player.inventory.addItemStackToInventory(resultStack);
+
+            resultStack.setCount(amount == null ? 1 : amount);
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.giveSuccess", resultStack.getTextComponent(), amount));
         } else {
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.needMoreResearch", need - has, targetStack.getDisplayName()));
+            int need = JourneyUtils.getRequiredAmount(resultStack);
+            int has = cap.getResearch(resultStack);
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.needMoreResearch", need - has, resultStack.getDisplayName()));
         }
     }
 
@@ -319,6 +326,34 @@ public class CommandJourney extends CommandBase {
         }
     }
 
+    private ItemStack parseItemStackFromString(String input) {
+        String[] parts = input.split("@");
+        Item item = Item.getByNameOrId(parts[0]);
+        if (item == null) {
+            return ItemStack.EMPTY;
+        }
+        int meta = 0;
+        if (parts.length > 1) {
+            try {
+                meta = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException e) {
+                return ItemStack.EMPTY;
+            }
+        }
+        return new ItemStack(item,1, meta);
+    }
+
+    @Nullable
+    private NBTTagCompound parseNbtFromArgs(String[] args, int startIndex) {
+        if (args.length <= startIndex) return null;
+        try {
+            String nbtString = CommandBase.buildString(args, startIndex);
+            return JsonToNBT.getTagFromJson(nbtString);
+        } catch (NBTException e) {
+            return null;
+        }
+    }
+
 
     /**
      * Превращает ResearchKey обратно в полноценный ItemStack для отображения
@@ -354,13 +389,33 @@ public class CommandJourney extends CommandBase {
             return getListOfStringsMatchingLastWord(args, "add", "remove");
         }
 
-        // Уровень 2: /jm give [item] или /jm remove [item]
-        if (args.length == 2 && (cmd.equals("give") || cmd.equals("remove"))) {
+        // Уровень 2: /jm remove [item]
+        if (args.length == 2 && cmd.equals("remove")) {
             List<String> researchedItems = new ArrayList<>();
             for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
                 researchedItems.add(key.getRegistryName().toString());
             }
             return getListOfStringsMatchingLastWord(args, researchedItems);
+        }
+
+        // Уровень 2: /jm give [item@meta]
+        if (args.length == 2 && cmd.equals("give")) {
+            List<String> suggestions = new ArrayList<>();
+            for (Map.Entry<ResearchKey, Integer> entry : cap.getReadOnlyMap().entrySet()) {
+                ResearchKey key = entry.getKey();
+                int currentProgress = entry.getValue();
+
+                ItemStack checkStack = createDisplayStack(key);
+                int requiredAmount = JourneyUtils.getRequiredAmount(checkStack);
+                if (currentProgress >= requiredAmount) {
+                    String registryName = key.getRegistryName().toString();
+                    int meta = key.getMeta();
+
+                    String suggestionString = registryName + "@" + meta;
+                    suggestions.add(suggestionString);
+                }
+            }
+            return getListOfStringsMatchingLastWord(args, suggestions);
         }
 
         // Уровень 3: /jm ignore add/remove [tag]
@@ -380,9 +435,35 @@ public class CommandJourney extends CommandBase {
             }
         }
 
+        // Уровень 3: /jm give pid@meta] [количество]
+        if (args.length == 3 && cmd.equals("give")) {
+            return getListOfStringsMatchingLastWord(args, "1", "64");
+        }
+
+        // Уровень 4: /jm give [id@meta] [количество] [NBT]
+        if (args.length == 4 && cmd.equals("give")) {
+            List<String> nbtSuggestions = new ArrayList<>();
+            String targetItem = args[1]; // Например: "minecraft:spawn_egg@0" или "minecraft:spawn_egg"
+
+            for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
+                if (key.getCleanedNbt() == null) continue; // Если у предмета нет NBT, он нам не интересен
+
+                String registryName = key.getRegistryName().toString();
+                int meta = key.getMeta();
+
+                String formatWithMeta = registryName + "@" + meta;
+                String formatWithoutMeta = registryName + (meta > 0 ? "@" + meta : "");
+
+                if (targetItem.equals(formatWithMeta) || targetItem.equals(formatWithoutMeta)) {
+                    String nbtString = key.getCleanedNbt().toString().replace(" ", "");
+                    nbtSuggestions.add(nbtString);
+                }
+            }
+            return getListOfStringsMatchingLastWord(args, nbtSuggestions);
+        }
+
         // Уровень 3/4: Подсказка количества предметов из руки
-        if ((args.length == 2 && (cmd.equals("research") || cmd.equals("consume"))) ||
-                (args.length == 3 && cmd.equals("give"))) {
+        if ((args.length == 2 && (cmd.equals("research") || cmd.equals("consume")))) {
             return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
         }
 

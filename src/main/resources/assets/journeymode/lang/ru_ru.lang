@@ -5,17 +5,15 @@ chat.journeymode.emptyHand=§cВы должны держать предмет в
 chat.journeymode.progress=--- Твой прогресс исследований ---
 chat.journeymode.noResearch=§cУ вас пока нет исследованных предметов.
 chat.journeymode.wrongPage=§cНеверный номер страницы!
+chat.journeymode.giveSuccess=Добавлено %s %s в инвентарь игрока
 
-# %1$d - текущая страница, %2$d - всего страниц
 chat.journeymode.progress.header=§6=== §eПрогресс исследований (Стр. %1$d из %2$d) §6===
-# %1$s - имя предмета, %2$s - маркер NBT, %3$d - прогресс, %4$d - надо
 chat.journeymode.progress.item=§8 - %1$s%2$s§3 [%3$d/%4$d]
 chat.journeymode.progress.nextPage=§7Используйте §b/jm progress %d§7, чтобы открыть следующую страницу.
 
 chat.journeymode.clear=Весь прогресс был стерт.
 chat.journeymode.add=Добавлено предметов %1$s (%2$d шт.) к исследованиям игрока.
 chat.journeymode.remove=Удалён предмет %s из исследований.
-# Используем явный порядок: %2$s - имя предмета, %1$d - число
 chat.journeymode.needMoreResearch=§cПредмету %2$s не хватает %1$d исследований!
 chat.journeymode.noPermission=§cУ тебя недостаточно прав для использования этой команды.
 
