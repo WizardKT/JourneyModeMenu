@@ -16,6 +16,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.event.HoverEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -182,7 +183,15 @@ public class CommandJourney extends CommandBase {
 
             boolean hasNbt = key.getCleanedNbt() != null;
             ITextComponent nbtComponent = new TextComponentString(hasNbt ? " [+NBT]" : "");
-            if (hasNbt) nbtComponent.getStyle().setColor(TextFormatting.LIGHT_PURPLE);
+            if (hasNbt) {
+                nbtComponent.getStyle().setColor(TextFormatting.LIGHT_PURPLE);
+                String nbtJson = key.getCleanedNbt().toString();
+
+                nbtComponent.getStyle().setHoverEvent(
+                        new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(
+                                TextFormatting.ITALIC + nbtJson)
+                        ));
+            }
 
             player.sendMessage(new TextComponentTranslation(
                     "chat.journeymode.progress.item",
@@ -234,10 +243,11 @@ public class CommandJourney extends CommandBase {
             return;
         }
 
+        // Сценарий: просто /jm ignore (вывод списка тегов предмета)
         if (args.length == 1) {
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignoreHat"));
             for (String key : stack.getTagCompound().getKeySet()) {
-                boolean isIgnored = ConfigHandler.IGNORED_TAGS.contains(key);
+                boolean isIgnored = ConfigHandler.isTagIgnored(key);
                 TextFormatting color = isIgnored ? TextFormatting.GREEN : TextFormatting.RED;
 
                 ITextComponent keyComponent = new TextComponentString(key);
@@ -249,10 +259,37 @@ public class CommandJourney extends CommandBase {
             return;
         }
 
+        // Сценарий: /jm ignore add/remove <tag>
         String action = args[1].toLowerCase();
-        if (args.length >= 3 && action.equals("add")) {
-            ConfigHandler.IGNORED_TAGS.add(args[2]);
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
+
+        if (args.length >= 3) {
+            String targetTag = args[2];
+
+            if (action.equals("add")) {
+                boolean success = ConfigHandler.addTag(targetTag);
+                if (success) {
+                    player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
+                } else {
+                    ITextComponent errorText = new TextComponentString("Тег '" + targetTag + "' уже находится в черном списке!");
+                    errorText.getStyle().setColor(TextFormatting.YELLOW);
+                    player.sendMessage(errorText);
+                }
+            }
+            else if (action.equals("remove")) {
+                boolean success = ConfigHandler.removeTag(targetTag); // Твой новый метод
+                if (success) {
+                    // Создай этот ключ перевода в .lang файле
+                    player.sendMessage(new TextComponentTranslation("chat.journeymode.removeIgnore"));
+                } else {
+                    ITextComponent errorText = new TextComponentString("Тега '" + targetTag + "' нет в черном списке!");
+                    errorText.getStyle().setColor(TextFormatting.RED);
+                    player.sendMessage(errorText);
+                }
+            } else {
+                sendError(player, "commandError", getUsage(player));
+            }
+        } else {
+            sendError(player, "commandError", getUsage(player));
         }
     }
 
@@ -298,12 +335,19 @@ public class CommandJourney extends CommandBase {
         EntityPlayer player = (EntityPlayer) sender;
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
+        // Уровень 1: /jm [подкоманда]
         if (args.length == 1) {
             return getListOfStringsMatchingLastWord(args, "consume", "research", "give", "progress", "clear", "remove", "ignore");
         }
 
         String cmd = args[0].toLowerCase();
 
+        // Уровень 2: /jm ignore [add/remove]
+        if (args.length == 2 && cmd.equals("ignore")) {
+            return getListOfStringsMatchingLastWord(args, "add", "remove");
+        }
+
+        // Уровень 2: /jm give [item] или /jm remove [item]
         if (args.length == 2 && (cmd.equals("give") || cmd.equals("remove"))) {
             List<String> researchedItems = new ArrayList<>();
             for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
@@ -312,6 +356,24 @@ public class CommandJourney extends CommandBase {
             return getListOfStringsMatchingLastWord(args, researchedItems);
         }
 
+        // Уровень 3: /jm ignore add/remove [tag]
+        if (args.length == 3 && cmd.equals("ignore")) {
+            String action = args[1].toLowerCase();
+
+            if (action.equals("add")) {
+                // Подсказываем теги, которые есть на предмете в руке
+                ItemStack heldItem = player.getHeldItemMainhand();
+                if (!heldItem.isEmpty() && heldItem.hasTagCompound()) {
+                    return getListOfStringsMatchingLastWord(args, heldItem.getTagCompound().getKeySet());
+                }
+            }
+            else if (action.equals("remove")) {
+                // Подсказываем теги, которые уже занесены в конфиг
+                return getListOfStringsMatchingLastWord(args, ConfigHandler.IGNORED_TAGS);
+            }
+        }
+
+        // Уровень 3/4: Подсказка количества предметов из руки
         if ((args.length == 2 && (cmd.equals("research") || cmd.equals("consume"))) ||
                 (args.length == 3 && cmd.equals("give"))) {
             return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
@@ -322,6 +384,8 @@ public class CommandJourney extends CommandBase {
 
     // Заглушка
     private void sendError(EntityPlayer player, String key, String usage) {
-        player.sendMessage(new TextComponentTranslation(TextFormatting.RED + key, usage));
+        TextComponentTranslation text = new TextComponentTranslation(key, usage);
+        text.getStyle().setColor(TextFormatting.RED);
+        player.sendMessage(text);
     }
 }

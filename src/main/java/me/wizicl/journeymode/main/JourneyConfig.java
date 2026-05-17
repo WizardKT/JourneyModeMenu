@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Keyboard;
 
-@Config(modid = "journeymode", name = "journeymode_general")
+@Config(modid = "journeymode", name = "journeymode_config")
 public class JourneyConfig {
     @Config.Name("Stack Multiplier")
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")
