@@ -33,7 +33,7 @@ public class CommandJourney extends CommandBase {
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/jm consume|research|give|progress|clear|remove";
+        return "/jm consume|research|give|progress|clear|remove|ignore";
     }
 
 
@@ -46,7 +46,7 @@ public class CommandJourney extends CommandBase {
         ItemStack heldItem = player.getHeldItemMainhand();
 
         if (args.length == 0) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
@@ -75,8 +75,10 @@ public class CommandJourney extends CommandBase {
 
         switch (subCommand) {
             case "consume":
-            case "research":
                 handleConsume(player, heldItem, args);
+                break;
+            case "research":
+                handleResearch(player, heldItem, args);
                 break;
             case "give":
                 handleGive(player, cap, args);
@@ -94,7 +96,7 @@ public class CommandJourney extends CommandBase {
                 handleIgnore(player, heldItem, args);
                 break;
             default:
-                sendError(player, "commandError", getUsage(player));
+                sendError(player, "chat.journeymode.commandError", getUsage(player));
                 break;
         }
     }
@@ -103,28 +105,33 @@ public class CommandJourney extends CommandBase {
     /// === Обработчики конкретных команд ===
 
     private void handleConsume(EntityPlayer player, ItemStack stack, String[] args) {
-        if (stack.isEmpty()) {
-            sendError(player, "commandError", getUsage(player));
-            return;
-        }
+        Integer amount = parseArgInt(player, args, 1, stack.getCount());
+        if (amount == null) return;
+        int amountToConsume = Math.max(1, Math.min(amount, stack.getCount()));
 
+        JourneyUtils.addResearchAndSync(player, stack, amountToConsume);
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amountToConsume));
+        stack.shrink(amountToConsume);
+    }
+
+    private void handleResearch(EntityPlayer player, ItemStack stack, String[] args) {
         Integer amount = parseArgInt(player, args, 1, stack.getCount());
         if (amount == null) return;
 
-        JourneyUtils.addResearchAndSync(player, stack, amount);
         player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
+        JourneyUtils.addResearchAndSync(player, stack, amount);
     }
 
 
     private void handleGive(EntityPlayer player, IResearch cap, String[] args) {
         if (args.length < 2) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
         Item item = Item.getByNameOrId(args[1]);
         if (item == null) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
@@ -220,13 +227,13 @@ public class CommandJourney extends CommandBase {
             if (item != null) {
                 targetStack = new ItemStack(item);
             } else {
-                sendError(player, "commandError", getUsage(player));
+                sendError(player, "chat.journeymode.commandError", getUsage(player));
                 return;
             }
         }
 
         if (targetStack.isEmpty()) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
@@ -239,7 +246,7 @@ public class CommandJourney extends CommandBase {
 
     private void handleIgnore(EntityPlayer player, ItemStack stack, String[] args) {
         if (stack.isEmpty() || !stack.hasTagCompound()) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
@@ -286,10 +293,10 @@ public class CommandJourney extends CommandBase {
                     player.sendMessage(errorText);
                 }
             } else {
-                sendError(player, "commandError", getUsage(player));
+                sendError(player, "chat.journeymode.commandError", getUsage(player));
             }
         } else {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
         }
     }
 
@@ -307,7 +314,7 @@ public class CommandJourney extends CommandBase {
         try {
             return Integer.parseInt(args[index]);
         } catch (NumberFormatException e) {
-            sendError(player, "commandError", getUsage(player));
+            sendError(player, "chat.journeymode.commandError", getUsage(player));
             return null;
         }
     }

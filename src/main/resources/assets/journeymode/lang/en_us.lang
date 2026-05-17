@@ -1,6 +1,6 @@
 chat.journeymode.research=You researched %s points
 chat.journeymode.click_count=You used %s power of %s
-chat.journeymode.commandError=§cUse: %s
+chat.journeymode.commandError=§cUse: %s %s
 chat.journeymode.emptyHand=§cYou must hold an item in your hand!
 chat.journeymode.progress=--- Your research progress ---
 chat.journeymode.noResearch=§cNo research has been detected.
