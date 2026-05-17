@@ -24,405 +24,304 @@ import java.util.*;
 
 public class CommandJourney extends CommandBase {
 
-    /// Общие переменные
-    int amount;
-
-    /// Универсальное сообщение ошибки
-    private void sendError(ICommandSender sender, String key, Object args) {
-        sender.sendMessage(new TextComponentTranslation("chat.journeymode.commandError" + key, args));
-    }
-
-    /// Универсальное сообщение об отсутствии изучений
-    private void sendNoResearch(ICommandSender sender, String key, Object args) {
-        sender.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch" + key, args));
-    }
-
-
-    // Название команды
     @Override
     public String getName() {
         return "jm";
     }
 
 
-    // Подсказка к использованию команды
     @Override
     public String getUsage(ICommandSender sender) {
         return "/jm consume|research|give|progress|clear|remove";
     }
 
 
-    // Команды
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, @Nonnull String[] args) throws CommandException {
-
-        /// Все используемые в коде переменные
-        EntityPlayer player = (EntityPlayer) sender; // Получаем переменную игрока
-        ItemStack stack = player.getHeldItemMainhand(); // Получаем переменную предмета в руке
-        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null); // Получаем переменную капы
-        String cmd = args[0].toLowerCase(); // Первая команда jm
-
-
-        /// Вводим список команд, которым нужен предмет в руке
-        List<String> requireHand = Arrays.asList("consume", "research");
-
-        // Проверка на наличие предмета в руке
-        if (requireHand.contains(cmd) && stack.isEmpty()) {
-            sendError(sender, "EmptyHand", getUsage(sender));
-            return;
-        }
-
-
-        /// Вводим список команд, которым нужны исследования
-        List<String> requireResearch = Arrays.asList("give", "progress", "remove");
-
-        // Проверка на наличие исследований у игрока
-        if (requireResearch.contains(cmd) && cap.getReadOnlyMap().isEmpty()) {
-            sendNoResearch(sender, "", "");
-            return;
-        }
-
-
-        /// Вводим список команд, которым нужны админ права
-        List<String> requireOp = Arrays.asList("ignore", "research");
-
-        if (requireOp.contains(cmd) && !sender.canUseCommand(2, cmd)) {
-            sender.sendMessage(new TextComponentTranslation("chat.journeymode.noPermission"));
-        }
-
-
-        /// Проверка на то что команду отправил именно игрок
+    public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
         if (!(sender instanceof EntityPlayer)) return;
 
-        /// Проверяем на то что игрок ввёл хоть что-то
+        EntityPlayer player = (EntityPlayer) sender;
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+        ItemStack heldItem = player.getHeldItemMainhand();
+
         if (args.length == 0) {
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.commandError", getUsage(sender)));
+            sendError(player, "commandError", getUsage(player));
             return;
         }
 
-        /// Объединяем все команды в 1 поле
-        String subCommand = args[0];
+        String subCommand = args[0].toLowerCase();
+
+        // 1. Проверка на обязательный предмет в руке
+        List<String> requireHand = Arrays.asList("consume", "research");
+        if (requireHand.contains(subCommand) && heldItem.isEmpty()) {
+            sendError(player, "chat.journeymode.emptyHand", getUsage(player));
+            return;
+        }
+
+        // 2. Проверка на наличие хоть какого-то прогресса в вашей базе данных
+        List<String> requireResearch = Arrays.asList("give", "progress", "remove");
+        if (requireResearch.contains(subCommand) && cap.getReadOnlyMap().isEmpty()) {
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch"));
+            return;
+        }
+
+        // 3. Проверка прав Администратора (OP уровень 2)
+        List<String> requireOp = Arrays.asList("ignore", "research");
+        if (requireOp.contains(subCommand) && !player.canUseCommand(2, this.getName())) {
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.noPermission"));
+            return; // КРИТИЧЕСКИ ВАЖНО: останавливаем выполнение!
+        }
+
         switch (subCommand) {
-            case "consume": handleConsume(player, cap, stack, args); break;
-            case "research": handleResearch(player, stack, cap, args); break;
-            case "give": handleGive(player, cap, args); break;
-            case "progress": handleProgress(player, stack, cap); break;
-            case "clear": handleClear(player, cap); break;
-            case "remove": handleRemove(player, stack, cap, args); break;
-            case "ignore": handleIgnore(player, stack, args);  break;
+            case "consume":
+            case "research":
+                handleConsume(player, heldItem, args);
+                break;
+            case "give":
+                handleGive(player, cap, args);
+                break;
+            case "progress":
+                handleProgress(player, cap, args);
+                break;
+            case "clear":
+                handleClear(player, cap);
+                break;
+            case "remove":
+                handleRemove(player, heldItem, cap, args);
+                break;
+            case "ignore":
+                handleIgnore(player, heldItem, args);
+                break;
+            default:
+                sendError(player, "commandError", getUsage(player));
+                break;
         }
     }
 
-    /// --- Команда на уничтожение предмета в целях науки ---
 
-    private void handleConsume(EntityPlayer player, IResearch cap, ItemStack stack, String[] args) {
+    /// === Обработчики конкретных команд ===
 
-        // Проверка, если пользователь ничего не ввёл
-        if (args.length < 2) {
-
-            // Если в руке пусто
-            if (stack.isEmpty()) {
-                sendError(player, "commandError", getUsage(player));
-                return;
-            }
-
-            // Если пользователь ничего не ввёл регистрируем максимально возможное число
-            this.amount = stack.getCount();
+    private void handleConsume(EntityPlayer player, ItemStack stack, String[] args) {
+        if (stack.isEmpty()) {
+            sendError(player, "commandError", getUsage(player));
+            return;
         }
 
-        // Если пользователь что-то ввёл, получаем желаемое игроком количество потребляемых предметов, с проверкой на число
-        else {
-            try {
-                amount = Integer.parseInt(args[1]);
-            } catch (NumberFormatException e) {
-                sendError(player, "commandError", getUsage(player));
-                return;
-            }
-        }
+        Integer amount = parseArgInt(player, args, 1, stack.getCount());
+        if (amount == null) return;
 
-        // Проверяем на мухлёж, больше ли запрос чем то что в руке игрока
-        if (amount > stack.getCount()) amount = stack.getCount();
-
-        // Добавляем предметы в изучения и удаляем из инвентаря
-        stack.shrink(amount);
-
-        // Синхронизируем данные с сервером
         JourneyUtils.addResearchAndSync(player, stack, amount);
-
-        // Переводим название предмета с эльфийского
-        ITextComponent name = stack.getTextComponent();
-
-        // Отправляем игроку сколько он изучил
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", name, amount));
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
     }
 
-
-    /// --- Команда на бесплатное изучение предмета в целях науки ---
-
-    private void handleResearch(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
-
-        // Проверка, если пользователь ничего не ввёл
-        if (args.length < 2) {
-
-            // Если в руке пусто
-            if (stack.isEmpty()) {
-                sendError(player, "commandError", getUsage(player));
-                return;
-            }
-
-            // Если пользователь ничего не ввёл регистрируем максимально возможное число
-            amount = stack.getCount();
-        }
-
-        // Если пользователь что-то ввёл, получаем желаемое игроком количество потребляемых предметов, с проверкой на число
-        else {
-            try {
-                amount = Integer.parseInt(args[1]);
-            } catch (NumberFormatException e) {
-                sendError(player, "commandError", getUsage(player));
-                return;
-            }
-        }
-
-        // Синхронизируем данные с сервером
-        JourneyUtils.addResearchAndSync(player, stack, amount);
-
-        // Переводим название предмета с эльфийского
-        ITextComponent name = stack.getTextComponent();
-
-        // Отправляем игроку сколько он изучил
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", name, amount));
-    }
-
-
-    /// --- Команда на бесплатную выдачу изученного предмета ---
 
     private void handleGive(EntityPlayer player, IResearch cap, String[] args) {
-
-        // Вводим переменную айди предмета
-        Item item = Item.getByNameOrId(args[1]);
-
-        // Если предмет отсутствует - ошибка
-        if (item == null) {
+        if (args.length < 2) {
             sendError(player, "commandError", getUsage(player));
+            return;
         }
 
-        // Вводим переменную количества предметов, равную размеру стака
-        int amount = item.getItemStackLimit();
+        Item item = Item.getByNameOrId(args[1]);
+        if (item == null) {
+            sendError(player, "commandError", getUsage(player));
+            return;
+        }
 
-        // Проверка на то сколько есть предметов, сколько надо и если предмет изучен, игрок может получить предметы
-        int has = cap.getResearch(new ItemStack(item));
-        int need = JourneyUtils.getRequiredAmount(new ItemStack(item));
+        ItemStack targetStack = new ItemStack(item);
+        int has = cap.getResearch(targetStack);
+        int need = JourneyUtils.getRequiredAmount(targetStack);
+
         if (has >= need) {
+            Integer amount = parseArgInt(player, args, 2, item.getItemStackLimit());
+            if (amount == null) return;
 
-            // Проверка, хочет ли получить игрок определённое количество предметов.
-            if (args.length == 3) {
-
-                // Получаем желаемое игроком количество получаемых предметов, с проверкой на число
-                try {
-                    amount = Integer.parseInt(args[2]);
-                } catch (NumberFormatException e) {
-                    sendError(player, "commandError", getUsage(player));
-                    return;
-                }
-            }
-
-            // Выдаём игроку предметы
-            player.inventory.addItemStackToInventory(new ItemStack(item, amount));
+            targetStack.setCount(amount);
+            player.inventory.addItemStackToInventory(targetStack);
         } else {
-            // Не выдаём если предмет не изучен
-            String localizedName = new ItemStack(item).getDisplayName();
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.needMoreResearch", need - has, localizedName));
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.needMoreResearch", need - has, targetStack.getDisplayName()));
         }
     }
 
-
-    /// --- Команда на бесплатную выдачу изученного предмета ---
 
     private void handleProgress(EntityPlayer player, IResearch cap, String[] args) {
         List<Map.Entry<ResearchKey, Integer>> totalList = new ArrayList<>(cap.getReadOnlyMap().entrySet());
 
         if (totalList.isEmpty()) {
-            player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "chat.journeymode.noResearch"));
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch"));
             return;
         }
 
-        final int ITEMS_PER_PAGE = 6; // Сколько строк поместится в чат за раз
-        int totalItems = totalList.size();
-        int maxPages = (int) Math.ceil((double) totalItems / ITEMS_PER_PAGE);
-        int currentPage = 1;
+        final int ITEMS_PER_PAGE = 6;
+        int maxPages = (int) Math.ceil((double) totalList.size() / ITEMS_PER_PAGE);
 
-        if (args.length >= 2) {
-            try {
-                currentPage = Integer.parseInt(args[1]);
-            } catch (NumberFormatException e) {
-                player.sendMessage(new TextComponentTranslation(TextFormatting.RED + "chat.journeymode.wrongPage"));
-                return;
-            }
+        Integer currentPage = parseArgInt(player, args, 1, 1);
+        if (currentPage == null) {
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.wrongPage"));
+            return;
         }
 
-        if (currentPage < 1) currentPage = 1;
-        if (currentPage > maxPages) currentPage = maxPages;
+        currentPage = Math.max(1, Math.min(currentPage, maxPages)); // Защита от выхода за пределы
 
         int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalList.size());
 
-        player.sendMessage(new TextComponentTranslation(
-                TextFormatting.GOLD + "=== " +
-                        TextFormatting.YELLOW + "Прогресс исследований (Стр. " + currentPage + " из " + maxPages + ")" +
-                        TextFormatting.GOLD + " ==="
-        ));
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.progress.header", currentPage, maxPages));
 
         for (int i = startIndex; i < endIndex; i++) {
             Map.Entry<ResearchKey, Integer> entry = totalList.get(i);
             ResearchKey key = entry.getKey();
             int currentProgress = entry.getValue();
 
-            ItemStack displayStack = new ItemStack(
-                    ForgeRegistries.ITEMS.getValue(key.getRegistryName()),
-                    1,
-                    key.getMeta()
-            );
-            if (key.getCleanedNbt() != null) {
-                displayStack.setTagCompound(key.getCleanedNbt());
-            }
-
+            ItemStack displayStack = createDisplayStack(key);
             int requiredAmount = JourneyUtils.getRequiredAmount(displayStack);
 
             TextFormatting color = (currentProgress >= requiredAmount) ? TextFormatting.GREEN : TextFormatting.GRAY;
 
-            String itemDisplayName = displayStack.getDisplayName();
+            ITextComponent nameComponent = new TextComponentString(displayStack.getDisplayName());
+            nameComponent.getStyle().setColor(color);
 
-            String nbtMarker = (key.getCleanedNbt() != null) ? TextFormatting.LIGHT_PURPLE + " [+NBT]" : "";
+            boolean hasNbt = key.getCleanedNbt() != null;
+            ITextComponent nbtComponent = new TextComponentString(hasNbt ? " [+NBT]" : "");
+            if (hasNbt) nbtComponent.getStyle().setColor(TextFormatting.LIGHT_PURPLE);
 
-            player.sendMessage(new TextComponentString(
-                    TextFormatting.DARK_GRAY + " - " +
-                            color + itemDisplayName + nbtMarker +
-                            TextFormatting.DARK_AQUA + " [" + currentProgress + "/" + requiredAmount + "]"
+            player.sendMessage(new TextComponentTranslation(
+                    "chat.journeymode.progress.item",
+                    nameComponent, nbtComponent, currentProgress, requiredAmount
             ));
         }
 
         if (currentPage < maxPages) {
-            player.sendMessage(new TextComponentString(
-                    TextFormatting.GRAY + "Используйте " +
-                            TextFormatting.AQUA + "/jm progress " + (currentPage + 1) +
-                            TextFormatting.GRAY + ", чтобы открыть следующую страницу."
-            ));
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.progress.nextPage", currentPage + 1));
         }
     }
 
 
-    /// --- Команда на бесплатную выдачу изученного предмета ---
-
     private void handleClear(EntityPlayer player, IResearch cap) {
-
-        // Вызываем метод очистки карты исследований
         cap.clear();
-
-        // Выводим игроку сообщение об успешной очистке исследований
         player.sendMessage(new TextComponentTranslation("chat.journeymode.clear"));
     }
 
 
-    /// --- Команда на бесплатную выдачу изученного предмета ---
+    private void handleRemove(EntityPlayer player, ItemStack handStack, IResearch cap, String[] args) {
+        ItemStack targetStack = handStack;
 
-    private void handleRemove(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
-        // Вводим переменную предмета для удаления и предмета в руке
-        String item;
-
-        // Проверка, если пользователь ничего не ввёл
-        if (args.length < 2) {
-
-            // Если в руке пусто
-            if (stack.isEmpty()) {
+        // Если указан аргумент - пытаемся получить предмет по ID
+        if (args.length >= 2) {
+            Item item = Item.getByNameOrId(args[1]);
+            if (item != null) {
+                targetStack = new ItemStack(item);
+            } else {
                 sendError(player, "commandError", getUsage(player));
                 return;
             }
         }
 
-        // Если пользовать что-то ввёл, регистрируем
-        else {
-            item = args[1];
+        if (targetStack.isEmpty()) {
+            sendError(player, "commandError", getUsage(player));
+            return;
         }
 
-        // Если карта исследований содержит этот предмет - сносим нафиг.
-        if (cap.getResearch(stack) > 0) {
-            cap.remove(stack);
-
-            String localizedName = new ItemStack(stack.getItem()).getDisplayName();
-
-            // Выводим сообщение об успешном снесении предмета из исследований, хе-хе
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.remove", localizedName));
+        if (cap.getResearch(targetStack) > 0) {
+            cap.remove(targetStack);
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.remove", targetStack.getDisplayName()));
         }
     }
 
-    private void handleIgnore(EntityPlayer player, ItemStack stack, IResearch cap, String[] args) {
-        if (stack.isEmpty()) {
-            sendError(player, "commandError", getUsage(player));
-        }
 
-        if (!stack.hasTagCompound()) {
+    private void handleIgnore(EntityPlayer player, ItemStack stack, String[] args) {
+        if (stack.isEmpty() || !stack.hasTagCompound()) {
             sendError(player, "commandError", getUsage(player));
+            return;
         }
 
         if (args.length == 1) {
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignoreHat"));
             for (String key : stack.getTagCompound().getKeySet()) {
                 boolean isIgnored = ConfigHandler.IGNORED_TAGS.contains(key);
-                String color = isIgnored ? TextComponentTranslation() : TextComponentTranslation();
-                player.sendMessage(new TextComponentTranslation(color + key));
+                TextFormatting color = isIgnored ? TextFormatting.GREEN : TextFormatting.RED;
+
+                ITextComponent keyComponent = new TextComponentString(key);
+                keyComponent.getStyle().setColor(color);
+
+                player.sendMessage(new TextComponentTranslation("chat.journeymode.tagPrefix").appendSibling(keyComponent));
             }
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignore"));
             return;
         }
 
         String action = args[1].toLowerCase();
-
         if (args.length >= 3 && action.equals("add")) {
-            String tagToIngore = args[2];
-
-            ConfigHandler.IGNORED_TAGS.add(tagToIgnore);
+            ConfigHandler.IGNORED_TAGS.add(args[2]);
             player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
         }
     }
 
-    // Авто-дописывание команд и аргументов на tab
+
+    /// === Утилиты и хелперы ===
+
+    /**
+     * Безопасно достает число из аргументов. Если числа нет - возвращает стандартное значение.
+     * Если введена абракадабра - отправляет ошибку игроку и возвращает null.
+     */
+
+    @Nullable
+    private Integer parseArgInt(EntityPlayer player, String[] args, int index, int defaultValue) {
+        if (args.length <= index) return defaultValue;
+        try {
+            return Integer.parseInt(args[index]);
+        } catch (NumberFormatException e) {
+            sendError(player, "commandError", getUsage(player));
+            return null;
+        }
+    }
+
+
+    /**
+     * Превращает ResearchKey обратно в полноценный ItemStack для отображения
+     */
+
+    private ItemStack createDisplayStack(ResearchKey key) {
+        ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(key.getRegistryName()), 1, key.getMeta());
+        if (key.getCleanedNbt() != null) {
+            stack.setTagCompound(key.getCleanedNbt());
+        }
+        return stack;
+    }
+
+
+    /// === Автодополнение ===
+
     @Override
     public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+        if (!(sender instanceof EntityPlayer)) return Collections.emptyList();
 
-        // Проверка на игрока, является ли отправитель игроком
-        if (sender instanceof EntityPlayer) {
+        EntityPlayer player = (EntityPlayer) sender;
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
-            // Вводим переменные игрока и NBT игрока
-            EntityPlayer player = (EntityPlayer) sender;
-            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-            // Проверка первого слова
-            if (args.length == 1) {
-                return getListOfStringsMatchingLastWord(args, "consume", "research", "give", "progress", "clear", "remove");
-            }
-
-            // Проверка для слова give и remove на ввод предмета
-            if (args.length == 2 && ("give".equals(args[0]) || "remove".equals(args[0]))) {
-                List<String> researchedItems = new ArrayList<>();
-                for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
-                    researchedItems.add(key.getRegistryName().toString());
-                }
-                return getListOfStringsMatchingLastWord(args, researchedItems);
-            }
-
-            // Проверка для слова research и consume на ввод числа
-            if (args.length == 2 && "research".equals(args[0]) || "consume".equals(args[0])) {
-                return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
-            }
-
-            // Дополнительно для give ещё 1 проверка, чтобы вводить и число тоже
-            if (args.length == 3 && "give".equals(args[0])) {
-                return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
-            }
+        if (args.length == 1) {
+            return getListOfStringsMatchingLastWord(args, "consume", "research", "give", "progress", "clear", "remove", "ignore");
         }
 
-        // Вывод пустого листа
+        String cmd = args[0].toLowerCase();
+
+        if (args.length == 2 && (cmd.equals("give") || cmd.equals("remove"))) {
+            List<String> researchedItems = new ArrayList<>();
+            for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
+                researchedItems.add(key.getRegistryName().toString());
+            }
+            return getListOfStringsMatchingLastWord(args, researchedItems);
+        }
+
+        if ((args.length == 2 && (cmd.equals("research") || cmd.equals("consume"))) ||
+                (args.length == 3 && cmd.equals("give"))) {
+            return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
+        }
+
         return Collections.emptyList();
+    }
+
+    // Заглушка
+    private void sendError(EntityPlayer player, String key, String usage) {
+        player.sendMessage(new TextComponentTranslation(TextFormatting.RED + key, usage));
     }
 }
