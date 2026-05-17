@@ -33,25 +33,22 @@ public class RegHandler {
     /// Выдача капы игроку если тот умер
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            EntityPlayer oldplayer = event.getOriginal();
-            EntityPlayer newplayer = event.getEntityPlayer();
+        EntityPlayer oldplayer = event.getOriginal();
+        EntityPlayer newplayer = event.getEntityPlayer();
 
-            IResearch oldCap = oldplayer.getCapability(ResearchProvider.RESEARCH, null);
-            IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
+        IResearch oldCap = oldplayer.getCapability(ResearchProvider.RESEARCH, null);
+        IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
 
-            if (oldplayer != null && newplayer != null) {
-                newCap.getReadOnlyMap().putAll(oldCap.getReadOnlyMap());
-            }
-
-            // Создаём переменную игрока и капы
-            EntityPlayer player = event.getEntityPlayer();
-            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-            // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
-
+        if (oldplayer != null && newplayer != null) {
+            newCap.getReadOnlyMap().putAll(oldCap.getReadOnlyMap());
         }
+
+        // Создаём переменную игрока и капы
+        EntityPlayer player = event.getEntityPlayer();
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+        // Отправляем игроку пакет данных
+        JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
     }
 
     /// Выдача капы игроку который зашёл на сервер в МП

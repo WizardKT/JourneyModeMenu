@@ -43,8 +43,7 @@ public class JourneyMode {
     public static Capability<IResearch> RESEARCH = null;
 
     @SidedProxy(
-            clientSide = "me.wizicl.journeymode.proxy.ClientProxy",
-            serverSide = "me.wizicl.journeymode.proxy.ServerProxy"
+            clientSide = "me.wizicl.journeymode.proxy.ClientProxy"
     )
 
     public static CommonProxy proxy;
