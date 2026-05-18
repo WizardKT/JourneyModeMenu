@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Research gui functions">
+    <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Network code">
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" afterDir="false" />
@@ -12,12 +12,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/RegHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/RegHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch$Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch$Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/CommonProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/CommonProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/output.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/output.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/splash.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -27,34 +26,11 @@
       <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/capabilities.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/data/villages_nether.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM-1/forcedchunks.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/capabilities.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/data/villages_end.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/DIM1/forcedchunks.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/Mineshaft.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/capabilities.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/villages.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/forcedchunks.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usernamecache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/init/RegHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageRequestResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageRequestResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageSyncResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageSyncResearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/CommonProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/CommonProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/util/JourneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/util/JourneyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +115,9 @@
     <commands />
     <urls />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6,
   &quot;fromUser&quot;: false
@@ -175,7 +154,7 @@
     "git.auto.fetch.suggestion.counter": "1",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tonik/IdeaProjects/JourneyModeMenu",
+    "last_opened_file_path": "C:/Users/tonik/IdeaProjects/JourneyModeMenu/src/main/resources/assets/journeymode/textures/gui/container",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -189,10 +168,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\tonik\IdeaProjects\JourneyModeMenu\src\main\resources\assets\journeymode\textures\gui\container" />
       <recent name="C:\Users\tonik\IdeaProjects\JourneyModeMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.runServer">
+  <component name="RunManager" selected="Application.runClient">
     <configuration name="D:/WorkSpace/Journey Mode/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -363,7 +343,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779088036213</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- Network code">
+      <option name="closed" value="true" />
+      <created>1779093206801</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1779093206801</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +376,8 @@
     <MESSAGE value="- Added semi-working search bar" />
     <MESSAGE value="- Ahh, that somthing" />
     <MESSAGE value="- Research gui functions" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Research gui functions" />
+    <MESSAGE value="- Network code" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Network code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

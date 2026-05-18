@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import org.lwjgl.input.Keyboard;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
@@ -28,7 +29,11 @@ public class ClientProxy extends CommonProxy {
     public void init(FMLInitializationEvent event) {
         super.init(event);
 
-        keyBindOpenGui = new KeyBinding("key.journeymode.open_menu", ConfigMain.openGuiKey, "key.categories.journeymode");
+        keyBindOpenGui = new KeyBinding(
+                "key.journeymode.open_menu",
+                Keyboard.KEY_J,
+                "key.categories.journeymode"
+        );
         ClientRegistry.registerKeyBinding(keyBindOpenGui);
     }
 
