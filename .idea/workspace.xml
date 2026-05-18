@@ -5,115 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Research gui functions">
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageOpenResearchGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_findbugs_jsr305_3_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_code_gson_gson_2_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_guava_21_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_ibm_icu_icu4j_core_mojang_51_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mojang_authlib_1_5_25.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mojang_patchy_1_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mojang_realms_1_10_22.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mojang_text2speech_1_10_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_mojang_text2speech_natives_windows_1_10_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_paulscode_codecjorbis_20101023.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_paulscode_codecwav_20101023.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_paulscode_libraryjavasound_20101123.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_paulscode_librarylwjglopenal_20100824.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_paulscode_soundsystem_20120107.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_typesafe_akka_akka_actor_2_11_2_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_typesafe_config_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_codec_commons_codec_1_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_io_commons_io_2_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__commons_logging_commons_logging_1_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_netty_netty_all_4_1_9_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__it_unimi_dsi_fastutil_7_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__java3d_vecmath_1_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__lzma_lzma_0_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_dev_jna_jna_4_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_dev_jna_platform_3_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_2_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_linux_2_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_osx_2_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jinput_jinput_platform_natives_windows_2_0_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_java_jutils_jutils_1_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraft_client_extra_1_12_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraft_launchwrapper_1_12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraft_mappings_snapshot_zip_20171003_1_12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraftforge_forge_1_12_2_14_23_5_2859_mapped_snapshot_20171003_1_12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraftforge_legacydev_fatjar_0_2_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_minecraftforge_mergetool_forge_1_0_13.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_sf_jopt_simple_jopt_simple_5_0_4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__net_sf_trove4j_trove4j_3_0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_compress_1_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_commons_commons_lang3_3_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpclient_4_3_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_httpcomponents_httpcore_4_3_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_api_2_15_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_core_2_15_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_logging_log4j_log4j_slf4j18_impl_2_15_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_apache_maven_maven_artifact_3_5_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_codehaus_plexus_plexus_utils_3_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_jline_jline_3_5_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_2_9_4_nightly_20150209.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_platform_2_9_4_nightly_20150209.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_platform_natives_windows_2_9_4_nightly_20150209.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_lwjgl_lwjgl_lwjgl_util_2_9_4_nightly_20150209.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_analysis_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_debug_all_5_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_tree_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_ow2_asm_asm_util_6_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_modules_scala_parser_combinators_2_11_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_modules_scala_xml_2_11_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_plugins_scala_continuations_library_2_11_1_0_2_mc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_plugins_scala_continuations_plugin_2_11_1_1_0_2_mc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_actors_2_11_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_actors_migration_2_11_1_1_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_compiler_2_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_library_2_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_parser_combinators_2_11_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_reflect_2_11_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_swing_2_11_1_0_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_scala_lang_scala_xml_2_11_1_0_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__org_slf4j_slf4j_api_1_8_0_beta4.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__oshi_project_oshi_core_1_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyConfig$EventHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/IResearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/IResearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/Research.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/Research.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/ResearchProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/ResearchProvider.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/ResearchStorage.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/gui/GuiResearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/gui/base/GuiBase.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/gui/base/GuiItemSlot.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/gui/base/IGuiElement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/CommandJourney.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/InputHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/RegHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/RegHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch$Handler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch$Handler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ServerProxy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pack.mcmeta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/output.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/output.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/splash.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -122,57 +24,10 @@
       <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/04aedfc4-153f-3d65-bb99-866996994a71.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/3bdd7bc1-57b3-3ed1-a14e-cc7341dec1b1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/45c2c1e2-9dd4-3d62-8e53-82e2b4b32b4a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/a129ebab-93ca-3ac8-86a9-47cce1be86d0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/ac42e7c5-bf90-3ead-ba50-c551df161044.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/ad4a30d4-53bd-30c6-b482-5d77fb42b2d7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/ca560dd3-ebf9-3fc9-b2e6-088534082c81.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/f79c4f00-774e-3daf-ac9c-aebcbcc29c64.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/fd2b0ed7-411b-3fc7-aa79-261670dbe34f.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/advancements/fe736038-102e-365b-a97e-eabc472944ec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/Mineshaft.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/Mineshaft.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/data/villages.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/data/villages.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/level.dat_old" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/level.dat_old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/04aedfc4-153f-3d65-bb99-866996994a71.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/3bdd7bc1-57b3-3ed1-a14e-cc7341dec1b1.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/45c2c1e2-9dd4-3d62-8e53-82e2b4b32b4a.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/a129ebab-93ca-3ac8-86a9-47cce1be86d0.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/ac42e7c5-bf90-3ead-ba50-c551df161044.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/ad4a30d4-53bd-30c6-b482-5d77fb42b2d7.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/ca560dd3-ebf9-3fc9-b2e6-088534082c81.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/f79c4f00-774e-3daf-ac9c-aebcbcc29c64.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/fd2b0ed7-411b-3fc7-aa79-261670dbe34f.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/playerdata/fe736038-102e-365b-a97e-eabc472944ec.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.-1.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/region/r.0.0.mca" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/session.lock" beforeDir="false" afterPath="$PROJECT_DIR$/run/saves/New World/session.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/04aedfc4-153f-3d65-bb99-866996994a71.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/3bdd7bc1-57b3-3ed1-a14e-cc7341dec1b1.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/45c2c1e2-9dd4-3d62-8e53-82e2b4b32b4a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/a129ebab-93ca-3ac8-86a9-47cce1be86d0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/ac42e7c5-bf90-3ead-ba50-c551df161044.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/ad4a30d4-53bd-30c6-b482-5d77fb42b2d7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/ca560dd3-ebf9-3fc9-b2e6-088534082c81.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/f79c4f00-774e-3daf-ac9c-aebcbcc29c64.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/fd2b0ed7-411b-3fc7-aa79-261670dbe34f.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/saves/New World/stats/fe736038-102e-365b-a97e-eabc472944ec.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usernamecache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/IResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/IResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/Research.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/Research.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchStorage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/command/CommandJourney.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/command/CommandJourney.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/init/RegHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageRequestResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageRequestResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +163,7 @@
       <recent name="C:\Users\tonik\IdeaProjects\JourneyModeMenu" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.runClient">
+  <component name="RunManager" selected="Gradle.JourneyModeMenu [build]">
     <configuration name="D:/WorkSpace/Journey Mode/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -384,8 +239,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
         <item itemvalue="Gradle.JourneyModeMenu [build]" />
+        <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
         <item itemvalue="Gradle.JourneyModeMenu [genIntellijRuns]" />
         <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
       </list>
@@ -463,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1778810887258</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- Research gui functions">
+      <option name="closed" value="true" />
+      <created>1779087598910</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1779087598910</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

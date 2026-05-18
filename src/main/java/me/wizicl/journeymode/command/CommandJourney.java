@@ -28,6 +28,16 @@ import java.util.*;
 public class CommandJourney extends CommandBase {
 
     @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
+    public boolean checkPermission(net.minecraft.server.MinecraftServer server, net.minecraft.command.ICommandSender sender) {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "jm";
     }
