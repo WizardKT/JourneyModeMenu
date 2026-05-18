@@ -2,8 +2,8 @@
 {
   "modid": "journeymode",
   "name": "Journey Mode",
-  "description": "Мод, добавляющий систему исследования из режима приключения как в Террарии",
-  "version": "1.3.0",
+  "description": "This mod adds the Journey Mode Menu (in particulary, research and give menu) from Terraria game to the Minecraft",
+  "version": "1.5.0",
   "mcversion": "1.12.2",
   "url": "",
   "updateUrl": "",

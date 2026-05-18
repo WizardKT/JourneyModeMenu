@@ -5,8 +5,17 @@ import net.minecraft.item.ItemStack;
 import java.util.Map;
 
 public interface IResearch {
-    void addResearch(ItemStack stack);
-    int getResearchCount(String itemName);
-    Map<String, Integer> getResearchMap();
-    int getRequiredAmount(String itemName);
+    // Управление исследованиями
+    void addResearch(ItemStack stack, int amount);
+    void setResearch(ItemStack stack, int amount);
+
+    // Получение информации
+    int getResearch(ItemStack stack);
+    boolean isResearched(ItemStack stack);
+
+    // На всякий случай
+    Map<ResearchKey, Integer> getReadOnlyMap();
+
+    void clear();
+    void remove(ItemStack stack);
 }
