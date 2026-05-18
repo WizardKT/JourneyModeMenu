@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/JourneyModeMenu.main.iml" filepath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/JourneyModeMenu.test.iml" filepath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.test.iml" />
     </modules>
   </component>
 </project>

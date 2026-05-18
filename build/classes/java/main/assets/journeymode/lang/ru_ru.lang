@@ -1,0 +1,10 @@
+item.test_item.name=Тестовый предмет
+chat.journeymode.research=Ты исследовал %s очков
+chat.journeymode.click_count=Ты использовал %s сил из %s
+chat.journeymode.commandError=Используй: %s
+chat.journeymode.progress=--- Твой прогресс исследований ---
+chat.journeymode.noResearch=Не было найдено ни 1 исследования.
+chat.journeymode.clear=Весь прогресс был стерт.
+chat.journeymode.add=Добавлено %s %s к исследованиям игрока
+chat.journeymode.remove=Удалён предмет %s
+chat.journeymode.needMoreResearch=Нужно чтобы было на %s больше изучено %s
