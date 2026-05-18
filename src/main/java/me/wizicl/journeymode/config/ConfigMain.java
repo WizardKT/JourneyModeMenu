@@ -13,9 +13,9 @@ public class ConfigMain {
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")
     public static int stackMultiplier = 10;
 
-    @Config.Name("GUI open key")
-    @Config.Comment("Key to open mode GUI")
-    public static int openGuiKey = Keyboard.KEY_J;
+    @Config.Name("Auto research shift click")
+    @Config.Comment("When true make research menu auto research items when clicking shift click per item, useful for big amount of researches")
+    public static boolean easy_research_shift = false;
 
     @Mod.EventBusSubscriber(modid = "journeymode")
     private static class EventHandler {

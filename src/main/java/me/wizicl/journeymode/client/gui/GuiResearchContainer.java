@@ -2,6 +2,7 @@ package me.wizicl.journeymode.client.gui;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.config.ConfigMain;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -13,9 +14,9 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class GuiResearchContainer extends Container{
 
+    private final EntityPlayer player;
     private final IItemHandler researchInventory;
     private GuiState currentState = GuiState.RESEARCH;
-
     private static final int PLAYER_INV_START = 0;
     private static final int PLAYER_HOTBAR_START = 27;
     private static final int PLAYER_INV_END = 36;
@@ -23,7 +24,7 @@ public class GuiResearchContainer extends Container{
 
     public GuiResearchContainer(InventoryPlayer playerInv) {
 
-        EntityPlayer player = playerInv.player;
+        this.player = playerInv.player;
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
         this.researchInventory = (cap != null) ? cap.getResearchInventory() : new ItemStackHandler(1);
@@ -58,6 +59,26 @@ public class GuiResearchContainer extends Container{
             public boolean isEnabled() {
                 return currentState == GuiState.RESEARCH;
             }
+
+            @Override
+            public void putStack(ItemStack stack) {
+                if (!stack.isEmpty() && ConfigMain.easy_research_shift) {
+                    EntityPlayer player = GuiResearchContainer.this.player;
+                    IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+                    int amount = stack.getCount();
+
+                    if (cap != null) {
+                        if (!player.world.isRemote) {
+                            cap.addResearch(stack, amount);
+                        }
+
+                        super.putStack(ItemStack.EMPTY);
+                        return;
+                    }
+                }
+
+                super.putStack(stack);
+            }
         });
     }
 
@@ -88,46 +109,76 @@ public class GuiResearchContainer extends Container{
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
-
+        // Проверяем, что слот существует и в нём вообще есть предмет
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+            itemstack = itemstack1.copy(); // Сохраняем копию для сверки количества в конце
+
+            /// === СИТУАЦИЯ А: Игрок кликнул по СЛОТУ ИССЛЕДОВАНИЯ (вынимает предмет) ===
 
             if (index == RESEARCH_SLOT_INDEX) {
+                // Пытаемся переместить предмет из слота исследования в инвентарь игрока
                 if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_INV_END, true)) {
-                    return ItemStack.EMPTY;
+                    return ItemStack.EMPTY; // Если инвентарь забит, ничего не делаем
                 }
                 slot.onSlotChange(itemstack1, itemstack);
             }
+
+            if (index == RESEARCH_SLOT_INDEX) {
+                // Пытаемся переместить предмет из слота исследования в инвентарь игрока
+                if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_INV_END, true)) {
+                    return ItemStack.EMPTY; // Если инвентарь забит, ничего не делаем
+                }
+                slot.onSlotChange(itemstack1, itemstack);
+            }
+
+            /// === СИТУАЦИЯ Б: Игрок кликнул по своему ИНВЕНТАРЮ / ХОТБАРУ ===
             else {
+                // Если сейчас открыто окно исследований, пытаемся засунуть предмет в слот исследования
                 if (this.currentState == GuiState.RESEARCH) {
                     if (!this.mergeItemStack(itemstack1, RESEARCH_SLOT_INDEX, RESEARCH_SLOT_INDEX + 1, false)) {
+
+                        // Если слот исследования уже занят — перекидываем между Хотбаром и Инвентарем
                         if (index < PLAYER_HOTBAR_START) {
+
+                            // Кликнули в инвентаре -> перекидываем в хотбар
                             if (!this.mergeItemStack(itemstack1, PLAYER_HOTBAR_START, PLAYER_INV_END, false)) {
                                 return ItemStack.EMPTY;
                             }
-                        } else if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_HOTBAR_START, false)) {
-                            return ItemStack.EMPTY;
+                        } else {
+
+                            // Кликнули в хотбаре -> перекидываем в инвентарь
+                            if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_HOTBAR_START, false)) {
+                                return ItemStack.EMPTY;
+                            }
                         }
+
                     }
                 }
             }
 
+            /// === ФИНАЛЬНАЯ ЗАЧИСТКА И ОБНОВЛЕНИЕ СЛОТОВ ===
+
+            // Если стак полностью опустел — очищаем слот
             if (itemstack1.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
+                // Если что-то осталось — сообщаем слоту, что его содержимое изменилось
                 slot.onSlotChanged();
             }
 
+            // Если количество предметов не изменилось — выходим
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
+            // Вызываем событие взятия предмета (для триггеров и ачивок майна)
             slot.onTake(playerIn, itemstack1);
         }
 
         return itemstack;
     }
+
 
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {

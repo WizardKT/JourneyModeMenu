@@ -5,10 +5,10 @@
     <option name="VM_PARAMETERS" value="-Dforge.logging.console.level=debug -Dforge.logging.markers=SCAN,REGISTRIES,REGISTRYDUMP"/>
     <option name="PROGRAM_PARAMETERS" value=""/>
     <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$\run"/>
-    <module name="JourneyModeMenu.main"/>
+    <module name="MF1-12-2MSM.main"/>
     <envs>
       <env name="MCP_TO_SRG" value="$PROJECT_DIR$\build\createSrgToMcp\output.srg"/>
-      <env name="MOD_CLASSES" value="$PROJECT_DIR$\build\resources\main;$PROJECT_DIR$\build\classes\java\main"/>
+      <env name="MOD_CLASSES" value="$PROJECT_DIR$\build\classes\java\main"/>
       <env name="mainClass" value="net.minecraft.launchwrapper.Launch"/>
       <env name="MCP_MAPPINGS" value="snapshot_20171003-1.12"/>
       <env name="FORGE_VERSION" value="14.23.5.2859"/>

@@ -5,16 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Network code">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runServer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/runServer.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/pack.mcmeta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/createSrgToMcp/output.srg" beforeDir="false" afterPath="$PROJECT_DIR$/build/createSrgToMcp/output.srg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/reobfJar/output.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/output.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/splash.properties" afterDir="false" />
@@ -27,10 +34,10 @@
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usernamecache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,18 +66,18 @@
             <expand>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="JourneyModeMenu" type="f1a62948:ProjectNode" />
+                <item name="MF1-12-2MSM" type="f1a62948:ProjectNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="JourneyModeMenu" type="f1a62948:ProjectNode" />
+                <item name="MF1-12-2MSM" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
               </path>
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="JourneyModeMenu" type="f1a62948:ProjectNode" />
+                <item name="MF1-12-2MSM" type="f1a62948:ProjectNode" />
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
+                <item name="fg_runs" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -102,13 +109,10 @@
     &quot;assignee&quot;: &quot;WizardKT&quot;
   }
 }</component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="03d73ea2-c588-4c81-a2a9-16914495e33d" />
-  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/WizardKT/JourneyModeMenu.git&quot;,
-    &quot;accountId&quot;: &quot;03d73ea2-c588-4c81-a2a9-16914495e33d&quot;
+    &quot;accountId&quot;: &quot;9be962ad-fa40-4738-9a59-2d45325d0ae0&quot;
   }
 }</component>
   <component name="McpProjectServerCommands">
@@ -130,49 +134,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.D:/WorkSpace/Journey Mode/build.gradle.executor": "Run",
-    "Gradle.Journey Mode [createMcpToSrg].executor": "Run",
-    "Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainClient.main()].executor": "Run",
-    "Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainServer.main()].executor": "Run",
-    "Gradle.JourneyModeMenu [:prepareRunClient].executor": "Run",
-    "Gradle.JourneyModeMenu [:prepareRunServer].executor": "Run",
-    "Gradle.JourneyModeMenu [build].executor": "Run",
-    "Gradle.JourneyModeMenu [createMcpToSrg].executor": "Run",
-    "Gradle.JourneyModeMenu [genIntellijRuns].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "work",
-    "git.auto.fetch.suggestion.counter": "1",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/tonik/IdeaProjects/JourneyModeMenu/src/main/resources/assets/journeymode/textures/gui/container",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.D:/WorkSpace/Journey Mode/build.gradle.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Journey Mode [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainClient.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:prepareRunClient].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:prepareRunServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [genIntellijRuns].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainClient.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:prepareRunClient].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:prepareRunServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;1&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/WorkSpace/MF1-12-2MSM/src/main/resources/assets/journeymode/textures/gui/container&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\WorkSpace\MF1-12-2MSM\src\main\resources\assets\journeymode\textures\gui\container" />
       <recent name="C:\Users\tonik\IdeaProjects\JourneyModeMenu\src\main\resources\assets\journeymode\textures\gui\container" />
       <recent name="C:\Users\tonik\IdeaProjects\JourneyModeMenu" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WorkSpace\MF1-12-2MSM\src\main\resources\assets\journeymode" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.runClient">
+  <component name="RunManager" selected="Gradle.JourneyModeMenu [build]">
     <configuration name="D:/WorkSpace/Journey Mode/build.gradle" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -249,11 +263,19 @@
     <recent_temporary>
       <list>
         <item itemvalue="Gradle.JourneyModeMenu [build]" />
-        <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
         <item itemvalue="Gradle.JourneyModeMenu [genIntellijRuns]" />
+        <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
         <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-37e91769500f-intellij.indexing.shared.core-IU-261.24374.151" />
+        <option value="bundled-js-predefined-d6986cc7102b-31caf2ab9e3c-JavaScript-IU-261.24374.151" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -262,6 +284,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1778557910967</updated>
+      <workItem from="1779113783228" duration="26000" />
     </task>
     <task id="LOCAL-00001" summary="-Added all Java requirements to GitHub">
       <option name="closed" value="true" />
