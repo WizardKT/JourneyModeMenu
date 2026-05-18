@@ -1,10 +1,24 @@
-item.test_item.name=Test item
 chat.journeymode.research=You researched %s points
 chat.journeymode.click_count=You used %s power of %s
-chat.journeymode.commandError=Use: %s
-chat.journeymode.progress=--- Yur research progress ---
-chat.journeymode.noResearch=No research has been detected.
+chat.journeymode.commandError=§cUse: %s %s
+chat.journeymode.emptyHand=§cYou must hold an item in your hand!
+chat.journeymode.progress=--- Your research progress ---
+chat.journeymode.noResearch=§cNo research has been detected.
+chat.journeymode.wrongPage=§cIncorrect page number!
+chat.journeymode.giveSuccess=Added %s %s to player inventory
+
+chat.journeymode.progress.header=§6=== §eResearch progress (Page %1$d of %2$d) §6===
+chat.journeymode.progress.item=§8 - %1$s%2$s§3 [%3$d/%4$d]
+chat.journeymode.progress.nextPage=§7Use §b/jm progress %d§7 to open the next page.
+
 chat.journeymode.clear=All your progress has been deleted.
-chat.journeymode.add=Added %s %s to player researches
-chat.journeymode.remove=Removed %s item
-chat.journeymode.needMoreResearch=You need %s more researched %s
+chat.journeymode.add=Added %2$d x %1$s to player's research.
+chat.journeymode.remove=Item %s removed from research.
+chat.journeymode.needMoreResearch=§cYou need to research %2$s %1$d more times!
+chat.journeymode.noPermission=§cYou don't have permission to use this command.
+
+chat.journeymode.ignoreHat=§6--- NBT tag item list ---
+chat.journeymode.tagPrefix=§7-
+chat.journeymode.ignore=§6---------------------------------
+
+gui.journeymode.tooltip=Place item

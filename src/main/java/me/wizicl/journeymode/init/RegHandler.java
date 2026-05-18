@@ -1,10 +1,10 @@
 package me.wizicl.journeymode.init;
 
-import me.wizicl.journeymode.main.GuiResearch;
-import me.wizicl.journeymode.main.JourneyMode;
+import me.wizicl.journeymode.client.gui.GuiResearch;
+import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
-import me.wizicl.journeymode.main.ResearchContainer;
+import me.wizicl.journeymode.client.gui.GuiResearchContainer;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
@@ -33,25 +33,22 @@ public class RegHandler {
     /// Выдача капы игроку если тот умер
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        if (event.isWasDeath()) {
-            EntityPlayer oldplayer = event.getOriginal();
-            EntityPlayer newplayer = event.getEntityPlayer();
+        EntityPlayer oldplayer = event.getOriginal();
+        EntityPlayer newplayer = event.getEntityPlayer();
 
-            IResearch oldCap = oldplayer.getCapability(ResearchProvider.RESEARCH, null);
-            IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
+        IResearch oldCap = oldplayer.getCapability(ResearchProvider.RESEARCH, null);
+        IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
 
-            if (oldplayer != null && newplayer != null) {
-                newCap.getResearchMap().putAll(oldCap.getResearchMap());
-            }
-
-            // Создаём переменную игрока и капы
-            EntityPlayer player = event.getEntityPlayer();
-            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-            // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
-
+        if (oldplayer != null && newplayer != null) {
+            newCap.getReadOnlyMap().putAll(oldCap.getReadOnlyMap());
         }
+
+        // Создаём переменную игрока и капы
+        EntityPlayer player = event.getEntityPlayer();
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+        // Отправляем игроку пакет данных
+        JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
     }
 
     /// Выдача капы игроку который зашёл на сервер в МП
@@ -68,7 +65,7 @@ public class RegHandler {
             IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
             // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getResearchMap()), (EntityPlayerMP) player);
+            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
         }
     }
 
@@ -79,7 +76,7 @@ public class RegHandler {
             EntityPlayer player = Minecraft.getMinecraft().player;
 
             // Теперь мы можем обращаться к его инвентарю
-            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(new ResearchContainer(player.inventory)));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(new GuiResearchContainer(player.inventory)));
         }
     }
 }

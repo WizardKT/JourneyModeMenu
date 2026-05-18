@@ -2,23 +2,28 @@ package me.wizicl.journeymode.network;
 
 import io.netty.buffer.ByteBuf;
 import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.Research;
+import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MessageSyncResearch implements IMessage {
-    private Map<String, Integer> data;
+    private Map<ResearchKey, Integer> data;
 
     public MessageSyncResearch() {}
 
-    public MessageSyncResearch(Map<String, Integer> data) {
+    public MessageSyncResearch(Map<ResearchKey, Integer> data) {
         this.data = data;
     }
 
@@ -26,17 +31,29 @@ public class MessageSyncResearch implements IMessage {
     /// Запись данных в байты
     @Override
     public void toBytes(ByteBuf buf) {
-        // Пишем размер нашей карты
-        buf.writeInt(data.size());
+
+        PacketBuffer buffer = new PacketBuffer(buf);
+        buffer.writeInt(data.size());
 
         // Проходимся по всей карте
-        for (Map.Entry<String, Integer> entry : data.entrySet()) {
+        for (Map.Entry<ResearchKey, Integer> entry : data.entrySet()) {
+            ResearchKey key = entry.getKey();
 
-            // Пишем ID предмета
-            ByteBufUtils.writeUTF8String(buf, entry.getKey());
+            // ID предмета
+            buffer.writeResourceLocation(key.getRegistryName());
 
-            // Пишем количество предмета
-            buf.writeInt(entry.getValue());
+            // Meta предемета
+            buffer.writeInt(key.getMeta());
+
+            // NBT предмета
+            boolean hasNBT = key.getCleanedNbt() != null;
+            buffer.writeBoolean(hasNBT);
+            if (hasNBT) {
+                buffer.writeCompoundTag(key.getCleanedNbt());
+            }
+
+            // Amount предмета
+            buffer.writeInt(entry.getValue());
         }
     }
 
@@ -44,19 +61,27 @@ public class MessageSyncResearch implements IMessage {
     ///Вытаскивание данных из байтов
     @Override
     public void fromBytes(ByteBuf buf) {
-
-        // Вводим переменные карты и количества записей в карте
+        PacketBuffer buffer = new PacketBuffer(buf);
         data = new HashMap<>();
-        int size = buf.readInt();
 
-        // Проходимся по всей карте
+        int size = buffer.readInt();
+
         for  (int i = 0; i < size; i++) {
+            ResourceLocation id = buffer.readResourceLocation();
+            int meta = buffer.readInt();
 
-            // Читаем байты
-            String key = ByteBufUtils.readUTF8String(buf);
+            NBTTagCompound nbt = null;
+            if (buffer.readBoolean()) {
+                try {
+                    nbt = buffer.readCompoundTag();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
-            // Вытаскиваем данные
-            int value = buf.readInt();
+            int value = buffer.readInt();
+
+            ResearchKey key = new ResearchKey(id, meta, nbt);
             data.put(key, value);
         }
     }
@@ -70,12 +95,11 @@ public class MessageSyncResearch implements IMessage {
                 EntityPlayer player = Minecraft.getMinecraft().player;
                 if (player != null) {
                     IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-                    if (cap != null) {
-                        cap.getResearchMap().clear();
-                        cap.getResearchMap().putAll(message.data);
+                    if (cap instanceof Research) {
+                        ((Research) cap).refreshFromServer(message.data);
 
                         // Дебаг логики
-                        System.out.println("CLIENT-SIDE: Получены данные исследований! Размер: " + message.data.size());
+                        System.out.println("CLIENT-SIDE: Данные исследований успешно синхронизированы! Размер: " + message.data.size());
                     }
                 }
             });
