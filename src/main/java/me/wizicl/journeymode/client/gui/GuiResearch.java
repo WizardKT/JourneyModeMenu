@@ -1,15 +1,16 @@
 package me.wizicl.journeymode.client.gui;
 
 import me.wizicl.journeymode.JourneyMode;
+import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.network.MessageRequestResearch;
+import me.wizicl.journeymode.util.JourneyUtils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
-import scala.swing.TextComponent;
 
 import java.io.IOException;
 
@@ -56,10 +57,11 @@ public class GuiResearch extends GuiContainer {
             String infoText;
 
             if (!this.researchContainer.isResearchSlotEmpty()) {
-                ItemStack currentItem = this.researchContainer.getResearchTargetStack();
+                IResearch cap = Minecraft.getMinecraft().player.getCapability(ResearchProvider.RESEARCH, null);
+                ItemStack stack = this.researchContainer.getResearchTargetStack();
 
-                int currentProgress = 15;
-                int requiredAmount = 50;
+                int currentProgress = cap.getResearch(stack);
+                int requiredAmount = JourneyUtils.getRequiredAmount(stack);
 
                 infoText = currentProgress + "/" + requiredAmount;
             } else {

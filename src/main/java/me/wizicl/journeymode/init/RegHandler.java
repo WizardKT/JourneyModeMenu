@@ -5,6 +5,7 @@ import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.client.gui.GuiResearchContainer;
+import me.wizicl.journeymode.network.MessageOpenResearchGui;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
 import net.minecraft.client.Minecraft;
@@ -72,11 +73,7 @@ public class RegHandler {
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (ClientProxy.keyBindOpenGui.isPressed()) {
-            // Получаем экземпляр игрока на клиенте
-            EntityPlayer player = Minecraft.getMinecraft().player;
-
-            // Теперь мы можем обращаться к его инвентарю
-            Minecraft.getMinecraft().displayGuiScreen(new GuiResearch(new GuiResearchContainer(player.inventory)));
+            JourneyMode.NETWORK.sendToServer(new MessageOpenResearchGui());
         }
     }
 }

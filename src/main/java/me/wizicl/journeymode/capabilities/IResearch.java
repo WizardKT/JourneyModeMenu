@@ -1,12 +1,13 @@
 package me.wizicl.journeymode.capabilities;
 
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
 
 import java.util.Map;
 
 public interface IResearch {
     // Управление исследованиями
-    void addResearch(ItemStack stack, int amount);
+    int addResearch(ItemStack stack, int amount);
     void setResearch(ItemStack stack, int amount);
 
     // Получение информации
@@ -18,4 +19,7 @@ public interface IResearch {
 
     void clear();
     void remove(ItemStack stack);
+
+    // Инвентарь исследовательского слота
+    IItemHandler getResearchInventory();
 }
