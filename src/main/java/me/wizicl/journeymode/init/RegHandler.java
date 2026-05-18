@@ -8,6 +8,7 @@ import me.wizicl.journeymode.client.gui.GuiResearchContainer;
 import me.wizicl.journeymode.network.MessageOpenResearchGui;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
+import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -49,7 +50,7 @@ public class RegHandler {
         IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
         // Отправляем игроку пакет данных
-        JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
+        CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
     }
 
     /// Выдача капы игроку который зашёл на сервер в МП
@@ -66,14 +67,14 @@ public class RegHandler {
             IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
             // Отправляем игроку пакет данных
-            JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
+            CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
         }
     }
 
     @SubscribeEvent
     public static void onKeyInput(InputEvent.KeyInputEvent event) {
         if (ClientProxy.keyBindOpenGui.isPressed()) {
-            JourneyMode.NETWORK.sendToServer(new MessageOpenResearchGui());
+            CommonProxy.NETWORK.sendToServer(new MessageOpenResearchGui());
         }
     }
 }

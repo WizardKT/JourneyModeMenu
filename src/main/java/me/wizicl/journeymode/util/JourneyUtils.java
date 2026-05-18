@@ -5,6 +5,7 @@ import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.config.ConfigMain;
 import me.wizicl.journeymode.network.MessageSyncResearch;
+import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,7 @@ public class JourneyUtils {
 
             // Если игрок в мультиплеере, отправляем пакет данных
             if (!player.world.isRemote) {
-                JourneyMode.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
+                CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
             }
         }
     }

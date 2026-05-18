@@ -4,6 +4,7 @@ import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.network.MessageRequestResearch;
+import me.wizicl.journeymode.proxy.CommonProxy;
 import me.wizicl.journeymode.util.JourneyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -87,7 +88,7 @@ public class GuiResearch extends GuiContainer {
                 if (!this.researchContainer.isResearchSlotEmpty()) {
                     this.playButtonPressSound();
 
-                    JourneyMode.NETWORK.sendToServer(new MessageRequestResearch());
+                    CommonProxy.NETWORK.sendToServer(new MessageRequestResearch());
                 }
                 return;
             }

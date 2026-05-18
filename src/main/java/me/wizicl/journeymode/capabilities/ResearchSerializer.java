@@ -68,8 +68,8 @@ public class ResearchSerializer {
         tag.setInteger("Meta", key.getMeta());
 
         // Если у предмета есть NBT после твоей зачистки - сохраняем его
-        if (key.getCleanedNbt() != null) {
-            tag.setTag("CleanedNBT", key.getCleanedNbt());
+        if (key.getCleanedNbt() != null && !key.getCleanedNbt().hasNoTags()) {
+            tag.setTag("CleanedNBT", key.getCleanedNbt()); // Используем везде UPPERCASE для NBT
         }
 
         return tag;
@@ -86,8 +86,11 @@ public class ResearchSerializer {
 
         // Восстанавливаем NBT предмета, если оно было
         NBTTagCompound cleanedNbt = tag.getCompoundTag("CleanedNbt");
-        if (tag.hasKey("CleanedNbt", Constants.NBT.TAG_COMPOUND)) {
-            cleanedNbt = tag.getCompoundTag("CleanedNBT");
+        if (tag.hasKey("CleanedNBT", Constants.NBT.TAG_COMPOUND)) {
+            NBTTagCompound readTag = tag.getCompoundTag("CleanedNBT");
+            if (readTag != null && !readTag.hasNoTags()) {
+                cleanedNbt = readTag;
+            }
         }
 
         // Вызываем конструктор

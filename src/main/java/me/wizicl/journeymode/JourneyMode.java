@@ -6,7 +6,6 @@ import me.wizicl.journeymode.client.gui.GuiHandler;
 import me.wizicl.journeymode.command.CommandJourney;
 import me.wizicl.journeymode.network.MessageOpenResearchGui;
 import me.wizicl.journeymode.network.MessageRequestResearch;
-import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -40,7 +39,6 @@ public class JourneyMode {
     public static final String MC_VERSION = "1.12.2";
 
     public static Logger logger;
-    public static SimpleNetworkWrapper NETWORK;
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
@@ -51,7 +49,8 @@ public class JourneyMode {
     public static Capability<IResearch> RESEARCH = null;
 
     @SidedProxy(
-            clientSide = "me.wizicl.journeymode.proxy.ClientProxy"
+            clientSide = "me.wizicl.journeymode.proxy.ClientProxy",
+            serverSide = "me.wizicl.journeymode.proxy.CommonProxy"
     )
 
     public static CommonProxy proxy;
@@ -75,12 +74,7 @@ public class JourneyMode {
         }, Research::new);
 
         // Работа с сетью
-        int packetId = 0;
-        NetworkRegistry.INSTANCE.registerGuiHandler(JourneyMode.instance, new GuiHandler());
-        NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel("journeymode");
-        NETWORK.registerMessage(MessageSyncResearch.Handler.class, MessageSyncResearch.class, packetId++, Side.CLIENT);
-        NETWORK.registerMessage(MessageRequestResearch.Handler.class, MessageRequestResearch.class, packetId++, Side.SERVER);
-        NETWORK.registerMessage(MessageOpenResearchGui.Handler.class, MessageOpenResearchGui.class, packetId++, Side.SERVER);
+
     }
 
     // Инициализация. Загрузка рецептов, событий, сущностей.
