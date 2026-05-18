@@ -1,0 +1,10 @@
+item.test_item.name=Test item
+chat.journeymode.research=You researched %s points
+chat.journeymode.click_count=You used %s power of %s
+chat.journeymode.commandError=Use: %s
+chat.journeymode.progress=--- Yur research progress ---
+chat.journeymode.noResearch=No research has been detected.
+chat.journeymode.clear=All your progress has been deleted.
+chat.journeymode.add=Added %s %s to player researches
+chat.journeymode.remove=Removed %s item
+chat.journeymode.needMoreResearch=You need %s more researched %s

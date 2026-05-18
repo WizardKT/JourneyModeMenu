@@ -1,12 +1,8 @@
 package me.wizicl.journeymode.network;
 
 import io.netty.buffer.ByteBuf;
-import me.wizicl.journeymode.capabilities.IResearch;
-import me.wizicl.journeymode.capabilities.Research;
+import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.ResearchKey;
-import me.wizicl.journeymode.capabilities.ResearchProvider;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -19,9 +15,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MessageSyncResearch implements IMessage {
-    private Map<ResearchKey, Integer> data;
+    public Map<ResearchKey, Integer> data;
 
-    public MessageSyncResearch() {}
+    public MessageSyncResearch() {
+    }
 
     public MessageSyncResearch(Map<ResearchKey, Integer> data) {
         this.data = data;
@@ -58,7 +55,7 @@ public class MessageSyncResearch implements IMessage {
     }
 
 
-    ///Вытаскивание данных из байтов
+    /// Вытаскивание данных из байтов
     @Override
     public void fromBytes(ByteBuf buf) {
         PacketBuffer buffer = new PacketBuffer(buf);
@@ -66,7 +63,7 @@ public class MessageSyncResearch implements IMessage {
 
         int size = buffer.readInt();
 
-        for  (int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             ResourceLocation id = buffer.readResourceLocation();
             int meta = buffer.readInt();
 
@@ -91,18 +88,7 @@ public class MessageSyncResearch implements IMessage {
     public static class Handler implements IMessageHandler<MessageSyncResearch, IMessage> {
         @Override
         public IMessage onMessage(MessageSyncResearch message, MessageContext ctx) {
-            Minecraft.getMinecraft().addScheduledTask(() -> {
-                EntityPlayer player = Minecraft.getMinecraft().player;
-                if (player != null) {
-                    IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-                    if (cap instanceof Research) {
-                        ((Research) cap).refreshFromServer(message.data);
-
-                        // Дебаг логики
-                        System.out.println("CLIENT-SIDE: Данные исследований успешно синхронизированы! Размер: " + message.data.size());
-                    }
-                }
-            });
+            JourneyMode.proxy.handleSyncResearch(message);
             return null;
         }
     }

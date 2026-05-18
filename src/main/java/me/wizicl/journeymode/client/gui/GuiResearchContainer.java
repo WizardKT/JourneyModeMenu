@@ -1,18 +1,20 @@
 package me.wizicl.journeymode.client.gui;
 
+import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryBasic;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class GuiResearchContainer extends Container{
 
+    private final IItemHandler researchInventory;
     private GuiState currentState = GuiState.RESEARCH;
-
-    private final IInventory researchInventory = new InventoryBasic("ResearchConsole", false, 1);
 
     private static final int PLAYER_INV_START = 0;
     private static final int PLAYER_HOTBAR_START = 27;
@@ -20,6 +22,12 @@ public class GuiResearchContainer extends Container{
     private static final int RESEARCH_SLOT_INDEX = 36;
 
     public GuiResearchContainer(InventoryPlayer playerInv) {
+
+        EntityPlayer player = playerInv.player;
+        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+        this.researchInventory = (cap != null) ? cap.getResearchInventory() : new ItemStackHandler(1);
+
         this.addPlayerInventory(playerInv);
         this.addPlayerHotbar(playerInv);
         this.addResearchSlot();
@@ -40,7 +48,7 @@ public class GuiResearchContainer extends Container{
     }
 
     private void addResearchSlot() {
-        this.addSlotToContainer(new Slot(this.researchInventory, 0, 98, 32) {
+        this.addSlotToContainer(new SlotItemHandler(this.researchInventory, 0, 98, 32) {
             @Override
             public boolean isItemValid(ItemStack stack) {
                 return !stack.isEmpty();
@@ -124,8 +132,5 @@ public class GuiResearchContainer extends Container{
     @Override
     public void onContainerClosed(EntityPlayer playerIn) {
         super.onContainerClosed(playerIn);
-        if (!playerIn.world.isRemote) {
-            this.clearContainer(playerIn, playerIn.world, this.researchInventory);
-        }
     }
 }

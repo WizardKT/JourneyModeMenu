@@ -15,7 +15,7 @@ public class ResearchKey {
     public ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound cleanedNbt) {
         this.registryName = registryName;
         this.meta = meta;
-        this.cleanedNbt = cleanedNbt;
+        this.cleanedNbt = (cleanedNbt == null || cleanedNbt.hasNoTags()) ? null : cleanedNbt;
     }
 
     public ResearchKey(ItemStack stack) {
@@ -35,7 +35,7 @@ public class ResearchKey {
             }
 
             // Если после проверки NBT остался пустым - заменяем null
-            this.cleanedNbt = nbtCopy.hasNoTags() ? null : nbtCopy;
+            this.cleanedNbt = (nbtCopy == null || nbtCopy.hasNoTags()) ? null : nbtCopy;
         } else {
             this.cleanedNbt = null;
         }

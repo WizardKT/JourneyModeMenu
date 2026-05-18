@@ -28,6 +28,16 @@ import java.util.*;
 public class CommandJourney extends CommandBase {
 
     @Override
+    public int getRequiredPermissionLevel() {
+        return 0;
+    }
+
+    @Override
+    public boolean checkPermission(net.minecraft.server.MinecraftServer server, net.minecraft.command.ICommandSender sender) {
+        return true;
+    }
+
+    @Override
     public String getName() {
         return "jm";
     }
@@ -109,19 +119,18 @@ public class CommandJourney extends CommandBase {
     private void handleConsume(EntityPlayer player, ItemStack stack, String[] args) {
         Integer amount = parseArgInt(player, args, 1, stack.getCount());
         if (amount == null) return;
-        int amountToConsume = Math.max(1, Math.min(amount, stack.getCount()));
 
-        JourneyUtils.addResearchAndSync(player, stack, amountToConsume);
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amountToConsume));
-        stack.shrink(amountToConsume);
+        JourneyUtils.addResearchAndSync(player, stack, amount);
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
+        stack.shrink(amount);
     }
 
     private void handleResearch(EntityPlayer player, ItemStack stack, String[] args) {
         Integer amount = parseArgInt(player, args, 1, stack.getCount());
         if (amount == null) return;
 
-        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
         JourneyUtils.addResearchAndSync(player, stack, amount);
+        player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
     }
 
 

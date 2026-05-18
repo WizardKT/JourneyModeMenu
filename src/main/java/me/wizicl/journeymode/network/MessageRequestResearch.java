@@ -1,7 +1,11 @@
 package me.wizicl.journeymode.network;
 
 import io.netty.buffer.ByteBuf;
+import me.wizicl.journeymode.JourneyMode;
+import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.client.gui.GuiResearchContainer;
+import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -13,13 +17,16 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 public class MessageRequestResearch implements IMessage {
 
-    public MessageRequestResearch() {}
+    public MessageRequestResearch() {
+    }
 
     @Override
-    public void fromBytes(ByteBuf buf) {}
+    public void fromBytes(ByteBuf buf) {
+    }
 
     @Override
-    public void toBytes(ByteBuf buf) {}
+    public void toBytes(ByteBuf buf) {
+    }
 
     public static class Handler implements IMessageHandler<MessageRequestResearch, IMessage> {
 
@@ -27,19 +34,28 @@ public class MessageRequestResearch implements IMessage {
         public IMessage onMessage(MessageRequestResearch message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().player;
 
-            IThreadListener mainThread = (WorldServer) player.world;
-            mainThread.addScheduledTask(() -> {
+            player.getServerWorld().addScheduledTask(() -> {
 
                 if (player.openContainer instanceof GuiResearchContainer) {
                     GuiResearchContainer container = (GuiResearchContainer) player.openContainer;
 
-                    if (!container.isResearchSlotEmpty()) {
-                        ItemStack stackInSlot = container.getResearchTargetStack();
+                    // Берем предмет напрямую из инвентаря капы через метод контейнера
+                    ItemStack stack = container.getResearchTargetStack();
 
-                        System.out.println("SERVER-SIDE: Deleting item " + stackInSlot.getDisplayName() + " x" + stackInSlot.getCount());
+                    // На всякий случай проверяем, что лежит в слоте по индексу 36 через ванильный метод
+                    net.minecraft.inventory.Slot slot36 = container.getSlot(36);
+                    ItemStack stackInSlot36 = slot36.getStack();
 
-                        container.getSlot(36).putStack(ItemStack.EMPTY);
-                        container.detectAndSendChanges();
+                    IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+
+                    if (cap != null && !stack.isEmpty()) {
+                        int consumed = cap.addResearch(stack, stack.getCount());
+
+                        if (consumed > 0) {
+                            stack.shrink(consumed);
+                            container.detectAndSendChanges();
+                            CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), player);
+                        }
                     }
                 }
             });

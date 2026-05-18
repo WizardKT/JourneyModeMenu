@@ -2,11 +2,12 @@ package me.wizicl.journeymode;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
-import me.wizicl.journeymode.capabilities.ResearchStorage;
+import me.wizicl.journeymode.client.gui.GuiHandler;
 import me.wizicl.journeymode.command.CommandJourney;
+import me.wizicl.journeymode.network.MessageOpenResearchGui;
 import me.wizicl.journeymode.network.MessageRequestResearch;
-import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.proxy.CommonProxy;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
@@ -21,19 +22,23 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
 
+import static javax.swing.text.html.parser.DTDConstants.ID;
+
 //Айди мода, его название и его версия, а так же версия майнкрафта
 @Mod(modid = JourneyMode.MODID, name = JourneyMode.NAME, version = JourneyMode.VERSION, acceptedMinecraftVersions = JourneyMode.MC_VERSION)
 
 //Основной, открытый класс Main, доступный из любого участка кода
 public class JourneyMode {
 
+    @Mod.Instance
+    public static JourneyMode instance;
+
     public static final String MODID = "journeymode";
     public static final String NAME = "Journey Mode";
-    public static final String VERSION = "1.5.0";
+    public static final String VERSION = "1.6.1";
     public static final String MC_VERSION = "1.12.2";
 
     public static Logger logger;
-    public static SimpleNetworkWrapper NETWORK;
 
     @Mod.EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
@@ -44,7 +49,8 @@ public class JourneyMode {
     public static Capability<IResearch> RESEARCH = null;
 
     @SidedProxy(
-            clientSide = "me.wizicl.journeymode.proxy.ClientProxy"
+            clientSide = "me.wizicl.journeymode.proxy.ClientProxy",
+            serverSide = "me.wizicl.journeymode.proxy.CommonProxy"
     )
 
     public static CommonProxy proxy;
@@ -57,12 +63,18 @@ public class JourneyMode {
         proxy.preInit(event);
 
         // Работа с капой
-        CapabilityManager.INSTANCE.register(IResearch.class, new ResearchStorage(), Research::new);
+        CapabilityManager.INSTANCE.register(IResearch.class, new Capability.IStorage<IResearch>() {
+            @Override
+            public net.minecraft.nbt.NBTBase writeNBT(Capability<IResearch> capability, IResearch instance, EnumFacing side) {
+                return new net.minecraft.nbt.NBTTagCompound(); // Заглушка
+            }
+
+            @Override
+            public void readNBT(Capability<IResearch> capability, IResearch instance, EnumFacing side, net.minecraft.nbt.NBTBase nbt) {}
+        }, Research::new);
 
         // Работа с сетью
-        NETWORK = NetworkRegistry.INSTANCE.newSimpleChannel("journeymode");
-        NETWORK.registerMessage(MessageSyncResearch.Handler.class, MessageSyncResearch.class, 0, Side.CLIENT);
-        NETWORK.registerMessage(MessageRequestResearch.Handler.class, MessageRequestResearch.class, 1, Side.SERVER);
+
     }
 
     // Инициализация. Загрузка рецептов, событий, сущностей.

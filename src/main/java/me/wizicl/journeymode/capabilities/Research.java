@@ -1,7 +1,14 @@
 package me.wizicl.journeymode.capabilities;
 
 import me.wizicl.journeymode.util.JourneyUtils;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -10,12 +17,24 @@ import java.util.Map;
 public class Research implements IResearch {
     private final Map<ResearchKey, Integer> researchMap = new HashMap<>();
 
+    private final ItemStackHandler researchInventory = new ItemStackHandler(1);
+
     @Override
-    public void addResearch(ItemStack stack, int amount) {
-        if (stack.isEmpty()) return;
+    public int addResearch(ItemStack stack, int amount) {
+        if (stack.isEmpty() || amount <= 0) return 0;
         ResearchKey key = new ResearchKey(stack);
+        int maxRequired = getRequiredAmount(stack);
         int current = researchMap.getOrDefault(key, 0);
-        researchMap.put(key, current + amount);
+
+        if (current >= maxRequired) {
+            return 0;
+        }
+
+        int allowedToAdd = Math.min(amount, maxRequired - current);
+
+        researchMap.put(key, current + allowedToAdd);
+
+        return allowedToAdd;
     }
 
     @Override
@@ -60,5 +79,18 @@ public class Research implements IResearch {
     public void refreshFromServer(Map<ResearchKey, Integer> newData) {
         this.researchMap.clear();
         this.researchMap.putAll(newData);
+    }
+
+    @Override
+    public IItemHandler getResearchInventory() {
+        return this.researchInventory;
+    }
+
+    public NBTTagCompound serializeNBT() {
+        return ResearchSerializer.serialize(this);
+    }
+
+    public void deserializeNBT(NBTTagCompound nbt) {
+        ResearchSerializer.deserialize(this, nbt);
     }
 }
