@@ -1,0 +1,26 @@
+name: Project Config
+version: 1.0.0
+schema: v1
+
+models:
+  # 1. Твой облачный мозг для Чата (Gemini)
+  # (Вставь сюда свой рабочий API-ключ вместо ТВОЙ_API_КЛЮЧ)
+  - name: Gemini 2.5 Flash
+    provider: gemini
+    model: gemini-2.5-flash
+    apiKey: ТВОЙ_API_КЛЮЧ
+    roles:
+      - chat
+      - edit
+      - apply
+
+  # 2. Твой локальный микро-конвейер автодополнения (Ollama)
+  # Он будет мгновенно дописывать код серой строкой прямо в редакторе
+  - name: Qwen 1.5B (Локальный)
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    roles:
+      - autocomplete
+    autocompleteOptions:
+      debounceDelay: 150 # Задержка в мс перед появлением подсказки (чтобы не дергать карту на каждую букву)
+      maxPromptTokens: 1024
