@@ -3,6 +3,7 @@ package me.wizicl.journeymode.proxy;
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
+import me.wizicl.journeymode.client.event.TooltipHandler;
 import me.wizicl.journeymode.config.ConfigMain;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import net.minecraft.client.Minecraft;
@@ -35,6 +36,7 @@ public class ClientProxy extends CommonProxy {
                 "key.categories.journeymode"
         );
         ClientRegistry.registerKeyBinding(keyBindOpenGui);
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new TooltipHandler());
     }
 
     @Override

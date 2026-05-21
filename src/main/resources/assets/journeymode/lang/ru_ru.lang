@@ -24,3 +24,7 @@ chat.journeymode.ignore=§6---------------------------------
 gui.journeymode.tooltip=Положи предмет
 key.journeymode.open_menu=Открыть меню исследований
 key.categories.journeymode=Journey Mode
+
+tooltip.journeymode.researchFull=Полностью изучено ✓
+tooltip.journeymode.research=Изучено:
+tooltip.journeymode.notResearched=Не изучено ✕

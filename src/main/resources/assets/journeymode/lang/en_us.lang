@@ -24,3 +24,7 @@ chat.journeymode.ignore=§6---------------------------------
 gui.journeymode.tooltip=Place item
 key.journeymode.open_menu=Open research menu
 key.categories.journeymode=Journey Mode
+
+tooltip.journeymode.researchFull=Full researched ✓
+tooltip.journeymode.research=Researched:
+tooltip.journeymode.notResearched=Not researched ✕

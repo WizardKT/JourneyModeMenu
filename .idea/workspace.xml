@@ -5,10 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- QoL">
-      <change afterPath="$PROJECT_DIR$/.continue/agents/new-config.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.continue/mcpServers/new-mcp-server.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/event/TooltipHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/protecter/StackValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.continue/agents/new-config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.continue/mcpServers/new-mcp-server.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/reobfJar/output.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/reobfJar/output.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/splash.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-3.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-4.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-4.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usernamecache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigNBT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigNBT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/util/JourneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/util/JourneyUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +52,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="122" />
+    <option name="cachedIndexableFilesCount" value="248" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -104,6 +140,65 @@
     <commands />
     <urls />
   </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0000006481692174" />
+      <entry key="S5" value="1.0125122793143462" />
+      <entry key="S10" value="1.3687599405284978" />
+      <entry key="S30" value="4.7086444138259544" />
+      <entry key="S60" value="7.760891630283396" />
+      <entry key="M2" value="12.644670235527627" />
+      <entry key="M5" value="33.89895884123643" />
+      <entry key="M10" value="58.74122136478095" />
+      <entry key="M15" value="72.15121209994307" />
+      <entry key="M30" value="89.4943655724816" />
+      <entry key="H1" value="100.01070579552453" />
+      <entry key="H2" value="105.80837122943265" />
+      <entry key="H4" value="108.85323032328075" />
+      <entry key="D1" value="111.46831111222978" />
+      <entry key="W1" value="111.92386545737436" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.9395227492140118" />
+      <entry key="MS500" value="0.9876008614453725" />
+      <entry key="S2" value="0.9968863433814441" />
+      <entry key="S5" value="1.0112487522525928" />
+      <entry key="S10" value="1.3678810392249166" />
+      <entry key="S30" value="4.707552421359295" />
+      <entry key="S60" value="7.759978306381006" />
+      <entry key="M2" value="12.643941980128984" />
+      <entry key="M5" value="33.89809301312228" />
+      <entry key="M10" value="58.74037873789759" />
+      <entry key="M15" value="72.15048909101723" />
+      <entry key="M30" value="89.49389434930833" />
+      <entry key="H1" value="100.01043564154912" />
+      <entry key="H2" value="105.80822644634824" />
+      <entry key="H4" value="108.8531553581938" />
+      <entry key="D1" value="111.46829824746759" />
+      <entry key="W1" value="111.92386361029972" />
+    </decayedShown>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -119,48 +214,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.D:/WorkSpace/Journey Mode/build.gradle.executor": "Run",
-    "Gradle.Journey Mode [createMcpToSrg].executor": "Run",
-    "Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainClient.main()].executor": "Run",
-    "Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainServer.main()].executor": "Run",
-    "Gradle.JourneyModeMenu [:prepareRunClient].executor": "Run",
-    "Gradle.JourneyModeMenu [:prepareRunServer].executor": "Run",
-    "Gradle.JourneyModeMenu [build].executor": "Run",
-    "Gradle.JourneyModeMenu [createMcpToSrg].executor": "Run",
-    "Gradle.JourneyModeMenu [genIntellijRuns].executor": "Run",
-    "Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainClient.main()].executor": "Run",
-    "Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainServer.main()].executor": "Run",
-    "Gradle.MF1-12-2MSM [:prepareRunClient].executor": "Run",
-    "Gradle.MF1-12-2MSM [:prepareRunServer].executor": "Run",
-    "Gradle.MF1-12-2MSM [createMcpToSrg].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "git-widget-placeholder": "master",
-    "git.auto.fetch.suggestion.counter": "1",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/WorkSpace/MF1-12-2MSM/src/main/resources/assets/journeymode/textures/gui/container",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.D:/WorkSpace/Journey Mode/build.gradle.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Journey Mode [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainClient.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:net.minecraftforge.legacydev.MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:prepareRunClient].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [:prepareRunServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [build].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.JourneyModeMenu [genIntellijRuns].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainClient.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:net.minecraftforge.legacydev.MainServer.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:prepareRunClient].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [:prepareRunServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.MF1-12-2MSM [createMcpToSrg].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;1&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/WorkSpace/MF1-12-2MSM/src/main/resources/assets/journeymode/textures/gui/container&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\WorkSpace\MF1-12-2MSM\src\main\resources\assets\journeymode\textures\gui\container" />
@@ -247,8 +345,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.JourneyModeMenu [genIntellijRuns]" />
         <item itemvalue="Gradle.JourneyModeMenu [build]" />
+        <item itemvalue="Gradle.JourneyModeMenu [genIntellijRuns]" />
         <item itemvalue="Gradle.D:/WorkSpace/Journey Mode/build.gradle" />
       </list>
     </recent_temporary>
@@ -279,7 +377,14 @@
       <workItem from="1779212225012" duration="344000" />
       <workItem from="1779212590026" duration="76000" />
       <workItem from="1779212678204" duration="2081000" />
-      <workItem from="1779214791878" duration="2291000" />
+      <workItem from="1779214791878" duration="3215000" />
+      <workItem from="1779341827795" duration="258000" />
+      <workItem from="1779342107677" duration="548000" />
+      <workItem from="1779342673282" duration="1549000" />
+      <workItem from="1779344259141" duration="895000" />
+      <workItem from="1779345169968" duration="834000" />
+      <workItem from="1779362736530" duration="8387000" />
+      <workItem from="1779372221400" duration="8555000" />
     </task>
     <task id="LOCAL-00001" summary="-Added all Java requirements to GitHub">
       <option name="closed" value="true" />
@@ -377,11 +482,22 @@
       <option name="project" value="LOCAL" />
       <updated>1779113960091</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="- QoL">
+      <option name="closed" value="true" />
+      <created>1779217841060</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1779217841060</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.env" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

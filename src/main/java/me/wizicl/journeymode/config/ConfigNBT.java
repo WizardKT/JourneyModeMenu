@@ -1,5 +1,7 @@
 package me.wizicl.journeymode.config;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -19,7 +21,6 @@ public class ConfigNBT {
 
     private static Set<String> ignoredTagsSet = null;
 
-    // Проверяет, занесен ли тег в черный список.
     public static boolean isTagIgnored(String tag) {
         if (ignoredTagsSet == null) {
             initTagSet();

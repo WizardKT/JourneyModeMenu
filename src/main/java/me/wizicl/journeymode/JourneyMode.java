@@ -37,7 +37,7 @@ public class JourneyMode {
 
     public static final String MODID = "journeymode";
     public static final String NAME = "Journey Mode";
-    public static final String VERSION = "1.6.1";
+    public static final String VERSION = "1.7.0";
     public static final String MC_VERSION = "1.12.2";
 
     public static Logger logger;

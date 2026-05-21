@@ -85,7 +85,7 @@ public class ResearchSerializer {
         int meta = tag.getInteger("Meta");
 
         // Восстанавливаем NBT предмета, если оно было
-        NBTTagCompound cleanedNbt = tag.getCompoundTag("CleanedNbt");
+        NBTTagCompound cleanedNbt = tag.getCompoundTag("CleanedNBT");
         if (tag.hasKey("CleanedNBT", Constants.NBT.TAG_COMPOUND)) {
             NBTTagCompound readTag = tag.getCompoundTag("CleanedNBT");
             if (readTag != null && !readTag.hasNoTags()) {
