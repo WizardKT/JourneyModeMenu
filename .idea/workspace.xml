@@ -4,16 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Something">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" afterDir="false" />
+    <list default="true" id="487a171a-70fc-426b-af16-2760a7d85635" name="Changes" comment="- Research info animation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageStateSwitch.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageSyncSingleResearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/CommonProxy.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/CommonProxy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" afterPath="$PROJECT_DIR$/run/config/splash.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-1.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-2.log.gz" afterDir="false" />
@@ -22,17 +23,14 @@
       <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug-5.log.gz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" afterPath="$PROJECT_DIR$/run/logs/latest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" afterPath="$PROJECT_DIR$/run/options.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usercache.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" afterPath="$PROJECT_DIR$/run/usernamecache.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/IResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/IResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchKey.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/CommonProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/CommonProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/give.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/give.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -375,7 +373,7 @@
       <workItem from="1779372221400" duration="8658000" />
       <workItem from="1779462019916" duration="7082000" />
       <workItem from="1779603997516" duration="8218000" />
-      <workItem from="1779626696534" duration="5900000" />
+      <workItem from="1779626696534" duration="20925000" />
     </task>
     <task id="LOCAL-00001" summary="-Added all Java requirements to GitHub">
       <option name="closed" value="true" />
@@ -505,7 +503,15 @@
       <option name="project" value="LOCAL" />
       <updated>1779604284891</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="- Research info animation">
+      <option name="closed" value="true" />
+      <created>1779632662129</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1779632662129</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -538,7 +544,8 @@
     <MESSAGE value="- New research progress tooltip visualization&#10;- New universal error input parameter analyzer" />
     <MESSAGE value="- GUI remake" />
     <MESSAGE value="- Something" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Something" />
+    <MESSAGE value="- Research info animation" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Research info animation" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

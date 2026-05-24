@@ -4,6 +4,8 @@ import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.config.ConfigMain;
+import me.wizicl.journeymode.network.MessageSyncSingleResearch;
+import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -68,7 +70,7 @@ public class GuiResearchContainer extends Container{
 
             @Override
             public void putStack(ItemStack stack) {
-                // Проверяем настройку конфига И наш внутренний флаг шифта
+                // Проверяем настройку конфига и внутренний флаг шифта
                 if (!stack.isEmpty() && ConfigMain.easy_research_shift && isShiftPressedRightNow) {
                     EntityPlayer player = GuiResearchContainer.this.player;
                     IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
@@ -76,7 +78,18 @@ public class GuiResearchContainer extends Container{
 
                     if (cap != null) {
                         if (!player.world.isRemote) {
-                            cap.addResearch(stack, amount);
+                            int added = cap.addResearch(stack, amount);
+
+                            if (added > 0 && player instanceof net.minecraft.entity.player.EntityPlayerMP) {
+                                me.wizicl.journeymode.capabilities.ResearchKey key = new me.wizicl.journeymode.capabilities.ResearchKey(stack);
+                                int newProgress = cap.getResearch(stack);
+
+                                // Шлем клиенту только этот предмет и его цифру прогресса
+                                CommonProxy.NETWORK.sendTo(
+                                        new MessageSyncSingleResearch(key, newProgress),
+                                        (net.minecraft.entity.player.EntityPlayerMP) player
+                                );
+                            }
                         }
 
                         super.putStack(ItemStack.EMPTY);

@@ -41,6 +41,25 @@ public class ResearchKey {
         }
     }
 
+    public ItemStack createItemStack() {
+        // 1. Ищем предмет в регистрах игры по его ResourceLocation
+        net.minecraft.item.Item item = net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS.getValue(this.registryName);
+        // Если по какой-то причине предмет не найден (например, мод удалили), возвращаем пустой стек
+        if (item == null) {
+            return ItemStack.EMPTY;
+        }
+
+        // 2. Создаем стек с количеством 1 и нашей метадатой
+        ItemStack stack = new ItemStack(item, 1, this.meta);
+
+        // 3. Если у нас были сохранены NBT-теги, возвращаем их предмету
+        if (this.cleanedNbt != null) {
+            stack.setTagCompound(this.cleanedNbt.copy()); // .copy() на всякий случай, чтобы не связать ссылки
+        }
+
+        return stack;
+    }
+
     public ResourceLocation getRegistryName() { return registryName; }
     public int getMeta() { return meta; }
     public NBTTagCompound getCleanedNbt() { return cleanedNbt; }
