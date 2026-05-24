@@ -22,9 +22,14 @@ chat.journeymode.tagPrefix=§7-
 chat.journeymode.ignore=§6---------------------------------
 
 gui.journeymode.tooltip=Положи предмет
+gui.journeymode.marquee.success=Изучен предмет: %s:%d в количестве %d
+gui.journeymode.marquee.with_nbt= с нбт: %s
+gui.journeymode.marquee.no_nbt= без нбт
 key.journeymode.open_menu=Открыть меню исследований
 key.categories.journeymode=Journey Mode
+
 
 tooltip.journeymode.researchFull=Полностью изучено ✓
 tooltip.journeymode.research=Изучено:
 tooltip.journeymode.notResearched=Не изучено ✕
+

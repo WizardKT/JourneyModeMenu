@@ -1,6 +1,7 @@
 package me.wizicl.journeymode.client.gui;
 
 import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.config.ConfigMain;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,13 +15,18 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class GuiResearchContainer extends Container{
 
+
     private final EntityPlayer player;
     private final IItemHandler researchInventory;
     private GuiState currentState = GuiState.RESEARCH;
+    private boolean isShiftPressedRightNow = false;
+
     private static final int PLAYER_INV_START = 0;
     private static final int PLAYER_HOTBAR_START = 27;
     private static final int PLAYER_INV_END = 36;
     private static final int RESEARCH_SLOT_INDEX = 36;
+
+
 
     public GuiResearchContainer(InventoryPlayer playerInv) {
 
@@ -62,7 +68,8 @@ public class GuiResearchContainer extends Container{
 
             @Override
             public void putStack(ItemStack stack) {
-                if (!stack.isEmpty() && ConfigMain.easy_research_shift) {
+                // Проверяем настройку конфига И наш внутренний флаг шифта
+                if (!stack.isEmpty() && ConfigMain.easy_research_shift && isShiftPressedRightNow) {
                     EntityPlayer player = GuiResearchContainer.this.player;
                     IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
                     int amount = stack.getCount();
@@ -77,6 +84,8 @@ public class GuiResearchContainer extends Container{
                     }
                 }
 
+                // Если шифт не был зажат (предмет принесли мышкой),
+                // или автоизучение выключено — предмет просто ложится в слот
                 super.putStack(stack);
             }
         });
@@ -107,8 +116,11 @@ public class GuiResearchContainer extends Container{
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+        this.isShiftPressedRightNow = true;
+
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
+
         // Проверяем, что слот существует и в нём вообще есть предмет
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
@@ -124,18 +136,27 @@ public class GuiResearchContainer extends Container{
                 slot.onSlotChange(itemstack1, itemstack);
             }
 
-            if (index == RESEARCH_SLOT_INDEX) {
-                // Пытаемся переместить предмет из слота исследования в инвентарь игрока
-                if (!this.mergeItemStack(itemstack1, PLAYER_INV_START, PLAYER_INV_END, true)) {
-                    return ItemStack.EMPTY; // Если инвентарь забит, ничего не делаем
-                }
-                slot.onSlotChange(itemstack1, itemstack);
-            }
-
             /// === СИТУАЦИЯ Б: Игрок кликнул по своему ИНВЕНТАРЮ / ХОТБАРУ ===
             else {
                 // Если сейчас открыто окно исследований, пытаемся засунуть предмет в слот исследования
                 if (this.currentState == GuiState.RESEARCH) {
+
+                    // Ловим момент ДО того, как майнкрафт уменьшит или переместит стек
+                    if (playerIn.world.isRemote) {
+                        net.minecraft.client.gui.GuiScreen currentScreen = net.minecraft.client.Minecraft.getMinecraft().currentScreen;
+
+                        if (currentScreen instanceof GuiResearch) {
+                            GuiResearch gui = (GuiResearch) currentScreen;
+
+                            // Создаем ключ из предмета, по которому кликнули, и берем его количество
+                            ResearchKey key = new ResearchKey(itemstack1);
+                            int amount = itemstack1.getCount();
+
+                            // Запускаем бегущую строку в GUI!
+                            gui.updateResearchLog(key, amount);
+                        }
+                    }
+
                     if (!this.mergeItemStack(itemstack1, RESEARCH_SLOT_INDEX, RESEARCH_SLOT_INDEX + 1, false)) {
 
                         // Если слот исследования уже занят — перекидываем между Хотбаром и Инвентарем
@@ -152,7 +173,6 @@ public class GuiResearchContainer extends Container{
                                 return ItemStack.EMPTY;
                             }
                         }
-
                     }
                 }
             }
@@ -176,6 +196,7 @@ public class GuiResearchContainer extends Container{
             slot.onTake(playerIn, itemstack1);
         }
 
+        this.isShiftPressedRightNow = false;
         return itemstack;
     }
 

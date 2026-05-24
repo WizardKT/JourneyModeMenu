@@ -22,6 +22,9 @@ chat.journeymode.tagPrefix=§7-
 chat.journeymode.ignore=§6---------------------------------
 
 gui.journeymode.tooltip=Place item
+gui.journeymode.marquee.success=Researched item: %s:%d in amount %d
+gui.journeymode.marquee.with_nbt= with nbt: %s
+gui.journeymode.marquee.no_nbt= without nbt
 key.journeymode.open_menu=Open research menu
 key.categories.journeymode=Journey Mode
 

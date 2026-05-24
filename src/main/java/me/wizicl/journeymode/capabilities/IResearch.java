@@ -17,6 +17,7 @@ public interface IResearch {
     // На всякий случай
     Map<ResearchKey, Integer> getReadOnlyMap();
 
+    // Стирание информации
     void clear();
     void remove(ItemStack stack);
 
