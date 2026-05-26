@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: MF1-12-2MSM
-Implementation-Version: 1.7.0
+Implementation-Version: 2.0.0
 Specification-Vendor: examplemodsareus
 Specification-Title: examplemod
-Implementation-Timestamp: 2026-05-21T23:20:22+0700
+Implementation-Timestamp: 2026-05-27T01:54:55+0700
 Specification-Version: 1
 Implementation-Vendor: examplemodsareus
 

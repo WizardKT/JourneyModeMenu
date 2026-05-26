@@ -88,7 +88,6 @@ public class MessageSyncResearch implements IMessage {
         @Override
         public IMessage onMessage(MessageSyncResearch message, MessageContext ctx) {
             JourneyMode.proxy.handleSyncResearch(message);
-            Minecraft.getMinecraft().currentScreen.initGui();
             return null;
         }
     }
