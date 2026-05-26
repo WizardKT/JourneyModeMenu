@@ -1,15 +1,14 @@
 package me.wizicl.journeymode.init;
 
-import me.wizicl.journeymode.client.gui.GuiResearch;
 import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.Research;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
-import me.wizicl.journeymode.client.gui.GuiResearchContainer;
 import me.wizicl.journeymode.network.MessageOpenResearchGui;
 import me.wizicl.journeymode.network.MessageSyncResearch;
+import me.wizicl.journeymode.network.MessageSyncSingleResearch;
 import me.wizicl.journeymode.proxy.ClientProxy;
 import me.wizicl.journeymode.proxy.CommonProxy;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -20,7 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
-// Регистрируем наши предметы в Майнкрафте
+// Регистрируем наши данные в Майнкрафте
 @Mod.EventBusSubscriber(modid = JourneyMode.MODID)
 public class RegHandler {
 
@@ -35,38 +34,49 @@ public class RegHandler {
     /// Выдача капы игроку если тот умер
     @SubscribeEvent
     public static void onPlayerClone(PlayerEvent.Clone event) {
-        EntityPlayer oldplayer = event.getOriginal();
-        EntityPlayer newplayer = event.getEntityPlayer();
+        if (event.isWasDeath()) {
+            EntityPlayer oldPlayer = event.getOriginal();
+            EntityPlayer newPlayer = event.getEntityPlayer();
 
-        IResearch oldCap = oldplayer.getCapability(ResearchProvider.RESEARCH, null);
-        IResearch newCap = newplayer.getCapability(ResearchProvider.RESEARCH, null);
+            IResearch oldCap = oldPlayer.getCapability(ResearchProvider.RESEARCH, null);
+            IResearch newCap = newPlayer.getCapability(ResearchProvider.RESEARCH, null);
 
-        if (oldplayer != null && newplayer != null) {
-            newCap.getReadOnlyMap().putAll(oldCap.getReadOnlyMap());
+            if (oldCap instanceof Research && newCap instanceof Research) {
+                ((Research) newCap).refreshFromServer(oldCap.getReadOnlyMap());
+            }
         }
-
-        // Создаём переменную игрока и капы
-        EntityPlayer player = event.getEntityPlayer();
-        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-        // Отправляем игроку пакет данных
-        CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
     }
 
-    /// Выдача капы игроку который зашёл на сервер в МП
+    @SubscribeEvent
+    public static void onPlayerRespawn(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerRespawnEvent event) {
+        if (!event.player.world.isRemote && event.player instanceof EntityPlayerMP) {
+            EntityPlayer player = event.player;
+            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+            if (cap != null) {
+                CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerChangedDimension(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (!event.player.world.isRemote && event.player instanceof EntityPlayerMP) {
+            EntityPlayer player = event.player;
+            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+            if (cap != null) {
+                CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
+                System.out.println("SERVER-SIDE: Игрок сменил измерение. Пакет синхронизации отправлен!");
+            }
+        }
+    }
+
+
     @SubscribeEvent
     public static void onPlayerLogin(net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent event) {
 
-        // Создаём переменную игрока
         EntityPlayer player = event.player;
-
-        // Если это сервер
         if (!player.world.isRemote) {
-
-            // Создаём переменную капы
             IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-            // Отправляем игроку пакет данных
             CommonProxy.NETWORK.sendTo(new MessageSyncResearch(cap.getReadOnlyMap()), (EntityPlayerMP) player);
         }
     }

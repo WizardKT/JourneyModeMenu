@@ -1,7 +1,7 @@
 package me.wizicl.journeymode.util;
 
-import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.IResearch;
+import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.config.ConfigMain;
 import me.wizicl.journeymode.network.MessageSyncResearch;
@@ -9,9 +9,14 @@ import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 public class JourneyUtils {
+
+    public static int getRequiredAmount(ResearchKey key) {
+        ItemStack stack = key.createItemStack();
+        if (stack.isEmpty()) return 0;
+        return getRequiredAmount(stack);
+    }
 
     /// Сколько надо на изучение предмета
     public static int getRequiredAmount(ItemStack stack) {

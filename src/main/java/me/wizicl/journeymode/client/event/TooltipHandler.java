@@ -31,15 +31,10 @@ public class TooltipHandler {
 
         /// === Основная часть системы тултипов отображения ===
 
-        // -- Переменные --
-
         int meta = stack.getMetadata();
         List<String> tooltip = event.getToolTip();
-
         int currentResearched = cap.getResearch(stack);
         int maxRequired = JourneyUtils.getRequiredAmount(stack);
-
-        // -- Вывод тултипов --
 
         if (currentResearched >= maxRequired) {
             TextComponentTranslation text = new TextComponentTranslation("tooltip.journeymode.researchFull");
@@ -54,6 +49,5 @@ public class TooltipHandler {
                 text.getStyle().setColor(TextFormatting.RED);
                 tooltip.add(text.getFormattedText() + TextFormatting.DARK_GRAY + " (" + TextFormatting.AQUA + "0" + TextFormatting.DARK_GRAY + " / " + maxRequired + ")");
         }
-
     }
 }

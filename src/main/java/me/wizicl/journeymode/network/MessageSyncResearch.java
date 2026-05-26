@@ -3,6 +3,7 @@ package me.wizicl.journeymode.network;
 import io.netty.buffer.ByteBuf;
 import me.wizicl.journeymode.JourneyMode;
 import me.wizicl.journeymode.capabilities.ResearchKey;
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.ResourceLocation;
@@ -83,12 +84,11 @@ public class MessageSyncResearch implements IMessage {
         }
     }
 
-
-    /// Обработчик пакетов данных
     public static class Handler implements IMessageHandler<MessageSyncResearch, IMessage> {
         @Override
         public IMessage onMessage(MessageSyncResearch message, MessageContext ctx) {
             JourneyMode.proxy.handleSyncResearch(message);
+            Minecraft.getMinecraft().currentScreen.initGui();
             return null;
         }
     }

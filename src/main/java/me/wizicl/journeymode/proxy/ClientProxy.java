@@ -2,14 +2,20 @@ package me.wizicl.journeymode.proxy;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
+import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.client.event.TooltipHandler;
-import me.wizicl.journeymode.config.ConfigMain;
+import me.wizicl.journeymode.client.gui.GuiResearch;
 import me.wizicl.journeymode.network.MessageSyncResearch;
 import me.wizicl.journeymode.network.MessageSyncSingleResearch;
+import me.wizicl.journeymode.util.JourneyUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -17,10 +23,19 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Keyboard;
 
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 @Mod.EventBusSubscriber(Side.CLIENT)
 public class ClientProxy extends CommonProxy {
 
     public static KeyBinding keyBindOpenGui;
+
+    public static final Set<ResearchKey> CACHED_UNLOCKED_ITEMS = new HashSet<>();
+    public static void clearCache() {
+        CACHED_UNLOCKED_ITEMS.clear();
+    }
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
@@ -37,7 +52,7 @@ public class ClientProxy extends CommonProxy {
                 "key.categories.journeymode"
         );
         ClientRegistry.registerKeyBinding(keyBindOpenGui);
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new TooltipHandler());
+        MinecraftForge.EVENT_BUS.register(new TooltipHandler());
     }
 
     @Override
@@ -49,8 +64,18 @@ public class ClientProxy extends CommonProxy {
                 IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
                 if (cap instanceof Research) {
                     ((Research) cap).refreshFromServer(message.data);
+                    CACHED_UNLOCKED_ITEMS.clear();
+                    for (Map.Entry<ResearchKey, Integer> entry : message.data.entrySet()) {
+                        ItemStack stack = entry.getKey().createItemStack();
+                        if (stack.isEmpty()) continue;
 
-                    System.out.println("CLIENT-SIDE: Данные исследований успешно синхронизированы! Размер: " + message.data.size());
+                        int required = JourneyUtils.getRequiredAmount(stack);
+                        if (entry.getValue() >= required) {
+                            ResearchKey key = entry.getKey();
+                            CACHED_UNLOCKED_ITEMS.add(key);
+                        }
+                    }
+                    System.out.println("CLIENT-SIDE: Данные исследований синхронизированы! Кэш предметов готов. Размер: " + CACHED_UNLOCKED_ITEMS.size());
                 }
             }
         });
@@ -58,40 +83,34 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void handleSyncSingleResearch(MessageSyncSingleResearch message) {
-        net.minecraft.client.Minecraft mc = net.minecraft.client.Minecraft.getMinecraft();
+        Minecraft mc = Minecraft.getMinecraft();
 
-        // Используем костыль ваниллы, чтобы выполнить код в основном потоке клиента
+        // Используем планировщик ваниллы для безопасного выполнения в основном потоке клиента
         mc.addScheduledTask(() -> {
-            net.minecraft.entity.player.EntityPlayer player = mc.player;
-            if (player != null) {
-                // 1. Достаем клиентскую капу исследований
-                me.wizicl.journeymode.capabilities.IResearch cap = player.getCapability(
-                        me.wizicl.journeymode.capabilities.ResearchProvider.RESEARCH, null
-                );
+            EntityPlayer player = mc.player;
+            if (player == null) return;
 
-                if (cap instanceof me.wizicl.journeymode.capabilities.Research) {
+            // Достаем клиентскую капу исследований
+            IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
+            if (cap instanceof Research) {
 
-                    net.minecraft.item.ItemStack dummyStack = new net.minecraft.item.ItemStack(
-                            net.minecraft.item.Item.REGISTRY.getObject(message.key.getRegistryName()),
-                            1,
-                            message.key.getMeta()
-                    );
-                    if (message.key.getCleanedNbt() != null) {
-                        dummyStack.setTagCompound(message.key.getCleanedNbt().copy());
-                    }
+                ItemStack dummyStack = message.key.createItemStack();
+                if (dummyStack.isEmpty()) return;
 
-                    // Обновляем прогресс ТОЛЬКО для этого предмета в клиентской капе
-                    cap.setResearch(dummyStack, message.progress);
+                // ОБНОВЛЯЕМ КАПУ ВСЕГДА. Для тултипов нужен любой прогресс (даже 1 / 50).
+                cap.setResearch(dummyStack, message.progress);
+                int required = JourneyUtils.getRequiredAmount(dummyStack);
 
-                    // 2. Если у игрока прямо сейчас открыт интерфейс GuiResearch,
-                    // принудительно заставляем его обновить лог и запустить бегущую строку
-                    if (mc.currentScreen instanceof me.wizicl.journeymode.client.gui.GuiResearch) {
-                        me.wizicl.journeymode.client.gui.GuiResearch gui = (me.wizicl.journeymode.client.gui.GuiResearch) mc.currentScreen;
+                // Логика ПОЛНОГО изучения
+                if (message.progress >= required) {
+                    CACHED_UNLOCKED_ITEMS.add(message.key);
+                    mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+                }
 
-                        // Вызываем метод, который бросит marqueeTimer в 0
-                        // и запустит строку с самого начала с новыми данными
-                        gui.updateResearchLog(message.key, message.progress);
-                    }
+                // Динамически обновляем интерфейс, если у игрока прямо сейчас открыта книга
+                if (mc.currentScreen instanceof GuiResearch) {
+                    GuiResearch gui = (GuiResearch) mc.currentScreen;
+                    gui.updateResearchLog(message.key, message.progress);
                 }
             }
         });

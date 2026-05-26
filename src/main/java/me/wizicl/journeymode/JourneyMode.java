@@ -2,10 +2,7 @@ package me.wizicl.journeymode;
 
 import me.wizicl.journeymode.capabilities.IResearch;
 import me.wizicl.journeymode.capabilities.Research;
-import me.wizicl.journeymode.client.gui.GuiHandler;
 import me.wizicl.journeymode.command.CommandJourney;
-import me.wizicl.journeymode.network.MessageOpenResearchGui;
-import me.wizicl.journeymode.network.MessageRequestResearch;
 import me.wizicl.journeymode.proxy.CommonProxy;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -17,12 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.Logger;
-
-import static javax.swing.text.html.parser.DTDConstants.ID;
 
 //Айди мода, его название и его версия, а так же версия майнкрафта
 @Mod(modid = JourneyMode.MODID, name = JourneyMode.NAME, version = JourneyMode.VERSION, acceptedMinecraftVersions = JourneyMode.MC_VERSION)

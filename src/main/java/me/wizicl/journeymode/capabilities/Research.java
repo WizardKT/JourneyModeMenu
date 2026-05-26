@@ -1,12 +1,8 @@
 package me.wizicl.journeymode.capabilities;
 
 import me.wizicl.journeymode.util.JourneyUtils;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -53,8 +49,8 @@ public class Research implements IResearch {
     public boolean isResearched(ItemStack stack) {
         if (stack.isEmpty()) return false;
 
-        int requared = getRequiredAmount(stack);
-        return getResearch(stack) >= requared;
+        int required = getRequiredAmount(stack);
+        return getResearch(stack) >= required;
     }
 
     @Override
