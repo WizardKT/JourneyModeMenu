@@ -31,6 +31,7 @@ import java.util.Set;
 public class ClientProxy extends CommonProxy {
 
     public static KeyBinding keyBindOpenGui;
+    public static KeyBinding keyBindDelItem;
 
     public static final Set<ResearchKey> CACHED_UNLOCKED_ITEMS = new HashSet<>();
     public static void clearCache() {
@@ -51,7 +52,15 @@ public class ClientProxy extends CommonProxy {
                 Keyboard.KEY_J,
                 "key.categories.journeymode"
         );
+
+        keyBindDelItem = new KeyBinding(
+                "key.journeymode.del_item",
+                Keyboard.KEY_DELETE,
+                "key.categories.journeymode"
+        );
+
         ClientRegistry.registerKeyBinding(keyBindOpenGui);
+        ClientRegistry.registerKeyBinding(keyBindDelItem);
         MinecraftForge.EVENT_BUS.register(new TooltipHandler());
     }
 
@@ -105,6 +114,8 @@ public class ClientProxy extends CommonProxy {
                 if (message.progress >= required) {
                     CACHED_UNLOCKED_ITEMS.add(message.key);
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F));
+                } else if (message.progress == 0){
+                    CACHED_UNLOCKED_ITEMS.remove(message.key);
                 }
 
                 // Динамически обновляем интерфейс, если у игрока прямо сейчас открыта книга

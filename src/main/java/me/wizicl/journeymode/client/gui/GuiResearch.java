@@ -19,6 +19,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.input.Mouse;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -323,6 +324,17 @@ public class GuiResearch extends GuiContainer {
                 }
             }
         }
+    }
+
+    @Override
+    public void keyTyped(char typedChar, int keyCode) throws IOException {
+        if (GuiScreen.isCtrlKeyDown() && keyCode == ClientProxy.keyBindDelItem.getKeyCode()) {
+            if (this.currentState == GuiState.GIVE && hoveredCatalogStack != null) {
+                NETWORK.sendToServer(new MessageGuiAction(hoveredCatalogStack));
+                return;
+            }
+        }
+        super.keyTyped(typedChar, keyCode);
     }
 
     private void playButtonPressSound() {

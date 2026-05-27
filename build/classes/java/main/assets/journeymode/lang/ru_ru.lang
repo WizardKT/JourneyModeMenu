@@ -26,6 +26,7 @@ gui.journeymode.marquee.success=Изучен предмет: %s:%d в колич
 gui.journeymode.marquee.with_nbt= с нбт: %s
 gui.journeymode.marquee.no_nbt= без нбт
 key.journeymode.open_menu=Открыть меню исследований
+key.journeymode.del_item=Удалить предмет из меню выдачи
 key.categories.journeymode=Journey Mode
 
 

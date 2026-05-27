@@ -6,6 +6,7 @@ import me.wizicl.journeymode.capabilities.ResearchKey;
 import me.wizicl.journeymode.capabilities.ResearchProvider;
 import me.wizicl.journeymode.client.gui.GuiResearchContainer;
 import me.wizicl.journeymode.client.gui.GuiState;
+import me.wizicl.journeymode.proxy.ClientProxy;
 import me.wizicl.journeymode.proxy.CommonProxy;
 import me.wizicl.journeymode.util.JourneyUtils;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -23,12 +24,11 @@ public class MessageGuiAction implements IMessage {
     public enum ActionType {
         SWITCH_TAB,
         DO_RESEARCH,
-        GIVE_ITEM
+        GIVE_ITEM,
+        DEL_ITEM
     }
 
     private ActionType actionType;
-
-    // Переменные для разных типов действий (заполняются по необходимости)
     private int tabId;
     private ItemStack requestedStack;
     private int clickMode;
@@ -54,6 +54,12 @@ public class MessageGuiAction implements IMessage {
         this.clickMode = clickMode;
     }
 
+    // Конструкция для DEL_ITEM
+    public MessageGuiAction(ItemStack requestedStack) {
+        this.actionType = ActionType.DEL_ITEM;
+        this.requestedStack = requestedStack.copy();
+    }
+
     @Override
     public void fromBytes(ByteBuf buf) {
         PacketBuffer buffer = new PacketBuffer(buf);
@@ -67,10 +73,14 @@ public class MessageGuiAction implements IMessage {
 
             case DO_RESEARCH:
                 break;
-
             case GIVE_ITEM:
+
                 this.requestedStack = ByteBufUtils.readItemStack(buffer);
                 this.clickMode = buffer.readInt();
+                break;
+            case DEL_ITEM:
+
+                this.requestedStack = ByteBufUtils.readItemStack(buffer);
                 break;
         }
     }
@@ -92,6 +102,9 @@ public class MessageGuiAction implements IMessage {
             case GIVE_ITEM:
                 ByteBufUtils.writeItemStack(buffer, this.requestedStack);
                 buffer.writeInt(this.clickMode);
+                break;
+            case DEL_ITEM:
+                ByteBufUtils.writeItemStack(buffer, this.requestedStack);
                 break;
         }
     }
@@ -193,7 +206,22 @@ public class MessageGuiAction implements IMessage {
                         // Синхронизируем изменения инвентаря с клиентом
                         player.sendContainerToPlayer(container);
                         break;
-                }
+                    case DEL_ITEM:
+                        if (container.getCurrentState() != GuiState.GIVE) return;
+                        if (message.requestedStack.isEmpty()) return;
+                        IResearch delCap = player.getCapability(ResearchProvider.RESEARCH, null);
+                        if (delCap != null) {
+                            ItemStack stackToDel = message.requestedStack;
+                            if (delCap.remove(stackToDel)) {
+                                ResearchKey keyToDel = new ResearchKey(stackToDel);
+                                CommonProxy.NETWORK.sendTo(new MessageSyncSingleResearch(keyToDel, 0), player);
+                                container.detectAndSendChanges();
+                            }
+
+                        }
+
+                        break;
+                    }
             });
             return null;
         }

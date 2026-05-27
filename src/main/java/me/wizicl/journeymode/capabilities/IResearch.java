@@ -19,7 +19,7 @@ public interface IResearch {
 
     // Стирание информации
     void clear();
-    void remove(ItemStack stack);
+    boolean remove(ItemStack stack);
 
     // Инвентарь исследовательского слота
     IItemHandler getResearchInventory();

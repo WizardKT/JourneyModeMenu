@@ -1,68 +1,83 @@
 package me.wizicl.journeymode.capabilities;
 
 import me.wizicl.journeymode.config.ConfigNBT;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 import java.util.Objects;
 
-public class ResearchKey {
+public final class ResearchKey {
     private final ResourceLocation registryName;
     private final int meta;
     private final NBTTagCompound cleanedNbt;
 
-    public ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound cleanedNbt) {
+    public ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound rawNbt) {
         this.registryName = registryName;
         this.meta = meta;
-        this.cleanedNbt = (cleanedNbt == null || cleanedNbt.hasNoTags()) ? null : cleanedNbt;
+        this.cleanedNbt = isolateAndCleanNBT(rawNbt);
     }
 
     public ResearchKey(ItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
+            this.registryName = new ResourceLocation("minecraft", "air");
+            this.meta = 0;
+            this.cleanedNbt = null;
+            return;
+        }
+
         this.registryName = stack.getItem().getRegistryName();
         this.meta = stack.getMetadata();
 
-        if (stack.hasTagCompound()) {
+        this.cleanedNbt = stack.hasTagCompound() ? isolateAndCleanNBT(stack.getTagCompound()) : null;
+    }
 
-            // Копия, чтобы не испортить оригинал
-            NBTTagCompound nbtCopy = stack.getTagCompound().copy();
+    private static NBTTagCompound isolateAndCleanNBT(NBTTagCompound sourceNbt) {
+        if (sourceNbt == null || sourceNbt.hasNoTags()) {
+            return null;
+        }
 
-            // Удаляем NBT находящиеся в ЧС
+        NBTTagCompound isolatedCopy = sourceNbt.copy();
+
+        isolatedCopy.removeTag("ForgeCaps");
+
+        if (ConfigNBT.IGNORED_TAGS != null) {
             for (String tagToRemove : ConfigNBT.IGNORED_TAGS) {
-                if (nbtCopy.hasKey(tagToRemove)) {
-                    nbtCopy.removeTag(tagToRemove);
+                if (isolatedCopy.hasKey(tagToRemove)) {
+                    isolatedCopy.removeTag(tagToRemove);
                 }
             }
-
-            // Если после проверки NBT остался пустым - заменяем null
-            this.cleanedNbt = (nbtCopy == null || nbtCopy.hasNoTags()) ? null : nbtCopy;
-        } else {
-            this.cleanedNbt = null;
         }
+
+        return isolatedCopy.hasNoTags() ? null : isolatedCopy;
+    }
+
+    public NBTTagCompound getCleanedNbt() {
+        return this.cleanedNbt == null ? null : this.cleanedNbt.copy();
+    }
+
+    public ResourceLocation getRegistryName() {
+        return this.registryName;
+    }
+
+    public int getMeta() {
+        return this.meta;
     }
 
     public ItemStack createItemStack() {
-        // 1. Ищем предмет в регистрах игры по его ResourceLocation
-        net.minecraft.item.Item item = net.minecraftforge.fml.common.registry.ForgeRegistries.ITEMS.getValue(this.registryName);
-        // Если по какой-то причине предмет не найден (например, мод удалили), возвращаем пустой стек
+        Item item = ForgeRegistries.ITEMS.getValue(this.registryName);
         if (item == null) {
             return ItemStack.EMPTY;
         }
 
-        // 2. Создаем стек с количеством 1 и нашей метадатой
         ItemStack stack = new ItemStack(item, 1, this.meta);
-
-        // 3. Если у нас были сохранены NBT-теги, возвращаем их предмету
         if (this.cleanedNbt != null) {
-            stack.setTagCompound(this.cleanedNbt.copy()); // .copy() на всякий случай, чтобы не связать ссылки
+            stack.setTagCompound(this.cleanedNbt.copy());
         }
-
         return stack;
     }
-
-    public ResourceLocation getRegistryName() { return registryName; }
-    public int getMeta() { return meta; }
-    public NBTTagCompound getCleanedNbt() { return cleanedNbt; }
 
     @Override
     public boolean equals(Object o) {
@@ -70,13 +85,13 @@ public class ResearchKey {
         if (o == null || getClass() != o.getClass()) return false;
         ResearchKey that = (ResearchKey) o;
 
-        return meta == that.meta &&
-                Objects.equals(registryName, that.registryName) &&
-                Objects.equals(cleanedNbt, that.cleanedNbt);
+        return this.meta == that.meta &&
+                Objects.equals(this.registryName, that.registryName) &&
+                Objects.equals(this.cleanedNbt, that.cleanedNbt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(registryName, meta, cleanedNbt);
+        return Objects.hash(this.registryName, this.meta, this.cleanedNbt);
     }
 }

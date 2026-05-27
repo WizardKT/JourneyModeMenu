@@ -27,9 +27,7 @@ public class Research implements IResearch {
         }
 
         int allowedToAdd = Math.min(amount, maxRequired - current);
-
         researchMap.put(key, current + allowedToAdd);
-
         return allowedToAdd;
     }
 
@@ -64,8 +62,9 @@ public class Research implements IResearch {
     }
 
     @Override
-    public void remove(ItemStack stack) {
+    public boolean remove(ItemStack stack) {
         researchMap.remove(new ResearchKey(stack));
+        return true;
     }
 
     public int getRequiredAmount(ItemStack stack) {
