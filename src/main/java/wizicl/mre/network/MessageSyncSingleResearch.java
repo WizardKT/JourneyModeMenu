@@ -1,7 +1,7 @@
 package wizicl.mre.network;
 
 import io.netty.buffer.ByteBuf;
-import wizicl.mre.MRE;
+import wizicl.mre.MatterReplicationEngine;
 import wizicl.mre.capabilities.ResearchKey;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
@@ -64,7 +64,7 @@ public class MessageSyncSingleResearch implements IMessage {
     public static class Handler implements IMessageHandler<MessageSyncSingleResearch, IMessage> {
         @Override
         public IMessage onMessage(MessageSyncSingleResearch message, MessageContext ctx) {
-            MRE.proxy.handleSyncSingleResearch(message);
+            MatterReplicationEngine.proxy.handleSyncSingleResearch(message);
             return null;
         }
     }
