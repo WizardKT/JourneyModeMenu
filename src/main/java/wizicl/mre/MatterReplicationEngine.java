@@ -37,8 +37,8 @@ public class MatterReplicationEngine {
     public static Capability<IResearch> RESEARCH = null;
 
     @SidedProxy(
-            clientSide = "wizicl.MatterReplicationEngine.proxy.ClientProxy",
-            serverSide = "wizicl.MatterReplicationEngine.proxy.CommonProxy"
+            clientSide = "wizicl.mre.proxy.ClientProxy",
+            serverSide = "wizicl.mre.proxy.CommonProxy"
     )
     public static CommonProxy proxy;
 

@@ -9,9 +9,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncSingleResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncSingleResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/resource-templates/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource-templates/mcmod.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/resource-templates/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource-templates/pack.mcmeta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,7 +326,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780602867851</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="3.0.0 #CleanRoom rebuild">
+      <option name="closed" value="true" />
+      <created>1780604183317</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1780604183317</updated>
+    </task>
+    <task id="LOCAL-00005" summary="3.0.0 #CleanRoom rebuild">
+      <option name="closed" value="true" />
+      <created>1780604188157</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1780604188157</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
