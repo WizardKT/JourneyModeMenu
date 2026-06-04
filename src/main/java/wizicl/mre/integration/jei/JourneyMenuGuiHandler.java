@@ -1,8 +1,8 @@
-package wizicl.mre.jei;
+package wizicl.mre.integration.jei;
 
 import mezz.jei.api.gui.IAdvancedGuiHandler;
-import wizicl.mre.gui.view.GuiResearch;
-import wizicl.mre.gui.controller.GuiResearchContainer;
+import wizicl.mre.client.gui.view.GuiResearch;
+import wizicl.mre.client.gui.controller.GuiResearchContainer;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package wizicl.mre.init;
 
-import wizicl.mre.MRE;
+import wizicl.mre.Reference;
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.Research;
 import wizicl.mre.capabilities.ResearchProvider;
@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 
 // Регистрируем наши данные в Майнкрафте
-@Mod.EventBusSubscriber(modid = MRE.MODID)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID)
 public class RegHandler {
 
     /// Регистрации капы на игроке

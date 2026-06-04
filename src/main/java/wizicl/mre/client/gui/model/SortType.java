@@ -1,4 +1,4 @@
-package wizicl.mre.gui.model;
+package wizicl.mre.client.gui.model;
 
 import net.minecraft.item.ItemStack;
 

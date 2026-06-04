@@ -1,6 +1,6 @@
 package wizicl.mre.autoresearch;
 
-import wizicl.mre.MRE;
+import wizicl.mre.Reference;
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.ResearchProvider;
 import wizicl.mre.config.ConfigMain;
@@ -27,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = MODID, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Reference.MOD_ID, value = Side.CLIENT)
 public class ResultAutoResearch {
 
     @SideOnly(Side.CLIENT)

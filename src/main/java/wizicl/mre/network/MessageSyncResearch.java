@@ -1,7 +1,7 @@
 package wizicl.mre.network;
 
 import io.netty.buffer.ByteBuf;
-import wizicl.mre.MRE;
+import wizicl.mre;
 import wizicl.mre.capabilities.ResearchKey;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;

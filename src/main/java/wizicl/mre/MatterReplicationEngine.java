@@ -1,10 +1,10 @@
 package wizicl.mre;
 
+import wizicl.mre.Reference;
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.Research;
 import wizicl.mre.command.CommandJourney;
 import wizicl.mre.proxy.CommonProxy;
-import wizicl.mre.Reference;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;

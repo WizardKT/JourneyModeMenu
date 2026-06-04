@@ -1,9 +1,9 @@
-package wizicl.mre.gui.controller;
+package wizicl.mre.client.gui.controller;
 
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.ResearchKey;
 import wizicl.mre.capabilities.ResearchProvider;
-import wizicl.mre.gui.model.GuiState;
+import wizicl.mre.client.gui.model.GuiState;
 import wizicl.mre.config.ConfigMain;
 import wizicl.mre.network.MessageSyncSingleResearch;
 import wizicl.mre.proxy.CommonProxy;

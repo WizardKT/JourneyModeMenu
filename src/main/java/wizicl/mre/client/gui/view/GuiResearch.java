@@ -1,18 +1,18 @@
-package wizicl.mre.gui.view;
+package wizicl.mre.client.gui.view;
 
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.ResearchKey;
 import wizicl.mre.capabilities.ResearchProvider;
-import wizicl.mre.gui.controller.GuiResearchContainer;
-import wizicl.mre.gui.controller.JellyBarMath;
-import wizicl.mre.gui.controller.JellyMesh2D;
-import wizicl.mre.gui.model.GuiState;
-import wizicl.mre.gui.model.SortType;
+import wizicl.mre.client.gui.controller.GuiResearchContainer;
+import wizicl.mre.client.gui.controller.JellyBarMath;
+import wizicl.mre.client.gui.controller.JellyMesh2D;
+import wizicl.mre.client.gui.model.GuiState;
+import wizicl.mre.client.gui.model.SortType;
 import wizicl.mre.metaprogress.JourneyLeveling;
 import wizicl.mre.network.MessageGuiAction;
 import wizicl.mre.proxy.ClientProxy;
 import wizicl.mre.util.JourneyUtils;
-import wizicl.mre.gui.controller.SearchHelper;
+import wizicl.mre.client.gui.controller.SearchHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

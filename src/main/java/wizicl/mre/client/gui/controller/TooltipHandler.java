@@ -1,4 +1,4 @@
-package wizicl.mre.gui.controller;
+package wizicl.mre.client.gui.controller;
 
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.ResearchKey;

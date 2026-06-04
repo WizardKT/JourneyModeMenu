@@ -1,6 +1,6 @@
-package wizicl.mre.gui.controller;
+package wizicl.mre.client.gui.controller;
 
-import wizicl.mre.gui.view.GuiResearch;
+import wizicl.mre.client.gui.view.GuiResearch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;

@@ -1,4 +1,4 @@
-package wizicl.mre.gui.controller;
+package wizicl.mre.client.gui.controller;
 
 public class JellyBarMath {
     private float currentValue = 0f;

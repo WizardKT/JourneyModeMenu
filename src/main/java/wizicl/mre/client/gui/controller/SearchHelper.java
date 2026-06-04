@@ -1,4 +1,4 @@
-package wizicl.mre.gui.controller;
+package wizicl.mre.client.gui.controller;
 
 import org.apache.commons.lang3.StringUtils;
 

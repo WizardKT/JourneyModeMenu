@@ -5,8 +5,9 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import wizicl.mre.Reference;
 
-@Config(modid, name)
+@Config(modid = Reference.MOD_ID, name = "MRE_Main")
 public class ConfigMain {
     @Config.Name("Stack Multiplier")
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")

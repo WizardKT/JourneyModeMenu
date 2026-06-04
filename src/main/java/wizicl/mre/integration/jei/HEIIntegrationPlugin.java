@@ -1,4 +1,4 @@
-package wizicl.mre.jei;
+package wizicl.mre.integration.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;

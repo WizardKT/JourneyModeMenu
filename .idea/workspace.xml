@@ -4,139 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileChanges/last-build.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/annotation-processors.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileContent/fileContent.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/fileHashes.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/fileHashes/resourceHashesCache.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.9/taskHistory/taskHistory.lock" beforeDir="false" />
+    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="3.0.0 #CleanRoom rebuild">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/vcsWorkingDirs/gc.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/JourneyModeMenu.test.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runClient.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/runServer.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CREDITS.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/JourneyModeMenu.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE-Paulscode IBXM Library.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE-Paulscode SoundSystem CodecIBXM.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/en_us.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/mcmod.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/JourneyMode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/IResearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/Research.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/capabilities/ResearchProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/init/RegHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch$Handler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/network/MessageSyncResearch.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/ClientProxy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/me/wizicl/journeymode/proxy/CommonProxy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/pack.mcmeta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/createMcpToSrg/output.tsrg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/createSrgToMcp/output.srg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/downloadMCMeta/version.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/downloadMcpConfig/output.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/extractSrg/output.srg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/OpenAL32.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/OpenAL64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/SAPIWrapper_x64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/SAPIWrapper_x86.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/jinput-dx8.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/jinput-dx8_64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/jinput-raw.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/jinput-raw_64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/jinput-wintab.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/lwjgl.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/natives/lwjgl64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reobfJar/log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reobfJar/output.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/assets/journeymode/lang/en_us.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/assets/journeymode/lang/ru_ru.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/mcmod.info" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/pack.mcmeta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/expandedArchives/forge-1.12.2-14.23.5.2859-inject_src.jar_8241a9315ac86e155a38c9c936582715/net/minecraft/util/math/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/expandedArchives/forge-1.12.2-14.23.5.2859-inject_src.jar_8241a9315ac86e155a38c9c936582715/net/minecraft/util/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/jar/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/changelog.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/config/forge.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/config/forgeChunkLoading.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/config/journeymode_general.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/config/splash.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/crash-reports/crash-2026-05-13_15.09.54-client.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-1.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-2.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-3.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-4.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-5.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-6.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/2026-05-13-7.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug-1.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug-2.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug-3.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug-4.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug-5.log.gz" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/debug.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/logs/latest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/options.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usercache.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/run/usernamecache.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/JourneyMode.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/IResearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/Research.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchKey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/capabilities/ResearchSerializer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/event/TooltipHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiResearchContainer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/client/gui/GuiState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/command/CommandJourney.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/config/ConfigNBT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/init/RegHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageGuiAction.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageOpenResearchGui.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageSyncResearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/network/MessageSyncSingleResearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/protecter/StackValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/ClientProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/proxy/CommonProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/wizicl/journeymode/util/JourneyUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/en_us.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/lang/ru_ru.lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/give.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/journeymode/textures/gui/container/research.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mcmod.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigNBT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigNBT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/GuiHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/GuiHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/GuiResearchContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/GuiResearchContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/JellyBarMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/JellyBarMath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/JellyMesh2D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/JellyMesh2D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/SearchHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/SearchHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/controller/TooltipHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/controller/TooltipHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/model/GuiState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/model/GuiState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/model/SortType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/model/SortType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/gui/view/GuiResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/view/GuiResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/jei/HEIIntegrationPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/HEIIntegrationPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/jei/JourneyMenuGuiHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/JourneyMenuGuiHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageGuiAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageGuiAction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mcmod.info" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/pack.mcmeta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,6 +70,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="blossom" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Matter-Replication-Engine" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -184,6 +84,11 @@
     </system>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -207,28 +112,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Matter-Replication-Engine [generateJavaTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [generateResourceTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [generateTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.2. Run Client.executor": "Run",
+    "Gradle.Matter-Replication-Engine [buildDependents].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateJavaTemplates].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateResourceTemplates].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateTemplates].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
+    "git-widget-placeholder": "CleanRoom",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\java-templates" />
@@ -236,7 +144,7 @@
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.2. Run Client">
+  <component name="RunManager" selected="Gradle.Matter-Replication-Engine [buildDependents]">
     <configuration name="1. Build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -312,6 +220,31 @@
       <GradleCoverageDisabled>false</GradleCoverageDisabled>
       <method v="2" />
     </configuration>
+    <configuration name="Matter-Replication-Engine [buildDependents]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="buildDependents" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Matter-Replication-Engine [generateJavaTemplates]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -364,6 +297,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.Matter-Replication-Engine [buildDependents]" />
         <item itemvalue="Gradle.Matter-Replication-Engine [generateResourceTemplates]" />
         <item itemvalue="Gradle.Matter-Replication-Engine [generateJavaTemplates]" />
       </list>
@@ -385,9 +319,41 @@
       <option name="presentableId" value="Default" />
       <updated>1780598993959</updated>
     </task>
+    <task id="LOCAL-00001" summary="3.0.0 #CleanRoom rebuild">
+      <option name="closed" value="true" />
+      <created>1780602135926</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1780602135926</updated>
+    </task>
+    <task id="LOCAL-00002" summary="3.0.0 #CleanRoom rebuild">
+      <option name="closed" value="true" />
+      <created>1780602156364</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1780602156364</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="3.0.0 #CleanRoom rebuild" />
+    <option name="LAST_COMMIT_MESSAGE" value="3.0.0 #CleanRoom rebuild" />
   </component>
 </project>

@@ -5,13 +5,14 @@ import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import wizicl.mre.Reference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-@Config(modid = "journeymode", name = "journeymode_nbt")
+@Config(modid = Reference.MOD_ID, name = "MRE_NBT")
 public class ConfigNBT {
     @Config.Comment({"A list of NBT tags that will be ignored when researching items.",})
     @Config.Name("Ignored NBT Tags")

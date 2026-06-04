@@ -1,7 +1,7 @@
 package wizicl.mre.proxy;
 
-import wizicl.mre.MRE;
-import wizicl.mre.gui.controller.GuiHandler;
+import wizicl.mre.MatterReplicationEngine;
+import wizicl.mre.client.gui.controller.GuiHandler;
 import wizicl.mre.network.*;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,7 +31,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent e) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(MRE.instance, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(MatterReplicationEngine.instance, new GuiHandler());
     }
     public void postInit(FMLPostInitializationEvent e) {}
 
