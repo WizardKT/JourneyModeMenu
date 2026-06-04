@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.main.iml" filepath="$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.test.iml" filepath="$PROJECT_DIR$/.idea/modules/MF1-12-2MSM.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Matter-Replication-Engine.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Matter-Replication-Engine.main.iml" />
     </modules>
   </component>
 </project>
