@@ -9,6 +9,7 @@ import wizicl.mre.Reference;
 
 @Config(modid = Reference.MOD_ID, name = "MRE_Main")
 public class ConfigMain {
+
     @Config.Name("Stack Multiplier")
     @Config.Comment("How many stacks of a block are needed to fully research it (default 10)")
     public static int costMultiplier = 10;
@@ -35,14 +36,15 @@ public class ConfigMain {
         @Config.Comment("If true, items are consumed when auto-researched. If false, they are just scanned.")
         public boolean consumeItems = false;
     }
+
     // --- Синхронизация настройки в реал тайм ---
 
-    @Mod.EventBusSubscriber(modid = "journeymode")
+    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     private static class EventHandler {
         @SubscribeEvent
         public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals("journeymode")) {
-                ConfigManager.sync("journeymode", Config.Type.INSTANCE);
+            if (event.getModID().equals(Reference.MOD_ID)) {
+                ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
             }
         }
     }

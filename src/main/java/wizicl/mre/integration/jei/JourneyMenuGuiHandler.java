@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 public class JourneyMenuGuiHandler implements IAdvancedGuiHandler<GuiResearch> {
+
     @Override
     public Class<GuiResearch> getGuiContainerClass() {
         return GuiResearch.class;
@@ -17,20 +18,21 @@ public class JourneyMenuGuiHandler implements IAdvancedGuiHandler<GuiResearch> {
     @Override
     @Nullable
     public List<Rectangle> getGuiExtraAreas(GuiResearch guiContainer) {
-        List<Rectangle> areas = new ArrayList<>();
+        // Паттерн-матчинг: проверяем тип слотов инвентаря и сразу создаем переменную 'container'
+        if (guiContainer.inventorySlots instanceof GuiResearchContainer container) {
 
-        if (guiContainer.inventorySlots instanceof GuiResearchContainer) {
-            GuiResearchContainer container = (GuiResearchContainer) guiContainer.inventorySlots;
-
-            // Получаем текущие базовые координаты и размеры GuiContainer
-            int x = guiContainer.getGuiLeft();
-            int y = guiContainer.getGuiTop();
+            var x = guiContainer.getGuiLeft();
+            var y = guiContainer.getGuiTop();
             int width = guiContainer.getXSize();
             int height = guiContainer.getYSize();
-            areas.add(new Rectangle(x, y, width, height));
-            areas.add(new Rectangle(x + 155, y + 16, 56, 80));
+
+            return List.of(
+                    new Rectangle(x, y, width, height),
+                    new Rectangle(x + 155, y + 16, 56, 80)
+            );
         }
-        return areas.isEmpty() ? null : areas;
+
+        return null;
     }
 
     @Override

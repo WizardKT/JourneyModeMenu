@@ -18,61 +18,53 @@ public class MessageSyncResearch implements IMessage {
     public Map<ResearchKey, Integer> data;
     private boolean autoResearchState;
 
-    public boolean getAutoResearchState() {
-        return this.autoResearchState;
-    }
+    // Пустой конструктор для сетевого движка Forge
+    public MessageSyncResearch() {}
 
-    public MessageSyncResearch() {
-    }
-
+    // Основной конструктор для отправки с сервера
     public MessageSyncResearch(Map<ResearchKey, Integer> data, boolean autoResearchState) {
         this.data = data;
         this.autoResearchState = autoResearchState;
     }
 
+    public boolean getAutoResearchState() {
+        return this.autoResearchState;
+    }
 
-    /// Запись данных в байты
+    /// Запись данных в байты (Отправка)
     @Override
     public void toBytes(ByteBuf buf) {
-
-        PacketBuffer buffer = new PacketBuffer(buf);
+        var buffer = new PacketBuffer(buf);
         buffer.writeBoolean(this.autoResearchState);
         buffer.writeInt(data.size());
 
-        // Проходимся по всей карте
-        for (Map.Entry<ResearchKey, Integer> entry : data.entrySet()) {
-            ResearchKey key = entry.getKey();
+        // var превращает обход мапы в сказку
+        for (var entry : data.entrySet()) {
+            var key = entry.getKey();
 
-            // ID предмета
-            buffer.writeResourceLocation(key.getRegistryName());
+            buffer.writeResourceLocation(key.registryName());
+            buffer.writeInt(key.meta());
 
-            // Meta предемета
-            buffer.writeInt(key.getMeta());
-
-            // NBT предмета
-            boolean hasNBT = key.getCleanedNbt() != null;
+            boolean hasNBT = key.cleanedNbt() != null;
             buffer.writeBoolean(hasNBT);
             if (hasNBT) {
-                buffer.writeCompoundTag(key.getCleanedNbt());
+                buffer.writeCompoundTag(key.cleanedNbt());
             }
 
-            // Amount предмета
             buffer.writeInt(entry.getValue());
         }
     }
 
-
-    /// Вытаскивание данных из байтов
     @Override
     public void fromBytes(ByteBuf buf) {
-        PacketBuffer buffer = new PacketBuffer(buf);
-        this.autoResearchState = buf.readBoolean();
-        data = new HashMap<>();
+        var buffer = new PacketBuffer(buf);
+        this.autoResearchState = buffer.readBoolean();
+        this.data = new HashMap<>();
 
         int size = buffer.readInt();
 
         for (int i = 0; i < size; i++) {
-            ResourceLocation id = buffer.readResourceLocation();
+            var id = buffer.readResourceLocation();
             int meta = buffer.readInt();
 
             NBTTagCompound nbt = null;
@@ -80,17 +72,15 @@ public class MessageSyncResearch implements IMessage {
                 try {
                     nbt = buffer.readCompoundTag();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    MatterReplicationEngine.logger.error("Ошибка чтения NBT пакета исследований!", e);
                 }
             }
 
             int value = buffer.readInt();
 
-            ResearchKey key = new ResearchKey(id, meta, nbt);
-            data.put(key, value);
+            this.data.put(new ResearchKey(id, meta, nbt), value);
         }
     }
-
     public static class Handler implements IMessageHandler<MessageSyncResearch, IMessage> {
         @Override
         public IMessage onMessage(MessageSyncResearch message, MessageContext ctx) {

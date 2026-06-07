@@ -4,17 +4,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.common.util.INBTSerializable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ResearchProvider implements ICapabilitySerializable<NBTTagCompound> {
+public class ResearchProvider implements ICapabilityProvider, INBTSerializable<NBTTagCompound> {
 
-    // Экземпляр нашего интерфейса
     @CapabilityInject(IResearch.class)
     public static Capability<IResearch> RESEARCH = null;
 
+    // Инициализируем инстанс по умолчанию
     private final IResearch instance = RESEARCH.getDefaultInstance();
 
     // Проверяем наличие интерфейса
@@ -24,27 +26,29 @@ public class ResearchProvider implements ICapabilitySerializable<NBTTagCompound>
     }
 
     // Берём данные интерфейса
-    @Nullable
     @Override
+    @Nullable
     public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+        // Тернарный оператор в Java 25 работает молниеносно благодаря улучшенному выводу типов дженериков
         return capability == RESEARCH ? RESEARCH.cast(this.instance) : null;
     }
 
     // Задаём данные интерфейса
     @Override
     public NBTTagCompound serializeNBT() {
-        // Проверяем, что наш инстанс — это именно класс Research, у которого есть методы NBT
-        if (this.instance instanceof Research) {
-            return ((Research) this.instance).serializeNBT();
+        // Pattern Matching: проверяем тип и сразу создаем переменную 'research'
+        if (this.instance instanceof Research research) {
+            return research.serializeNBT();
         }
+
         return new NBTTagCompound();
     }
 
     // Удаляем данные интерфейса
     @Override
     public void deserializeNBT(NBTTagCompound nbt) {
-        if (this.instance instanceof Research) {
-            ((Research) this.instance).deserializeNBT(nbt);
+        if (this.instance instanceof Research research) {
+            research.deserializeNBT(nbt);
         }
     }
 }

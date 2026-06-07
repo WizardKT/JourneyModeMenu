@@ -12,22 +12,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Research implements IResearch {
-    private final Map<ResearchKey, Integer> researchMap = new HashMap<>();
 
+    private final Map<ResearchKey, Integer> researchMap = new HashMap<>();
     private final ItemStackHandler researchInventory = new ItemStackHandler(1);
-    private boolean AutoResearchState = false;
+    private boolean autoResearchState = false;
 
     /// --- Управление исследованиями ---
+
     @Override
     public int addResearch(ItemStack stack, int amount) {
         if (stack.isEmpty() || amount <= 0) return 0;
-        ResearchKey key = new ResearchKey(stack);
+
+        var key = new ResearchKey(stack);
         int maxRequired = getRequiredAmount(stack);
         int current = researchMap.getOrDefault(key, 0);
 
-        if (current >= maxRequired) {
-            return 0;
-        }
+        if (current >= maxRequired) return 0;
 
         int allowedToAdd = Math.min(amount, maxRequired - current);
         researchMap.put(key, current + allowedToAdd);
@@ -42,30 +42,30 @@ public class Research implements IResearch {
 
     @Override
     public boolean setAutoResearchState(boolean state) {
-        return this.AutoResearchState = state;
+        return this.autoResearchState = state;
     }
 
     @Override
     public boolean toggleAutoResearchState() {
-        this.AutoResearchState = !this.AutoResearchState;
-        return this.AutoResearchState;
+        this.autoResearchState = !this.autoResearchState;
+        return this.autoResearchState;
     }
 
     /// --- Получение информации ---
-    // Старый метод теперь просто делегирует задачу новому
+
     @Override
     public int getResearch(ItemStack stack) {
         if (stack.isEmpty()) return 0;
 
-        ResourceLocation targetId = stack.getItem().getRegistryName();
+        var targetId = stack.getItem().getRegistryName();
         int targetMeta = stack.getMetadata();
-        NBTTagCompound targetNbt = stack.getTagCompound(); // БЕРЕМ СЫРОЙ, ГРЯЗНЫЙ NBT
+        var targetNbt = stack.getTagCompound(); // Грязный NBT из стака
 
         int bestProgress = 0;
 
         // Перебираем базу данных
-        for (Map.Entry<ResearchKey, Integer> entry : researchMap.entrySet()) {
-            ResearchKey dbKey = entry.getKey();
+        for (var entry : researchMap.entrySet()) {
+            var dbKey = entry.getKey();
 
             // Быстрая проверка: ID и Мета совпадают?
             if (dbKey.getRegistryName().equals(targetId) && dbKey.getMeta() == targetMeta) {
@@ -82,27 +82,21 @@ public class Research implements IResearch {
         return bestProgress;
     }
 
-    // НОВЫЙ МЕТОД: Ищет в мапе напрямую по ключу
     @Override
     public int getResearch(ResearchKey key) {
-        if (key == null) return 0;
-        return researchMap.getOrDefault(key, 0);
+        return key == null ? 0 : researchMap.getOrDefault(key, 0);
     }
 
-    // Старый метод проверки "Изучено ли" тоже переводим на рельсы ключа
     @Override
     public boolean isResearched(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-        return isResearched(new ResearchKey(stack));
+        return !stack.isEmpty() && isResearched(new ResearchKey(stack));
     }
 
-    // ТОТ САМЫЙ НОВЫЙ МЕТОД: Проверяет изученность без посредничества ItemStack
     @Override
     public boolean isResearched(ResearchKey key) {
         if (key == null) return false;
 
-        // Для расчета необходимого количества всё равно нужен стак, создаем его из ключа
-        ItemStack dummyStack = key.createItemStack();
+        var dummyStack = key.createItemStack();
         int required = JourneyUtils.getRequiredAmount(dummyStack);
 
         return getResearch(key) >= required;
@@ -110,26 +104,22 @@ public class Research implements IResearch {
 
     @Override
     public int getProgress() {
-        int total = 0;
-        // Берем только значения мапы (Integer), игнорируя ключи
-        for (int amount : this.researchMap.values()) {
-            total += amount;
-        }
-        return total;
+        return researchMap.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     @Override
     public boolean getAutoResearchState() {
-        return this.AutoResearchState;
+        return this.autoResearchState;
     }
 
-    /// --- На всякий случай ---
+    /// --- Стирание и утилиты ---
+
     @Override
     public Map<ResearchKey, Integer> getReadOnlyMap() {
         return Collections.unmodifiableMap(researchMap);
     }
 
-    /// --- Стирание информации ---
+
     @Override
     public void clear() {
         researchMap.clear();
@@ -141,7 +131,6 @@ public class Research implements IResearch {
         return true;
     }
 
-    // --- Остальное ---
     public int getRequiredAmount(ItemStack stack) {
         return JourneyUtils.getRequiredAmount(stack);
     }

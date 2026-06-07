@@ -1,54 +1,44 @@
 package wizicl.mre.capabilities;
 
 import wizicl.mre.config.ConfigNBT;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
-import java.util.Objects;
+public record ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound cleanedNbt) {
 
-public final class ResearchKey {
-    private final ResourceLocation registryName;
-    private final int meta;
-    private final NBTTagCompound cleanedNbt;
-
-    public ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound rawNbt) {
+    // Главный (компактный) конструктор. Он автоматически вызывается в конце.
+    // Здесь перехватывается rawNbt и очищается прямо перед записью в поле
+    public ResearchKey(ResourceLocation registryName, int meta, NBTTagCompound cleanedNbt) {
         this.registryName = registryName;
         this.meta = meta;
-        this.cleanedNbt = isolateAndCleanNBT(rawNbt);
+        this.cleanedNbt = isolateAndCleanNBT(cleanedNbt);
     }
 
+    // Дополнительный конструктор из ItemStack (вызывает главный через this(...))
     public ResearchKey(ItemStack stack) {
-        if (stack == null || stack.isEmpty()) {
-            this.registryName = new ResourceLocation("minecraft", "air");
-            this.meta = 0;
-            this.cleanedNbt = null;
-            return;
-        }
-
-        this.registryName = stack.getItem().getRegistryName();
-        this.meta = stack.getMetadata();
-
-        this.cleanedNbt = stack.hasTagCompound() ? isolateAndCleanNBT(stack.getTagCompound()) : null;
+        this(
+                (stack == null || stack.isEmpty()) ? new ResourceLocation("minecraft", "air") : stack.getItem().getRegistryName(),
+                (stack == null || stack.isEmpty()) ? 0 : stack.getMetadata(),
+                (stack != null && stack.hasTagCompound()) ? stack.getTagCompound() : null
+        );
     }
 
+    // Очистка NBT
     private static NBTTagCompound isolateAndCleanNBT(NBTTagCompound sourceNbt) {
         if (sourceNbt == null || sourceNbt.isEmpty()) {
             return null;
         }
 
-        NBTTagCompound isolatedCopy = sourceNbt.copy();
+        var isolatedCopy = sourceNbt.copy();
 
-        // Удаляем стандартный мусор Forge
+        // Чистим мусор
         isolatedCopy.removeTag("ForgeCaps");
-
-        // Удаляем мусор от HBM, который ломает проверки
         isolatedCopy.removeTag("charge");
 
         if (ConfigNBT.IGNORED_TAGS != null) {
-            for (String tagToRemove : ConfigNBT.IGNORED_TAGS) {
+            for (var tagToRemove : ConfigNBT.IGNORED_TAGS) {
                 if (isolatedCopy.hasKey(tagToRemove)) {
                     isolatedCopy.removeTag(tagToRemove);
                 }
@@ -58,44 +48,33 @@ public final class ResearchKey {
         return isolatedCopy.isEmpty() ? null : isolatedCopy;
     }
 
-    public NBTTagCompound getCleanedNbt() {
-        return this.cleanedNbt == null ? null : this.cleanedNbt.copy();
-    }
-
-    public ResourceLocation getRegistryName() {
-        return this.registryName;
-    }
-
-    public int getMeta() {
-        return this.meta;
-    }
-
+    // Создание стака из ключа
     public ItemStack createItemStack() {
-        Item item = ForgeRegistries.ITEMS.getValue(this.registryName);
+        var item = ForgeRegistries.ITEMS.getValue(this.registryName);
         if (item == null) {
             return ItemStack.EMPTY;
         }
 
-        ItemStack stack = new ItemStack(item, 1, this.meta);
+        var stack = new ItemStack(item, 1, this.meta);
         if (this.cleanedNbt != null) {
             stack.setTagCompound(this.cleanedNbt.copy());
         }
         return stack;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ResearchKey that = (ResearchKey) o;
+    // --- СОВМЕСТИМОСТЬ СО СТАРЫМ КОДОМ ---
+    // Record автоматически создал методы registryName(), meta() и cleanedNbt().
+    // Но чтобы не переписывать весь остальной мод, делаем мосты для старых геттеров:
 
-        return this.meta == that.meta &&
-                Objects.equals(this.registryName, that.registryName) &&
-                Objects.equals(this.cleanedNbt, that.cleanedNbt);
+    public ResourceLocation getRegistryName() {
+        return registryName(); // Вызывает нативный метод рекорда
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(this.registryName, this.meta, this.cleanedNbt);
+    public int getMeta() {
+        return meta();
+    }
+
+    public NBTTagCompound getCleanedNbt() {
+        return this.cleanedNbt == null ? null : this.cleanedNbt.copy(); // Сохраняем защиту копированием
     }
 }

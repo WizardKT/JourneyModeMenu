@@ -27,94 +27,72 @@ import java.util.*;
 
 public class CommandJourney extends CommandBase {
 
-    @Override
-    public int getRequiredPermissionLevel() {
-        return 0;
-    }
+    // Легкие статические списки (не выделяют память при каждом вызове)
+    private static final List<String> COMMANDS = List.of("consume", "research", "give", "progress", "clear", "remove", "ignore");
 
     @Override
-    public boolean checkPermission(net.minecraft.server.MinecraftServer server, net.minecraft.command.ICommandSender sender) {
-        return true;
-    }
+    public int getRequiredPermissionLevel() { return 0; }
 
     @Override
-    public String getName() {
-        return "jm";
-    }
+    public boolean checkPermission(MinecraftServer server, ICommandSender sender) { return true; }
 
+    @Override
+    public String getName() { return "jm"; }
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return "/jm consume|research|give|progress|clear|remove|ignore";
+        return "/jm " + String.join("|", COMMANDS);
     }
 
 
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) {
-        if (!(sender instanceof EntityPlayer)) return;
-
-        EntityPlayer player = (EntityPlayer) sender;
-        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-        ItemStack heldItem = player.getHeldItemMainhand();
+        // Паттерн-матчинг: мгновенный каст в одну строку
+        if (!(sender instanceof EntityPlayer player)) return;
 
         if (args.length == 0) {
             sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
+        var cap = player.getCapability(ResearchProvider.RESEARCH, null);
+        var heldItem = player.getHeldItemMainhand();
         String subCommand = args[0].toLowerCase();
 
-        // 1. Проверка на обязательный предмет в руке
-        List<String> requireHand = Arrays.asList("consume", "research");
-        if (requireHand.contains(subCommand) && heldItem.isEmpty()) {
-            sendError(player, "chat.journeymode.emptyHand", getUsage(player));
-            return;
-        }
-
-        // 2. Проверка на наличие хоть какого-то прогресса в вашей базе данных
-        List<String> requireResearch = Arrays.asList("give", "progress", "remove");
-        if (requireResearch.contains(subCommand) && cap.getReadOnlyMap().isEmpty()) {
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch"));
-            return;
-        }
-
-        // 3. Проверка прав Администратора (OP уровень 2)
-        List<String> requireOp = Arrays.asList("ignore", "research");
-        if (requireOp.contains(subCommand) && !player.canUseCommand(2, this.getName())) {
+        // 1. Проверка прав Администратора (OP)
+        if ((subCommand.equals("ignore") || subCommand.equals("research")) && !player.canUseCommand(2, this.getName())) {
             player.sendMessage(new TextComponentTranslation("chat.journeymode.noPermission"));
-            return; // КРИТИЧЕСКИ ВАЖНО: останавливаем выполнение!
+            return;
         }
 
+        // 2. Маршрутизация через Enhanced Switch (Современная Java)
         switch (subCommand) {
-            case "consume":
-                handleConsume(player, heldItem, args);
-                break;
-            case "research":
-                handleResearch(player, heldItem, args);
-                break;
-            case "give":
-                handleGive(player, cap, args);
-                break;
-            case "progress":
-                handleProgress(player, cap, args);
-                break;
-            case "clear":
-                handleClear(player, cap);
-                break;
-            case "remove":
-                handleRemove(player, heldItem, cap, args);
-                break;
-            case "ignore":
-                handleIgnore(player, heldItem, args);
-                break;
-            default:
-                sendError(player, "chat.journeymode.commandError", getUsage(player));
-                break;
+            case "consume", "research" -> {
+                if (heldItem.isEmpty()) {
+                    sendError(player, "chat.journeymode.emptyHand", getUsage(player));
+                    return;
+                }
+                if (subCommand.equals("consume")) handleConsume(player, heldItem, args);
+                else handleResearch(player, heldItem, args);
+            }
+            case "give", "progress", "remove", "clear" -> {
+                if (!subCommand.equals("clear") && cap.getReadOnlyMap().isEmpty()) {
+                    player.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch"));
+                    return;
+                }
+                switch (subCommand) {
+                    case "give" -> handleGive(player, cap, args);
+                    case "progress" -> handleProgress(player, cap, args);
+                    case "remove" -> handleRemove(player, heldItem, cap, args);
+                    case "clear" -> handleClear(player, cap);
+                }
+            }
+            case "ignore" -> handleIgnore(player, heldItem, args);
+            default -> sendError(player, "chat.journeymode.commandError", getUsage(player));
         }
     }
 
-
-    /// === Обработчики конкретных команд ===
+    // === Обработчики ===
 
     private void handleConsume(EntityPlayer player, ItemStack stack, String[] args) {
         Integer amount = parseArgInt(player, args, 1, stack.getCount());
@@ -133,14 +111,13 @@ public class CommandJourney extends CommandBase {
         player.sendMessage(new TextComponentTranslation("chat.journeymode.add", stack.getTextComponent(), amount));
     }
 
-
     private void handleGive(EntityPlayer player, IResearch cap, String[] args) {
         if (args.length < 2) {
             sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
-        ItemStack resultStack = parseItemStackFromString(args[1]);
+        var resultStack = parseItemStackFromString(args[1]);
         if (resultStack.isEmpty()) {
             sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
@@ -151,13 +128,12 @@ public class CommandJourney extends CommandBase {
         resultStack.setCount(amount);
 
         if (args.length >= 4) {
-            NBTTagCompound nbt = parseNbtFromArgs(args, 3);
+            var nbt = parseNbtFromArgs(args, 3);
             if (nbt != null) resultStack.setTagCompound(nbt);
         }
 
         if (cap.isResearched(resultStack)) {
             player.inventory.addItemStackToInventory(resultStack);
-
             resultStack.setCount(amount == null ? 1 : amount);
             player.sendMessage(new TextComponentTranslation("chat.journeymode.giveSuccess", resultStack.getTextComponent(), amount));
         } else {
@@ -167,15 +143,8 @@ public class CommandJourney extends CommandBase {
         }
     }
 
-
     private void handleProgress(EntityPlayer player, IResearch cap, String[] args) {
-        List<Map.Entry<ResearchKey, Integer>> totalList = new ArrayList<>(cap.getReadOnlyMap().entrySet());
-
-        if (totalList.isEmpty()) {
-            player.sendMessage(new TextComponentTranslation("chat.journeymode.noResearch"));
-            return;
-        }
-
+        var totalList = new ArrayList<>(cap.getReadOnlyMap().entrySet());
         final int ITEMS_PER_PAGE = 6;
         int maxPages = (int) Math.ceil((double) totalList.size() / ITEMS_PER_PAGE);
 
@@ -185,42 +154,32 @@ public class CommandJourney extends CommandBase {
             return;
         }
 
-        currentPage = Math.max(1, Math.min(currentPage, maxPages)); // Защита от выхода за пределы
-
+        currentPage = Math.max(1, Math.min(currentPage, maxPages));
         int startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
         int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalList.size());
 
         player.sendMessage(new TextComponentTranslation("chat.journeymode.progress.header", currentPage, maxPages));
 
         for (int i = startIndex; i < endIndex; i++) {
-            Map.Entry<ResearchKey, Integer> entry = totalList.get(i);
-            ResearchKey key = entry.getKey();
+            var entry = totalList.get(i);
+            var key = entry.getKey();
             int currentProgress = entry.getValue();
 
-            ItemStack displayStack = createDisplayStack(key);
+            var displayStack = createDisplayStack(key);
             int requiredAmount = JourneyUtils.getRequiredAmount(displayStack);
 
-            TextFormatting color = (currentProgress >= requiredAmount) ? TextFormatting.GREEN : TextFormatting.GRAY;
+            var color = (currentProgress >= requiredAmount) ? TextFormatting.GREEN : TextFormatting.GRAY;
+            ITextComponent nameComp = new TextComponentString(displayStack.getDisplayName());
+            nameComp.getStyle().setColor(color);
 
-            ITextComponent nameComponent = new TextComponentString(displayStack.getDisplayName());
-            nameComponent.getStyle().setColor(color);
-
-            boolean hasNbt = key.getCleanedNbt() != null;
-            ITextComponent nbtComponent = new TextComponentString(hasNbt ? " [+NBT]" : "");
+            boolean hasNbt = key.cleanedNbt() != null;
+            ITextComponent nbtComp = new TextComponentString(hasNbt ? " [+NBT]" : "");
             if (hasNbt) {
-                nbtComponent.getStyle().setColor(TextFormatting.LIGHT_PURPLE);
-                String nbtJson = key.getCleanedNbt().toString();
-
-                nbtComponent.getStyle().setHoverEvent(
-                        new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(
-                                TextFormatting.ITALIC + nbtJson)
-                        ));
+                nbtComp.getStyle().setColor(TextFormatting.LIGHT_PURPLE);
+                nbtComp.getStyle().setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TextComponentString(TextFormatting.ITALIC + key.cleanedNbt().toString())));
             }
 
-            player.sendMessage(new TextComponentTranslation(
-                    "chat.journeymode.progress.item",
-                    nameComponent, nbtComponent, currentProgress, requiredAmount
-            ));
+            player.sendMessage(new TextComponentTranslation("chat.journeymode.progress.item", nameComp, nbtComp, currentProgress, requiredAmount));
         }
 
         if (currentPage < maxPages) {
@@ -228,19 +187,16 @@ public class CommandJourney extends CommandBase {
         }
     }
 
-
     private void handleClear(EntityPlayer player, IResearch cap) {
         cap.clear();
         player.sendMessage(new TextComponentTranslation("chat.journeymode.clear"));
     }
 
-
     private void handleRemove(EntityPlayer player, ItemStack handStack, IResearch cap, String[] args) {
-        ItemStack targetStack = handStack;
+        var targetStack = handStack;
 
-        // Если указан аргумент - пытаемся получить предмет по ID
         if (args.length >= 2) {
-            Item item = Item.getByNameOrId(args[1]);
+            var item = Item.getByNameOrId(args[1]);
             if (item != null) {
                 targetStack = new ItemStack(item);
             } else {
@@ -260,52 +216,41 @@ public class CommandJourney extends CommandBase {
         }
     }
 
-
     private void handleIgnore(EntityPlayer player, ItemStack stack, String[] args) {
         if (stack.isEmpty() || !stack.hasTagCompound()) {
             sendError(player, "chat.journeymode.commandError", getUsage(player));
             return;
         }
 
-        // Сценарий: просто /jm ignore (вывод списка тегов предмета)
         if (args.length == 1) {
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignoreHat"));
             for (String key : stack.getTagCompound().getKeySet()) {
-                boolean isIgnored = ConfigNBT.isTagIgnored(key);
-                TextFormatting color = isIgnored ? TextFormatting.GREEN : TextFormatting.RED;
-
-                ITextComponent keyComponent = new TextComponentString(key);
+                var color = ConfigNBT.isTagIgnored(key) ? TextFormatting.GREEN : TextFormatting.RED;
+                var keyComponent = new TextComponentString(key);
                 keyComponent.getStyle().setColor(color);
-
                 player.sendMessage(new TextComponentTranslation("chat.journeymode.tagPrefix").appendSibling(keyComponent));
             }
             player.sendMessage(new TextComponentTranslation("chat.journeymode.ignore"));
             return;
         }
 
-        // Сценарий: /jm ignore add/remove <tag>
-        String action = args[1].toLowerCase();
-
         if (args.length >= 3) {
+            String action = args[1].toLowerCase();
             String targetTag = args[2];
 
             if (action.equals("add")) {
-                boolean success = ConfigNBT.addTag(targetTag);
-                if (success) {
+                if (ConfigNBT.addTag(targetTag)) {
                     player.sendMessage(new TextComponentTranslation("chat.journeymode.addIgnore"));
                 } else {
-                    ITextComponent errorText = new TextComponentString("Тег '" + targetTag + "' уже находится в черном списке!");
+                    var errorText = new TextComponentString("Тег '" + targetTag + "' уже находится в черном списке!");
                     errorText.getStyle().setColor(TextFormatting.YELLOW);
                     player.sendMessage(errorText);
                 }
-            }
-            else if (action.equals("remove")) {
-                boolean success = ConfigNBT.removeTag(targetTag); // Твой новый метод
-                if (success) {
-                    // Создай этот ключ перевода в .lang файле
+            } else if (action.equals("remove")) {
+                if (ConfigNBT.removeTag(targetTag)) {
                     player.sendMessage(new TextComponentTranslation("chat.journeymode.removeIgnore"));
                 } else {
-                    ITextComponent errorText = new TextComponentString("Тега '" + targetTag + "' нет в черном списке!");
+                    var errorText = new TextComponentString("Тега '" + targetTag + "' нет в черном списке!");
                     errorText.getStyle().setColor(TextFormatting.RED);
                     player.sendMessage(errorText);
                 }
@@ -317,13 +262,57 @@ public class CommandJourney extends CommandBase {
         }
     }
 
+    /// === Автодополнение (Прямое и быстрое) ===
 
-    /// === Утилиты и хелперы ===
+    @Override
+    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+        if (!(sender instanceof EntityPlayer player)) return Collections.emptyList();
+        var cap = player.getCapability(ResearchProvider.RESEARCH, null);
 
-    /**
-     * Безопасно достает число из аргументов. Если числа нет - возвращает стандартное значение.
-     * Если введена абракадабра - отправляет ошибку игроку и возвращает null.
-     */
+        if (args.length == 1) return getListOfStringsMatchingLastWord(args, COMMANDS);
+
+        String cmd = args[0].toLowerCase();
+
+        return switch (args.length) {
+            case 2 -> switch (cmd) {
+                case "ignore" -> getListOfStringsMatchingLastWord(args, "add", "remove");
+                case "remove" -> getListOfStringsMatchingLastWord(args, cap.getReadOnlyMap().keySet().stream().map(k -> k.registryName().toString()).toList());
+                case "give" -> {
+                    var suggestions = cap.getReadOnlyMap().entrySet().stream()
+                            .filter(e -> e.getValue() >= JourneyUtils.getRequiredAmount(createDisplayStack(e.getKey())))
+                            .map(e -> e.getKey().registryName().toString() + "@" + e.getKey().meta())
+                            .toList();
+                    yield getListOfStringsMatchingLastWord(args, suggestions);
+                }
+                case "research", "consume" -> getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
+                default -> Collections.emptyList();
+            };
+            case 3 -> switch (cmd) {
+                case "ignore" -> args[1].equalsIgnoreCase("add")
+                        ? (player.getHeldItemMainhand().hasTagCompound() ? getListOfStringsMatchingLastWord(args, player.getHeldItemMainhand().getTagCompound().getKeySet()) : Collections.emptyList())
+                        : getListOfStringsMatchingLastWord(args, ConfigNBT.IGNORED_TAGS);
+                case "give" -> getListOfStringsMatchingLastWord(args, "1", "64");
+                default -> Collections.emptyList();
+            };
+            case 4 -> {
+                if (!cmd.equals("give")) yield Collections.emptyList();
+                var targetItem = args[1];
+                var nbtSuggestions = cap.getReadOnlyMap().keySet().stream()
+                        .filter(k -> k.cleanedNbt() != null)
+                        .filter(k -> {
+                            String formatWithMeta = k.registryName().toString() + "@" + k.meta();
+                            String formatWithoutMeta = k.registryName().toString() + (k.meta() > 0 ? "@" + k.meta() : "");
+                            return targetItem.equals(formatWithMeta) || targetItem.equals(formatWithoutMeta);
+                        })
+                        .map(k -> k.cleanedNbt().toString().replace(" ", ""))
+                        .toList();
+                yield getListOfStringsMatchingLastWord(args, nbtSuggestions);
+            }
+            default -> Collections.emptyList();
+        };
+    }
+
+    /// === Утилиты ===
 
     @Nullable
     private Integer parseArgInt(EntityPlayer player, String[] args, int index, int defaultValue) {
@@ -339,150 +328,33 @@ public class CommandJourney extends CommandBase {
     private ItemStack parseItemStackFromString(String input) {
         String[] parts = input.split("@");
         Item item = Item.getByNameOrId(parts[0]);
-        if (item == null) {
-            return ItemStack.EMPTY;
-        }
+        if (item == null) return ItemStack.EMPTY;
+
         int meta = 0;
         if (parts.length > 1) {
-            try {
-                meta = Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                return ItemStack.EMPTY;
-            }
+            try { meta = Integer.parseInt(parts[1]); } catch (NumberFormatException ignored) {}
         }
-        return new ItemStack(item,1, meta);
+        return new ItemStack(item, 1, meta);
     }
 
     @Nullable
     private NBTTagCompound parseNbtFromArgs(String[] args, int startIndex) {
         if (args.length <= startIndex) return null;
         try {
-            String nbtString = CommandBase.buildString(args, startIndex);
-            return JsonToNBT.getTagFromJson(nbtString);
+            return JsonToNBT.getTagFromJson(CommandBase.buildString(args, startIndex));
         } catch (NBTException e) {
             return null;
         }
     }
 
-
-    /**
-     * Превращает ResearchKey обратно в полноценный ItemStack для отображения
-     */
-
     private ItemStack createDisplayStack(ResearchKey key) {
-        ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(key.getRegistryName()), 1, key.getMeta());
-        if (key.getCleanedNbt() != null) {
-            stack.setTagCompound(key.getCleanedNbt());
-        }
+        var stack = new ItemStack(ForgeRegistries.ITEMS.getValue(key.registryName()), 1, key.meta());
+        if (key.cleanedNbt() != null) stack.setTagCompound(key.cleanedNbt());
         return stack;
     }
 
-
-    /// === Автодополнение ===
-
-    @Override
-    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
-        if (!(sender instanceof EntityPlayer)) return Collections.emptyList();
-
-        EntityPlayer player = (EntityPlayer) sender;
-        IResearch cap = player.getCapability(ResearchProvider.RESEARCH, null);
-
-        // Уровень 1: /jm [подкоманда]
-        if (args.length == 1) {
-            return getListOfStringsMatchingLastWord(args, "consume", "research", "give", "progress", "clear", "remove", "ignore");
-        }
-
-        String cmd = args[0].toLowerCase();
-
-        // Уровень 2: /jm ignore [add/remove]
-        if (args.length == 2 && cmd.equals("ignore")) {
-            return getListOfStringsMatchingLastWord(args, "add", "remove");
-        }
-
-        // Уровень 2: /jm remove [item]
-        if (args.length == 2 && cmd.equals("remove")) {
-            List<String> researchedItems = new ArrayList<>();
-            for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
-                researchedItems.add(key.getRegistryName().toString());
-            }
-            return getListOfStringsMatchingLastWord(args, researchedItems);
-        }
-
-        // Уровень 2: /jm give [item@meta]
-        if (args.length == 2 && cmd.equals("give")) {
-            List<String> suggestions = new ArrayList<>();
-            for (Map.Entry<ResearchKey, Integer> entry : cap.getReadOnlyMap().entrySet()) {
-                ResearchKey key = entry.getKey();
-                int currentProgress = entry.getValue();
-
-                ItemStack checkStack = createDisplayStack(key);
-                int requiredAmount = JourneyUtils.getRequiredAmount(checkStack);
-                if (currentProgress >= requiredAmount) {
-                    String registryName = key.getRegistryName().toString();
-                    int meta = key.getMeta();
-
-                    String suggestionString = registryName + "@" + meta;
-                    suggestions.add(suggestionString);
-                }
-            }
-            return getListOfStringsMatchingLastWord(args, suggestions);
-        }
-
-        // Уровень 3: /jm ignore add/remove [tag]
-        if (args.length == 3 && cmd.equals("ignore")) {
-            String action = args[1].toLowerCase();
-
-            if (action.equals("add")) {
-                // Подсказываем теги, которые есть на предмете в руке
-                ItemStack heldItem = player.getHeldItemMainhand();
-                if (!heldItem.isEmpty() && heldItem.hasTagCompound()) {
-                    return getListOfStringsMatchingLastWord(args, heldItem.getTagCompound().getKeySet());
-                }
-            }
-            else if (action.equals("remove")) {
-                // Подсказываем теги, которые уже занесены в конфиг
-                return getListOfStringsMatchingLastWord(args, ConfigNBT.IGNORED_TAGS);
-            }
-        }
-
-        // Уровень 3: /jm give pid@meta] [количество]
-        if (args.length == 3 && cmd.equals("give")) {
-            return getListOfStringsMatchingLastWord(args, "1", "64");
-        }
-
-        // Уровень 4: /jm give [id@meta] [количество] [NBT]
-        if (args.length == 4 && cmd.equals("give")) {
-            List<String> nbtSuggestions = new ArrayList<>();
-            String targetItem = args[1]; // Например: "minecraft:spawn_egg@0" или "minecraft:spawn_egg"
-
-            for (ResearchKey key : cap.getReadOnlyMap().keySet()) {
-                if (key.getCleanedNbt() == null) continue; // Если у предмета нет NBT, он нам не интересен
-
-                String registryName = key.getRegistryName().toString();
-                int meta = key.getMeta();
-
-                String formatWithMeta = registryName + "@" + meta;
-                String formatWithoutMeta = registryName + (meta > 0 ? "@" + meta : "");
-
-                if (targetItem.equals(formatWithMeta) || targetItem.equals(formatWithoutMeta)) {
-                    String nbtString = key.getCleanedNbt().toString().replace(" ", "");
-                    nbtSuggestions.add(nbtString);
-                }
-            }
-            return getListOfStringsMatchingLastWord(args, nbtSuggestions);
-        }
-
-        // Уровень 3/4: Подсказка количества предметов из руки
-        if ((args.length == 2 && (cmd.equals("research") || cmd.equals("consume")))) {
-            return getListOfStringsMatchingLastWord(args, String.valueOf(player.getHeldItemMainhand().getCount()));
-        }
-
-        return Collections.emptyList();
-    }
-
-    // Заглушка
     private void sendError(EntityPlayer player, String key, String usage) {
-        TextComponentTranslation text = new TextComponentTranslation(key, usage);
+        var text = new TextComponentTranslation(key, usage);
         text.getStyle().setColor(TextFormatting.RED);
         player.sendMessage(text);
     }

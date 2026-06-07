@@ -14,7 +14,8 @@ import java.util.Set;
 
 @Config(modid = Reference.MOD_ID, name = "MRE_NBT")
 public class ConfigNBT {
-    @Config.Comment({"A list of NBT tags that will be ignored when researching items.",})
+
+    @Config.Comment("A list of NBT tags that will be ignored when researching items.")
     @Config.Name("Ignored NBT Tags")
     public static String[] IGNORED_TAGS = new String[] {"display", "RepairCost"};
 
@@ -28,55 +29,47 @@ public class ConfigNBT {
     }
 
     /**
-     * Динамически добавляет тег в массив, обновляет кэш и записывает файл на диск:
-     * Возвращает true, если тег добавлен успешно;
-     * Возвращает false, если такой тег уже был в списке.
+     * Динамически добавляет тег в массив, обновляет кэш и пишет на диск.
      */
 
     public static boolean addTag(String tag) {
+        var list = new ArrayList<>(Arrays.asList(IGNORED_TAGS));
 
-        // Создаем динамический список на основе текущего массива
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(IGNORED_TAGS));
-
-        // Если такой тег уже есть — ничего не делаем
         if (list.contains(tag)) {
-            return false;
+            return false; // Тег уже есть, выходим
         }
 
-        // Добавляем новый тег в список
         list.add(tag);
 
-        // Превращаем список обратно в массив фиксированной длины и сохраняем в конфиг
-        String[] newArray = new String[list.size()];
-        IGNORED_TAGS = list.toArray(newArray);
+        // Ультра-быстрый перевод списка в массив в Java 25! Без ручного выделения памяти
+        IGNORED_TAGS = list.toArray(String[]::new);
 
-        // Обновляем кэш в оперативной памяти
-        initTagSet();
-
-        // Заставляем Forge перезаписать файл .cfg на жестком диске
-        ConfigManager.sync("journeymode", Config.Type.INSTANCE);
+        initTagSet(); // Обновляем кэш памяти
+        ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE); // Сохраняем на диск mre.cfg
         return true;
     }
 
-    public static boolean removeTag(String tag) {
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(IGNORED_TAGS));
+    /**
+     * Динамически удаляет тег из массива и обновляет файл конфига.
+     */
 
-        if (list.contains(tag)) {
+    public static boolean removeTag(String tag) {
+        var list = new ArrayList<>(Arrays.asList(IGNORED_TAGS));
+
+        // ИСПРАВИЛИ БАГ: если тега НЕТ в списке, то и удалять нечего — возвращаем false
+        if (!list.contains(tag)) {
             return false;
         }
 
         list.remove(tag);
-
-        String[] newArray = new String[list.size()];
-        IGNORED_TAGS = list.toArray(newArray);
+        IGNORED_TAGS = list.toArray(String[]::new);
 
         initTagSet();
-
-        ConfigManager.sync("journeymode", Config.Type.INSTANCE);
+        ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
         return true;
     }
 
-    public static Set <String> getIgnoredTagsSet() {
+    public static Set<String> getIgnoredTagsSet() {
         if (ignoredTagsSet == null) {
             initTagSet();
         }
@@ -88,17 +81,15 @@ public class ConfigNBT {
         ignoredTagsSet = new HashSet<>(Arrays.asList(IGNORED_TAGS));
     }
 
-    // Обновление и синхронизация конфига
-    @Mod.EventBusSubscriber(modid = "journeymode")
+    // Автоматическое обновление конфига при изменении через внутриигровое меню Forge
+    @Mod.EventBusSubscriber(modid = Reference.MOD_ID)
     public static class RegistryHandler {
         @SubscribeEvent
-        public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event) {
-            if (event.getModID().equals("journeymode")) {
-                ConfigManager.sync("journeymode", Config.Type.INSTANCE);
+        public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
+            if (event.getModID().equals(Reference.MOD_ID)) {
+                ConfigManager.sync(Reference.MOD_ID, Config.Type.INSTANCE);
                 initTagSet();
             }
         }
     }
-
-
 }

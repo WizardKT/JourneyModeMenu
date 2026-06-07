@@ -5,14 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="3.0.0 #CleanRoom rebuild">
+      <change afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/ResearchGuiHolder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resource-templates/mcmod.info" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource-templates/mcmod.info" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/resource-templates/pack.mcmeta" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resource-templates/pack.mcmeta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/Research.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/Research.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/capabilities/ResearchSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/command/CommandJourney.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/command/CommandJourney.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigNBT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/config/ConfigNBT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/HEIIntegrationPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/HEIIntegrationPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/JourneyMenuGuiHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/integration/jei/JourneyMenuGuiHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncSingleResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageSyncSingleResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/protecter/StackValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/protecter/StackValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/util/JourneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/util/JourneyUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +77,13 @@
         </projects_view>
       </state>
     </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -117,14 +137,15 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main" />
+      <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\resources" />
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\java-templates" />
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\java-templates\wizicl\mre" />
-      <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Gradle.2. Run Client">
@@ -342,7 +363,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780604188157</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="3.0.0 #CleanRoom rebuild">
+      <option name="closed" value="true" />
+      <created>1780605592502</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780605592502</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
