@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="- Rewrite 50% of code for new Java 25 syntax" />
+    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="- ??">
+      <change afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/TestGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/ResearchGuiHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -357,7 +365,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780833356621</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- ??">
+      <option name="closed" value="true" />
+      <created>1780835686654</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780835686654</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,6 +393,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="3.0.0 #CleanRoom rebuild" />
     <MESSAGE value="- Rewrite 50% of code for new Java 25 syntax" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Rewrite 50% of code for new Java 25 syntax" />
+    <MESSAGE value="- ??" />
+    <option name="LAST_COMMIT_MESSAGE" value="- ??" />
   </component>
 </project>

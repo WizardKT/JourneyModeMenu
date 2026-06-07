@@ -21,7 +21,7 @@ public class MessageOpenResearchGui implements IMessage {
             // Перенаправляем в основной поток сервера
             player.getServerWorld().addScheduledTask(() -> {
                 // Вызываем openGui НА СЕРВЕРЕ!
-                player.openGui(MatterReplicationEngine.instance, 0, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
+//                player.openGui(MatterReplicationEngine.instance, 0, player.world, (int)player.posX, (int)player.posY, (int)player.posZ);
             });
             return null;
         }

@@ -86,7 +86,7 @@ public class ResultAutoResearch {
     public static class AutoResearchButton extends GuiButton {
 
         // Указываем путь к твоей текстуре
-        private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation("journeymode", "textures/gui/container/statebuttons.png");
+        private static final ResourceLocation BUTTON_TEXTURE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/statebuttons.png");
 
         public AutoResearchButton(int buttonId, int x, int y) {
             // Передаем размеры 12x12 и пустую строку (текст поверх больше не нужен)
