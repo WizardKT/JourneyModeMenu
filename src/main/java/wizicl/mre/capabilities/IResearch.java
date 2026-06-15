@@ -6,32 +6,33 @@ import net.minecraftforge.items.IItemHandler;
 import java.util.Map;
 
 public interface IResearch {
-    // Управление исследованиями
+
+    /// Управление исследованиями
     int addResearch(ItemStack stack, int amount);
     void setResearch(ItemStack stack, int amount);
     boolean setAutoResearchState(boolean state);
     boolean toggleAutoResearchState();
 
-    // --- ПОЛУЧЕНИЕ ИНФОРМАЦИИ ---
-    // Старые методы оставляем для совместимости с ванильными контейнерами
+    /// Получение информации
+    // По стеку
     int getResearch(ItemStack stack);
     boolean isResearched(ItemStack stack);
 
-    // НОВЫЕ МЕТОДЫ: Пуленепробиваемые проверки напрямую через чистый ключ
+    // По ключу
     int getResearch(ResearchKey key);
     boolean isResearched(ResearchKey key);
 
-    // На всякий случай
+    // Из карты
     Map<ResearchKey, Integer> getReadOnlyMap();
 
-    // Для прогресс-бара
+    /// Прогресс-бар
     int getProgress();
     boolean getAutoResearchState();
 
-    // Стирание информации
+    /// Стирание информации
     void clear();
     boolean remove(ItemStack stack);
 
-    // Инвентарь исследовательского слота
+    /// Инвентарь исследовательского слота
     IItemHandler getResearchInventory();
 }
