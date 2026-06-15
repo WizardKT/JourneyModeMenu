@@ -1,5 +1,6 @@
 package wizicl.mre.client.gui.view;
 
+import wizicl.mre.Reference;
 import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.ResearchKey;
 import wizicl.mre.capabilities.ResearchProvider;
@@ -71,8 +72,8 @@ public class GuiResearch extends GuiContainer {
         static final int GRID_START_X = 8, GRID_START_Y = 30, SLOT_SIZE = 18;
     }
 
-    private static final ResourceLocation TEXTURE_RESEARCH = new ResourceLocation("journeymode", "textures/gui/container/research.png");
-    private static final ResourceLocation TEXTURE_GIVE = new ResourceLocation("journeymode", "textures/gui/container/give.png");
+    private static final ResourceLocation TEXTURE_RESEARCH = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/research.png");
+    private static final ResourceLocation TEXTURE_GIVE = new ResourceLocation(Reference.MOD_ID, "textures/gui/container/give.png");
 
     // --- Переменные состояния GUI ---
     private final GuiResearchContainer researchContainer;
@@ -521,7 +522,7 @@ public class GuiResearch extends GuiContainer {
             return;
         }
 
-        if (GuiScreen.isCtrlKeyDown() && keyCode == ClientProxy.keyBindDelItem.getKeyCode()) {
+        if (keyCode == ClientProxy.keyBindDelItem.getKeyCode()) {
             if (this.currentState == GuiState.GIVE && hoveredCatalogStack != null && !hoveredCatalogStack.isEmpty()) {
                 // Оборачиваем стак в ResearchKey при отправке пакета на удаление
                 NETWORK.sendToServer(new MessageGuiAction(new ResearchKey(this.hoveredCatalogStack)));

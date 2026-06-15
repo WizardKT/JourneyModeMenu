@@ -3,7 +3,7 @@ package wizicl.mre.metaprogress;
 import wizicl.mre.config.ConfigMain;
 
 public class JourneyLeveling {
-    public static final int MAX_LEVEL = 100;
+    public static final int MAX_LEVEL = 20;
     private static final int BASE_ITEMS = 64;
 
     /**

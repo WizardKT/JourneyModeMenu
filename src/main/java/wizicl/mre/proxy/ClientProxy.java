@@ -1,7 +1,6 @@
 package wizicl.mre.proxy;
 
 import wizicl.mre.MatterReplicationEngine;
-import wizicl.mre.capabilities.IResearch;
 import wizicl.mre.capabilities.Research;
 import wizicl.mre.capabilities.ResearchKey;
 import wizicl.mre.capabilities.ResearchProvider;
@@ -13,9 +12,7 @@ import wizicl.mre.util.JourneyUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -25,7 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import org.lwjgl.input.Keyboard;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 @Mod.EventBusSubscriber(Side.CLIENT)

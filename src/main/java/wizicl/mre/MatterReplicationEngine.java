@@ -40,13 +40,7 @@ public class MatterReplicationEngine {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
-        logger.info("""
-                ==================================
-                [MRE] Начинаю инициализацию мода...
-                ==================================
-                """);
-
-        logger.info("[MRE] Создаю конфиги...");
+        logger.info("Начинаю инициализацию мода...");
         proxy.preInit(event);
 
         CapabilityManager.INSTANCE.register(IResearch.class, new Capability.IStorage<>() {
@@ -65,12 +59,12 @@ public class MatterReplicationEngine {
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
-        logger.info("[MRE] Загружаю рецепты и события...");
+        logger.info("Загружаю рецепты и события...");
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        logger.info("[MRE] Оформляю совместимость с другими модами");
+        logger.info("Оформляю совместимость с другими модами");
     }
 
     @Mod.EventHandler

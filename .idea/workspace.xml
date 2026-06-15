@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="- ??">
-      <change afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/TestGui.java" afterDir="false" />
+    <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="- 3.0.0">
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/ResultAutoResearch.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/ResearchGuiHolder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/scripts/dependencies.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/MatterReplicationEngine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/newgui/TestGui.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/view/GuiResearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/client/gui/view/GuiResearch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/init/RegHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/metaprogress/JourneyLeveling.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/metaprogress/JourneyLeveling.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/network/MessageOpenResearchGui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +94,9 @@
     &quot;accountId&quot;: &quot;9be962ad-fa40-4738-9a59-2d45325d0ae0&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 6
@@ -100,32 +106,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.2. Run Client.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [buildDependents].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [generateJavaTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [generateResourceTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Matter-Replication-Engine [generateTemplates].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;CleanRoom&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.1. Build.executor": "Run",
+    "Gradle.2. Run Client.executor": "Run",
+    "Gradle.Matter-Replication-Engine [buildDependents].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateJavaTemplates].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateResourceTemplates].executor": "Run",
+    "Gradle.Matter-Replication-Engine [generateTemplates].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
+    "git-widget-placeholder": "CleanRoom",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main" />
@@ -134,7 +141,7 @@
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main\java-templates\wizicl\mre" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.2. Run Client">
+  <component name="RunManager" selected="Gradle.1. Build">
     <configuration name="1. Build" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -373,7 +380,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780835686654</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- 3.0.0">
+      <option name="closed" value="true" />
+      <created>1780856748809</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1780856748809</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -394,6 +409,7 @@
     <MESSAGE value="3.0.0 #CleanRoom rebuild" />
     <MESSAGE value="- Rewrite 50% of code for new Java 25 syntax" />
     <MESSAGE value="- ??" />
-    <option name="LAST_COMMIT_MESSAGE" value="- ??" />
+    <MESSAGE value="- 3.0.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="- 3.0.0" />
   </component>
 </project>
