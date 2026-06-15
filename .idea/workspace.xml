@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="600caf4d-2903-49a6-82b6-820485741144" name="Changes" comment="- Refactor code to remove ModularUI changes and implement GUI action handling. Update project configuration and documentation accordingly.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/CraftingEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/autoresearch/CraftingEventHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/ClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/proxy/CommonProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/wizicl/mre/util/JourneyUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/wizicl/mre/util/JourneyUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,33 +100,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.1. Build.executor": "Run",
-    "Gradle.2. Run Client.executor": "Run",
-    "Gradle.Matter-Replication-Engine [buildDependents].executor": "Run",
-    "Gradle.Matter-Replication-Engine [generateJavaTemplates].executor": "Run",
-    "Gradle.Matter-Replication-Engine [generateResourceTemplates].executor": "Run",
-    "Gradle.Matter-Replication-Engine [generateTemplates].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
-    "git-widget-placeholder": "CleanRoom",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "settings.codegpt.models"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.1. Build.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.2. Run Client.executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Matter-Replication-Engine [buildDependents].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Matter-Replication-Engine [generateJavaTemplates].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Matter-Replication-Engine [generateResourceTemplates].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.Matter-Replication-Engine [generateTemplates].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;CleanRoom&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.codegpt.models&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\WorkSpace\Mods\Minecraft1_12_2\Matter-Replication-Engine\src\main" />

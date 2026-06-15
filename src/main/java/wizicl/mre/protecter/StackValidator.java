@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.function.BiPredicate;
 
+/// Вспомогательный класс для удобной валидации стеков в игре Minecraft.
 public class StackValidator {
 
     // Вместо создания объектов, объявляем готовые "правила" валидации.
